@@ -1,0 +1,189 @@
+---
+interface Props {
+  variant?: 'dark' | 'light';
+}
+
+const { variant = 'dark' } = Astro.props;
+const bgClass = variant === 'light' ? 'bg-light' : 'bg-dark';
+
+const cards = [
+  {
+    number: 'De Macapá\nao Rio Grande do Sul',
+    text: 'Operação nacional em cidades onde o mercado diz que não tem escala',
+    bg: '#3aa845',
+    textColor: '#001d47',
+    isTitle: true,
+  },
+  {
+    number: '600.000',
+    text: 'A magia acontece porque a engenharia sustenta. pessoas em um único festival, sem um incidente de violência',
+    bg: '#fb2a54',
+    textColor: '#efec4b',
+  },
+  {
+    number: '2.000',
+    text: 'Empregos gerados por ano',
+    bg: '#efec4b',
+    textColor: '#191718',
+  },
+  {
+    number: '45',
+    text: 'Músicos de favela profissionalizados pela Orquestra NT da Rocinha',
+    bg: '#87cde7',
+    textColor: '#001d47',
+  },
+  {
+    number: '8 anos',
+    text: 'De parceria contínua com clientes como Prudential, porque entrega gera renovação',
+    bg: '#fb6c1b',
+    textColor: '#001d47',
+  }
+];
+---
+
+<section class:list={['cardcolors', bgClass]}>
+  <div id="cardcolors-splide" class="splide" aria-label="Números NT">
+    <div class="splide__track">
+      <ul class="splide__list">
+         {cards.map((card) => (     
+          <li class="splide__slide">
+            <div
+              class:list={['cardcolors__card', card.isTitle && 'cardcolors__card--title']}
+              style={`background-color: ${card.bg}; color: ${card.textColor};`}
+            >
+              <span class="cardcolors__number">{card.number}</span>
+              <span class="cardcolors__text">{card.text}</span>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cardcolors {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  :global(#cardcolors-splide .splide__track) {
+    overflow: visible;
+  }
+
+  :global(#cardcolors-splide .splide__list) {
+    display: flex;
+    align-items: stretch;
+  }
+
+  :global(#cardcolors-splide .splide__slide) {
+    list-style: none;
+    flex-shrink: 0;
+  }
+
+  :global(#cardcolors-splide .splide__pagination),
+  :global(#cardcolors-splide .splide__arrows) {
+    display: none !important;
+  }
+
+  :global(#cardcolors-splide .splide__sr) {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+
+  .cardcolors__card {
+    width: 340px;
+    min-width: 340px;
+    height: 370px;
+    padding: 90px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
+    text-align: left;
+    user-select: none;
+  }
+
+  .cardcolors__number {
+    font-size: 50.4px;
+    line-height: 1.37;
+    font-weight: 700;
+    white-space: pre-line;
+    width: 100%;
+  }
+
+  .cardcolors__card--title .cardcolors__number {
+    font-size: 26.25px;
+    line-height: 1.13;
+  }
+
+  .cardcolors__text {
+    font-size: 18.9px;
+    line-height: 1.3;
+    font-weight: 400;
+    width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    .cardcolors__card {
+      width: 200px;
+      min-width: 200px;
+      height: 220px;
+      padding: 40px 16px;
+      gap: 12px;
+    }
+
+    .cardcolors__number {
+      font-size: 26px;
+      line-height: 1.2;
+    }
+
+    .cardcolors__card--title .cardcolors__number {
+      font-size: 16px;
+      line-height: 1.2;
+    }
+
+    .cardcolors__text {
+      font-size: 14px;
+      line-height: 1.3;
+    }
+  }
+</style>
+
+<script>
+  import Splide from '@splidejs/splide';
+  import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const splide = new Splide('#cardcolors-splide', {
+      type: 'loop',
+      drag: 'free',
+      snap: false,
+      arrows: false,
+      pagination: false,
+      perPage: 5,
+      autoWidth: true,
+      gap: '24px',
+      autoScroll: {
+        speed: 0.6,
+        pauseOnHover: true,
+        pauseOnFocus: false,
+      },
+      responsive: {
+        768: {
+          gap: '16px',
+        },
+      },
+    });
+
+    splide.mount({ AutoScroll });
+  });
+</script>

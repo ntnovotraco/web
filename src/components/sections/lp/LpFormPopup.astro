@@ -1,0 +1,749 @@
+---
+---
+
+<!-- Overlay escuro -->
+<div id="lp-form-overlay" class="lp-popup-overlay" aria-hidden="true">
+  <div class="lp-popup-card" onclick="event.stopPropagation()">
+
+    <!-- Botão fechar (X) -->
+    <button class="lp-popup-close" id="lp-popup-close" aria-label="Fechar">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+
+    <!-- Texto introdutório -->
+    <p class="lp-popup-intro">
+      Preencha o formulário abaixo
+    </p>
+
+    <!-- Formulário -->
+    <form id="lp-capture-form" class="lp-popup-form" novalidate>
+
+      <!-- Nome -->
+      <div class="lp-input-wrap" data-field="name">
+        <div class="lp-input-container">
+          <img class="lp-input-icon" src="/images/lp/icon-user-freehand.svg" alt="" width="24" height="24" />
+          <input type="text" id="lp-name" name="name" placeholder="Seu nome*" autocomplete="name" />
+        </div>
+        <span class="lp-input-error">Preencha esse campo</span>
+      </div>
+
+      <!-- Email -->
+      <div class="lp-input-wrap" data-field="email">
+        <div class="lp-input-container">
+          <img class="lp-input-icon" src="/images/lp/icon-email-freehand.svg" alt="" width="24" height="24" />
+          <input type="email" id="lp-email" name="email" placeholder="Seu email*" autocomplete="email" />
+        </div>
+        <span class="lp-input-error">Preencha esse campo</span>
+      </div>
+
+      <!-- WhatsApp com DDI -->
+      <div class="lp-input-wrap" data-field="whatsapp">
+        <div class="lp-input-container">
+          <div class="lp-country-dropdown">
+            <button type="button" id="lp-country-select" class="lp-country-btn">
+              <img id="lp-selected-flag" src="https://flagcdn.com/w40/br.png" alt="Brasil" class="lp-flag-img" />
+              <svg id="lp-dropdown-arrow" class="lp-dropdown-arrow" width="8" height="5" viewBox="0 0 8 5" fill="none">
+                <path d="M1 1L4 4L7 1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div id="lp-country-dropdown-menu" class="lp-country-menu">
+              <div class="lp-country-search-wrap">
+                <input type="text" id="lp-country-search" placeholder="Buscar país..." class="lp-country-search" />
+              </div>
+              <div id="lp-countries-list" class="lp-countries-list"></div>
+            </div>
+          </div>
+          <input type="tel" id="lp-whatsapp" name="whatsapp" placeholder="WhatsApp com DDD*" autocomplete="off" />
+        </div>
+        <span class="lp-input-error">Preencha esse campo</span>
+      </div>
+
+      <!-- Termos -->
+      <p class="lp-terms-text">
+        Ao me cadastrar estou de acordo com as <a href="/lp/politicas" target="_blank">políticas de privacidade</a>
+      </p>
+
+      <!-- Botão -->
+      <button type="submit" class="lp-popup-btn" id="lp-submit-btn">
+        <span class="lp-popup-btn__text">ME CADASTRAR</span>
+        <span class="lp-popup-btn__loading">
+          Você está sendo redirecionado
+          <span class="lp-spinner"></span>
+        </span>
+      </button>
+    </form>
+
+    <!-- Segurança -->
+    <!-- <div class="lp-popup-secure">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="11" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.2"/>
+        <path d="M8 11V7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7V11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+      <span>Seus dados estão seguros.</span>
+    </div> -->
+  </div>
+</div>
+
+<style is:global>
+  /* ====== Overlay ====== */
+  .lp-popup-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+  }
+
+  .lp-popup-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* ====== Card ====== */
+  .lp-popup-card {
+    background-color: var(--color-lp-blue);
+    border-radius: 0;
+    width: 100%;
+    max-width: 420px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 32px 24px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+    overflow-y: inherit;
+  }
+
+  /* ====== Fechar ====== */
+  .lp-popup-close {
+    align-self: flex-end;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-lp-dark);
+    padding: 0;
+    line-height: 0;
+
+    position: absolute;
+    top: 16px;
+    right: 16px;
+  }
+
+  .lp-popup-close:hover {
+    opacity: 0.6;
+  }
+
+  /* ====== Intro ====== */
+  .lp-popup-intro {
+    font-family: 'Margem Test', sans-serif;
+    font-size: 14px;
+    line-height: 19px;
+    color: var(--color-lp-dark);
+    text-align: center;
+    max-width: 311px;
+    padding-top: 9px;
+  }
+
+  .lp-popup-intro strong {
+    font-weight: 700;
+  }
+
+  /* ====== Form ====== */
+  .lp-popup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+    align-items: center;
+  }
+
+  /* ====== Input wraps ====== */
+  .lp-input-wrap {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    position: relative;
+  }
+
+  .lp-input-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 48px;
+    border: 1px solid var(--color-lp-dark);
+    border-radius: 9999px;
+    padding: 0 20px;
+    background: transparent;
+    transition: border-color 0.2s;
+  }
+
+  .lp-input-wrap.error .lp-input-container {
+    border-color: #E10600;
+  }
+
+  .lp-input-icon {
+    flex-shrink: 0;
+    color: var(--color-lp-dark);
+    opacity: 0.8;
+  }
+
+  .lp-input-container input {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: 'Margem Test', sans-serif;
+    font-size: 14px;
+    color: var(--color-lp-dark);
+  }
+
+  .lp-input-container input::placeholder {
+    color: rgba(2, 3, 5, 0.8);
+  }
+
+  .lp-input-error {
+    font-family: 'Margem Test', sans-serif;
+    font-size: 12px;
+    line-height: 12px;
+    color: #E10600;
+    padding-left: 24px;
+    display: none;
+  }
+
+  .lp-input-wrap.error .lp-input-error,
+  .lp-checkbox-wrap.error .lp-checkbox-error {
+    display: block;
+  }
+
+  /* ====== Country DDI dropdown ====== */
+  .lp-country-dropdown {
+    position: static;
+    flex-shrink: 0;
+  }
+
+  .lp-country-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    color: var(--color-lp-dark);
+  }
+
+  .lp-flag-img {
+    width: 24px;
+    height: 24px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  .lp-dropdown-arrow {
+    transition: transform 0.2s;
+  }
+
+  .lp-dropdown-arrow.open {
+    transform: rotate(180deg);
+  }
+
+  .lp-country-menu {
+    position: absolute;
+    top: calc(48px + 4px);
+    left: 0;
+    right: 0;
+    z-index: 10;
+    background: var(--color-lp-dark);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    max-height: 240px;
+    overflow: hidden;
+    display: none;
+  }
+
+  .lp-country-menu.open {
+    display: block;
+  }
+
+  .lp-country-search-wrap {
+    padding: 8px;
+    border-bottom: 1px solid rgba(240, 239, 235, 0.15);
+  }
+
+  .lp-country-search {
+    width: 100%;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    color: var(--color-lp-light);
+    font-family: 'Margem Test', sans-serif;
+    font-size: 13px;
+    outline: none;
+  }
+
+  .lp-country-search::placeholder {
+    color: rgba(240, 239, 235, 0.5);
+  }
+
+  .lp-country-search:focus {
+    border-color: var(--color-lp-blue);
+  }
+
+  .lp-countries-list {
+    overflow-y: auto;
+    max-height: 180px;
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+  }
+
+
+  .lp-country-option {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    background: none;
+    border: none;
+    color: var(--color-lp-light);
+    cursor: pointer;
+    text-align: left;
+    border-radius: 8px;
+    font-family: 'Margem Test', sans-serif;
+    font-size: 13px;
+    transition: background 0.15s;
+    flex-direction: row;
+  }
+
+  .lp-country-option:hover {
+    background: rgba(135, 205, 231, 0.15);
+  }
+
+  .lp-country-option img {
+    width: 24px;
+    height: 18px;
+    border-radius: 3px;
+    object-fit: cover;
+  }
+
+  .lp-country-option .lp-co-name {
+    flex: 1;
+  }
+
+  .lp-country-option .lp-co-ddi {
+    color: rgba(240, 239, 235, 0.5);
+  }
+
+  .lp-country-option .lp-co-check {
+    color: var(--color-lp-blue);
+  }
+
+  /* ====== Checkbox ====== */
+  .lp-checkbox-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .lp-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+  }
+
+  .lp-checkbox-label input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .lp-checkbox-box {
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+    border: 1.5px solid var(--color-lp-dark);
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s, border-color 0.15s;
+    color: transparent;
+  }
+
+  .lp-checkbox-label input:checked + .lp-checkbox-box {
+    background: var(--color-lp-dark);
+    border-color: var(--color-lp-dark);
+    color: var(--color-lp-blue);
+  }
+
+  .lp-checkbox-wrap.error .lp-checkbox-box {
+    border-color: #E10600;
+  }
+
+  .lp-checkbox-text {
+    font-family: 'Margem Test', sans-serif;
+    font-size: 12px;
+    line-height: 12px;
+    color: rgba(2, 3, 5, 0.85);
+  }
+
+  .lp-checkbox-text a {
+    color: rgba(2, 3, 5, 0.85);
+    text-decoration: underline;
+  }
+
+  /* ====== Termos (texto simples) ====== */
+  .lp-terms-text {
+    font-family: 'Margem Test', sans-serif;
+    font-size: 12px;
+    line-height: 16px;
+    color: rgba(2, 3, 5, 0.85);
+    text-align: center;
+    width: 100%;
+  }
+
+  .lp-terms-text a {
+    color: rgba(2, 3, 5, 0.85);
+    text-decoration: underline;
+  }
+
+  /* ====== Botão submit ====== */
+  .lp-popup-btn {
+    width: 100%;
+    height: 48px;
+    border: none;
+    border-radius: 9999px;
+    background: var(--color-lp-dark);
+    color: var(--color-lp-light);
+    font-family: 'Margem Test', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: opacity 0.2s;
+  }
+
+  .lp-popup-btn:hover {
+    opacity: 0.85;
+  }
+
+  .lp-popup-btn__loading {
+    display: none;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .lp-popup-btn.loading .lp-popup-btn__text {
+    display: none;
+  }
+
+  .lp-popup-btn.loading .lp-popup-btn__loading {
+    display: flex;
+  }
+
+  .lp-popup-btn.loading {
+    pointer-events: none;
+  }
+
+  /* Spinner */
+  .lp-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(240, 239, 235, 0.3);
+    border-top-color: var(--color-lp-light);
+    border-radius: 50%;
+    animation: lp-spin 0.8s linear infinite;
+  }
+
+  @keyframes lp-spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* ====== Segurança ====== */
+  .lp-popup-secure {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--color-lp-dark);
+  }
+
+  .lp-popup-secure span {
+    font-family: 'Margem Test', sans-serif;
+    font-size: 12px;
+    line-height: 10px;
+  }
+
+  /* ====== Autofill ====== */
+  .lp-input-container input:-webkit-autofill,
+  .lp-input-container input:-webkit-autofill:hover,
+  .lp-input-container input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px var(--color-lp-blue) inset !important;
+    -webkit-text-fill-color: var(--color-lp-dark) !important;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+
+  /* ====== Scrollbar oculta no card ====== */
+  .lp-popup-card::-webkit-scrollbar {
+    display: none;
+  }
+
+  .lp-popup-card {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>
+
+<script is:inline>
+(function () {
+  // ========== País / DDI ==========
+  const countries = [
+    { code: 'BR', ddi: '+55', name: 'Brasil', flag: 'https://flagcdn.com/w40/br.png', mask: '(##) #####-####', placeholder: '(11) 99285-2666', min: 10, max: 11 },
+    { code: 'US', ddi: '+1', name: 'Estados Unidos', flag: 'https://flagcdn.com/w40/us.png', mask: '(###) ###-####', placeholder: '(555) 123-4567', min: 10, max: 10 },
+    { code: 'GB', ddi: '+44', name: 'Reino Unido', flag: 'https://flagcdn.com/w40/gb.png', mask: '#### ######', placeholder: '7400 123456', min: 10, max: 10 },
+    { code: 'PT', ddi: '+351', name: 'Portugal', flag: 'https://flagcdn.com/w40/pt.png', mask: '### ### ###', placeholder: '912 345 678', min: 9, max: 9 },
+    { code: 'ES', ddi: '+34', name: 'Espanha', flag: 'https://flagcdn.com/w40/es.png', mask: '### ## ## ##', placeholder: '612 34 56 78', min: 9, max: 9 },
+    { code: 'FR', ddi: '+33', name: 'França', flag: 'https://flagcdn.com/w40/fr.png', mask: '# ## ## ## ##', placeholder: '6 12 34 56 78', min: 9, max: 9 },
+    { code: 'DE', ddi: '+49', name: 'Alemanha', flag: 'https://flagcdn.com/w40/de.png', mask: '#### ########', placeholder: '1512 3456789', min: 10, max: 11 },
+    { code: 'IT', ddi: '+39', name: 'Itália', flag: 'https://flagcdn.com/w40/it.png', mask: '### ### ####', placeholder: '312 345 6789', min: 9, max: 10 },
+    { code: 'AR', ddi: '+54', name: 'Argentina', flag: 'https://flagcdn.com/w40/ar.png', mask: '## ####-####', placeholder: '11 1234-5678', min: 10, max: 10 },
+    { code: 'MX', ddi: '+52', name: 'México', flag: 'https://flagcdn.com/w40/mx.png', mask: '## #### ####', placeholder: '55 1234 5678', min: 10, max: 10 },
+  ];
+
+  let selectedCountry = countries[0];
+  let dropdownOpen = false;
+
+  // ========== DOM refs ==========
+  const overlay = document.getElementById('lp-form-overlay');
+  const closeBtn = document.getElementById('lp-popup-close');
+  const form = document.getElementById('lp-capture-form');
+  const submitBtn = document.getElementById('lp-submit-btn');
+
+  const nameInput = document.getElementById('lp-name');
+  const emailInput = document.getElementById('lp-email');
+  const whatsappInput = document.getElementById('lp-whatsapp');
+
+  const countryBtn = document.getElementById('lp-country-select');
+  const countryMenu = document.getElementById('lp-country-dropdown-menu');
+  const countrySearch = document.getElementById('lp-country-search');
+  const countriesList = document.getElementById('lp-countries-list');
+  const selectedFlag = document.getElementById('lp-selected-flag');
+  const dropdownArrow = document.getElementById('lp-dropdown-arrow');
+
+  // ========== Popup open / close ==========
+  function openPopup() {
+    overlay.classList.add('active');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePopup() {
+    overlay.classList.remove('active');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  // Botões que abrem o popup: todos os .lp-btn com href="#cadastro"
+  document.querySelectorAll('a[href="#cadastro"]').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      openPopup();
+    });
+  });
+
+  closeBtn.addEventListener('click', closePopup);
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) closePopup();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closePopup();
+  });
+
+  // ========== DDI Country Selector ==========
+  function renderCountries(list) {
+    list = list || countries;
+    countriesList.innerHTML = list.map(function (c) {
+      var isSelected = c.code === selectedCountry.code;
+      return '<button type="button" class="lp-country-option" data-code="' + c.code + '">' +
+        '<img src="' + c.flag + '" alt="' + c.name + '">' +
+        '<span class="lp-co-name">' + c.name + '</span>' +
+        '<span class="lp-co-ddi">' + c.ddi + '</span>' +
+        (isSelected ? '<span class="lp-co-check">✓</span>' : '') +
+        '</button>';
+    }).join('');
+
+    countriesList.querySelectorAll('.lp-country-option').forEach(function (opt) {
+      opt.addEventListener('click', function () {
+        selectCountry(opt.getAttribute('data-code'));
+      });
+    });
+  }
+
+  function selectCountry(code) {
+    selectedCountry = countries.find(function (c) { return c.code === code; }) || countries[0];
+    selectedFlag.src = selectedCountry.flag;
+    selectedFlag.alt = selectedCountry.name;
+    whatsappInput.placeholder = selectedCountry.placeholder;
+    whatsappInput.value = '';
+    toggleDropdown(false);
+    renderCountries();
+  }
+
+  function toggleDropdown(open) {
+    dropdownOpen = typeof open === 'boolean' ? open : !dropdownOpen;
+    if (dropdownOpen) {
+      countryMenu.classList.add('open');
+      dropdownArrow.classList.add('open');
+      countrySearch.focus();
+    } else {
+      countryMenu.classList.remove('open');
+      dropdownArrow.classList.remove('open');
+      countrySearch.value = '';
+      renderCountries();
+    }
+  }
+
+  countryBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    toggleDropdown();
+  });
+
+  countrySearch.addEventListener('input', function () {
+    var q = countrySearch.value.toLowerCase();
+    renderCountries(countries.filter(function (c) {
+      return c.name.toLowerCase().indexOf(q) !== -1 || c.ddi.indexOf(q) !== -1;
+    }));
+  });
+
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.lp-country-dropdown')) toggleDropdown(false);
+  });
+
+  // ========== Máscara de telefone ==========
+  function applyMask(value, mask) {
+    var numbers = value.replace(/\D/g, '');
+    var masked = '';
+    var ni = 0;
+    for (var i = 0; i < mask.length && ni < numbers.length; i++) {
+      if (mask[i] === '#') { masked += numbers[ni]; ni++; }
+      else { masked += mask[i]; }
+    }
+    return masked;
+  }
+
+  whatsappInput.addEventListener('input', function () {
+    var numbers = whatsappInput.value.replace(/\D/g, '');
+    if (numbers.length <= selectedCountry.max) {
+      whatsappInput.value = applyMask(numbers, selectedCountry.mask);
+    } else {
+      whatsappInput.value = whatsappInput.value.slice(0, -1);
+    }
+  });
+
+  // ========== Limpar erro ao digitar ==========
+  [nameInput, emailInput, whatsappInput].forEach(function (inp) {
+    inp.addEventListener('input', function () {
+      inp.closest('.lp-input-wrap').classList.remove('error');
+    });
+  });
+
+  // ========== Validação ==========
+  function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  // ========== Submit ==========
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    // Limpar erros
+    document.querySelectorAll('.lp-input-wrap').forEach(function (w) {
+      w.classList.remove('error');
+    });
+
+    var hasErrors = false;
+
+    if (!nameInput.value.trim()) {
+      nameInput.closest('.lp-input-wrap').classList.add('error');
+      hasErrors = true;
+    }
+    if (!emailInput.value.trim() || !isValidEmail(emailInput.value)) {
+      emailInput.closest('.lp-input-wrap').classList.add('error');
+      hasErrors = true;
+    }
+
+    var phoneDigits = whatsappInput.value.replace(/\D/g, '');
+    if (!phoneDigits || phoneDigits.length < selectedCountry.min) {
+      whatsappInput.closest('.lp-input-wrap').classList.add('error');
+      hasErrors = true;
+    }
+
+    if (hasErrors) return;
+
+    // Montar payload
+    var fullPhone = selectedCountry.ddi.replace('+', '') + phoneDigits;
+    var emailValue = emailInput.value.trim();
+
+    var urlParams = new URLSearchParams(window.location.search);
+    var utms = {};
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach(function (k) {
+      var v = urlParams.get(k);
+      if (v) utms[k] = v;
+    });
+
+    var payload = Object.assign({
+      name: nameInput.value.trim(),
+      email: emailValue,
+      phonenumber: fullPhone,
+    }, utms);
+
+    // Loading
+    submitBtn.classList.add('loading');
+
+    try {
+      await fetch('https://ac.matheusiaromo.workers.dev/?form=lp-capture', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      // Redirect pra lead-score com UTMs + email
+      var redirectParams = new URLSearchParams();
+      redirectParams.set('email', emailValue);
+      ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach(function (k) {
+        var v = urlParams.get(k);
+        if (v) redirectParams.set(k, v);
+      });
+
+      window.location.href = '/lp/lead-score?' + redirectParams.toString();
+    } catch (err) {
+      console.error('Erro ao enviar:', err);
+      window.location.href = '/lp/lead-score?email=' + encodeURIComponent(emailValue);
+    }
+  });
+
+  // Init
+  renderCountries();
+})();
+</script>

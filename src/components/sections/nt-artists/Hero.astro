@@ -1,0 +1,143 @@
+---
+import ButtonPill from '../../ui/ButtonPill.astro';
+---
+
+<section class="hero">
+  <div class="hero__bg" aria-hidden="true"></div>
+  <div class="hero__content">
+    <div class="hero__inner">
+
+      <div class="hero__left">
+        <p class="hero__subtitle font-subtitle">NT ARTIST</p>
+        <h1 class="hero__title font-title">Artistas com curadoria Novo Traço</h1>
+      </div>
+
+      <div class="hero__right">
+        <p class="hero__text font-body">Cada artista aqui foi descoberto dentro dos nossos festivais, desenvolvido pela NT Music e testado diante de plateias reais - de 40 mil a 600 mil pessoas.</p>
+        <ButtonPill href="/contact" variant="light">Falar sobre booking</ButtonPill>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-dark);
+    color: var(--color-light);
+  }
+
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('/images/nt-artists/bg-hero.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .hero__content {
+    position: relative;
+    z-index: 10;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%;
+  }
+
+  .hero__inner {
+    max-width: 1255px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 0px 90px;
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+    justify-content: space-between;
+  }
+
+  .hero__left {
+    max-width: 578.55px;
+    display: flex;
+    flex-direction: column;
+    gap: 48.3px;
+  }
+
+  .hero__subtitle {
+    margin: 0;
+  }
+
+  .hero__title {
+    margin: 0;
+    font-size: 64px;
+  }
+
+  .hero__right {
+    width: 355.95px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 27px;
+    align-items: flex-end;
+  }
+
+  .hero__text {
+    margin: 0;
+    max-width: 356px;
+    text-align: right;
+  }
+
+  @media (max-width: 1280px) {
+    .hero__inner {
+      padding: 0 16px 90px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      height: 563px;
+      min-height: 563px;
+    }
+
+    .hero__bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(25, 23, 24, 0.00) 47.2%, #191718 100%);
+    }
+
+    .hero__inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+      max-width: 300px;
+      padding: 0 0 48px;
+    }
+    .hero__title {
+      font-size: 32px;
+      text-align: center;
+    }
+    .hero__right {
+      width: 100%;
+      align-items: center;
+    }
+    .hero__left {
+      gap: 20px;
+      margin: 0 auto;
+    }
+
+    .hero__text {
+      text-align: center;
+      max-width: 100%;
+    }
+
+    .hero__subtitle {
+      text-align: center;
+    }
+  }
+</style>

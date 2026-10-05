@@ -1,0 +1,94 @@
+---
+import VetorAmarelo from '../../ui/VetorAmarelo.astro';
+---
+
+<section class="oquefica">
+  <div class="oquefica__inner">
+
+    <h2 class="oquefica__title font-title">O que fica quando as luzes se apagam?</h2>
+
+    <div class="oquefica__body font-body">
+      <p>Existimos para derrubar uma crença: a de que cultura é sobremesa — doce, mas dispensável. Nossa causa é provar que arte é prato principal.</p>
+      <p>Lutamos contra duas fomes: a do espírito, que adoece quando privado de beleza e significado; e a de oportunidades, quando o mercado não enxerga a cultura como a indústria poderosa que ela é.</p>
+      <p>Para a Novo Traço, um palco é nutrição para quem assiste e prosperidade para quem faz. Não vendemos ornamento. Vendemos potência.</p>
+      <p>Porque a arte alimenta e enriquece.</p>
+    </div>
+
+  </div>
+
+  <VetorAmarelo />
+</section>
+
+<style>
+  .oquefica {
+    width: 100%;
+    background-color: var(--color-dark);
+    color: var(--color-light);
+    position: relative;
+  }
+
+  /* grid de 2 colunas — proporção fiel ao Figma (510px : 397px) */
+  .oquefica__inner {
+    max-width: 917px;
+    margin: 0 auto;
+    padding: 200px 0px 400px;
+    display: grid;
+    grid-template-columns: 56fr 44fr;
+    gap: 10px;
+  }
+
+  .oquefica__title {
+    margin: 0;
+    max-width: 370px;
+  }
+
+  /* offset vertical do texto em relação ao título (425px - 198px = 227px) */
+  .oquefica__body {
+    padding-top: 227px;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+
+  .oquefica__body p {
+    margin: 0;
+  }
+
+  @media (max-width: 1200px) {
+    .oquefica__inner {
+      padding: 150px 16px 300px;
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .oquefica__inner {
+      padding: 80px 16px 450px;
+      grid-template-columns: 1fr;
+    }
+
+    .oquefica__body {
+      padding-top: 40px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .oquefica__inner {
+      padding: 80px 0px 300px;
+      max-width: 276px;
+      gap: 25px;
+    }
+
+    .oquefica__body {
+      padding-top: 0px;
+    }
+  }
+
+   @media (max-width: 590px) {
+     .oquefica__inner {
+       padding: 80px 0px 197px;
+     }
+   }
+
+
+
+</style>

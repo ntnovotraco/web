@@ -1,0 +1,149 @@
+---
+import Card from '../../ui/Card.astro';
+---
+
+<section class="section5">
+  <div class="section5__inner">
+
+    <div class="section5__left">
+      <h2 class="section5__title font-title">O que você pode fazer com um artista NT</h2>
+      <p class="section5__text font-body">Contratar um artista do roster NT Artists não é só booking. É acessar um ecossistema de possibilidades criativas com a curadoria e a credibilidade da Novo Traço por trás.</p>
+    </div>
+
+    <div class="section5__cards">
+      <Card
+        iconSrc="/images/nt-artists/card5.svg"
+        title="Shows e apresentações ao vivo"
+        content="Do show corporativo ao festival de grande escala. Com rider técnico impecável e a segurança operacional de quem já colocou 600 mil pessoas em Copacabana sem um incidente."
+        borderRadius="45px"
+      />
+      <Card
+        iconSrc="/images/nt-artists/card6.svg"
+        title="Collabs de marca"
+        content="Quando a sua marca precisa de um rosto, ou uma voz, que tenha autenticidade de origem, não de casting."
+        borderRadius="45px"
+      />
+      <Card
+        iconSrc="/images/nt-artists/card7.svg"
+        title="Trilhas sonoras e documentários"
+        content="Conteúdo de marca que soa verdadeiro porque é. Artistas que trazem sua história para a narrativa da sua marca, não o contrário."
+        borderRadius="45px"
+      />
+      <Card
+        iconSrc="/images/nt-artists/card8.svg"
+        title="Masterclasses e experiências educativas"
+        content="Para marcas com agenda de diversidade, inclusão e acesso cultural. Experiências que provam que ESG não é relatório, é palco."
+        borderRadius="45px"
+      />
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .section5 {
+    background-color: var(--color-light);
+    color: var(--color-dark);
+    border-top: 1px solid rgba(25, 23, 24, 0.13);
+    padding: 133px 0;
+  }
+
+  .section5__inner {
+    max-width: 1255px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* 1255 + 16×2 = 1287 */
+  @media (max-width: 1287px) {
+    .section5__inner {
+      padding: 0 16px;
+    }
+  }
+
+  .section5__left {
+    width: 322px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .section5__title {
+    margin: 0;
+  }
+
+  .section5__text {
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .section5__cards {
+    max-width: 722px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+
+  .section5__cards > :global(.card) {
+    flex: 1 1 calc(50% - 15px);
+    height: 401px;
+  }
+
+  @media (max-width: 1024px) {
+    .section5 {
+      padding: 80px 0;
+    }
+
+    .section5__inner {
+      flex-direction: column;
+      gap: 48px;
+      align-items: flex-start;
+    }
+
+    .section5__left {
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .section5__cards {
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .section5 {
+      padding: 64px 16px;
+    }
+
+    .section5__left {
+      max-width: 276px;
+      margin: 0 auto;
+    }
+
+    .section5__inner {
+      gap: 50px;
+      padding: 0px;
+    }
+
+    .section5__left {
+      width: 100%;
+    }
+
+    .section5__cards {
+      flex-direction: column;
+      max-width: 400px;
+      gap: 16px;
+    }
+
+    .section5__cards > :global(.card) {
+      flex: 1 1 100%;
+      height: auto;
+      min-height: 300px;
+    }
+  }
+</style>

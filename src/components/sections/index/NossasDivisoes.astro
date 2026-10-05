@@ -1,0 +1,112 @@
+---
+import Card from '../../ui/Card.astro';
+---
+
+<section class="nossasdivisoes">
+  <div class="nossasdivisoes__header">
+    <span class="nossasdivisoes__subtitle font-subtitle">Nossas Divisões</span>
+    <h2 class="nossasdivisoes__title font-title">Somos uma powerhouse de inteligência cultural.</h2>
+    <div class="nossasdivisoes__body font-body">
+      <p>Não somos uma produtora de eventos. Produtoras entregam palcos. Nós entregamos latência emocional, aquele efeito que faz uma pessoa, dez anos depois, fechar os olhos e lembrar que foi a sua marca que trouxe aquela música para a vida dela.</p>
+      <p>Operamos no cruzamento raro entre a Economia de Mercado (ROI, margens, logística impecável) e a Economia da Emoção (afeto, memória, pertencimento). Para as marcas que entendem que consumidor apaixonado vale mais que consumidor informado.</p>
+    </div>
+  </div>
+
+  <div class="nossasdivisoes__cards">
+    <Card
+      iconSrc="/icons/icon-nt-artists.svg"
+      title="NT Artists"
+      content="Curadoria e desenvolvimento de artistas descobertos nos nossos eventos. Da favela ao palco global."
+      link="/nt-artists"
+      buttonText="Conhecer"
+    />
+    <Card
+      iconSrc="/icons/icon-nt-events.svg"
+      title="NT Live XP"
+      content="Festivais gratuitos de grande escala, IPs proprietários e curadoria estratégica para marcas que querem se tornar parte da história das pessoas."
+      link="/live-xp"
+      buttonText="Conhecer"
+    />
+    <Card
+      iconSrc="/icons/icon-nt-collection.svg"
+      title="NT Collection"
+      content="O NT Collection é o acervo vivo da genialidade criativa brasileira. Não filmamos o resultado polido — capturamos a alma. Os processos íntimos, as dúvidas e as epifanias de quem ousou ser quem é, preservados para sempre."
+      link="/nt-collection"
+      buttonText="Conhecer"
+    />
+  </div>
+</section>
+
+<style>
+  .nossasdivisoes {
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--color-light);
+    color: var(--color-dark);
+    padding: 133px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 93px;
+  }
+  .nossasdivisoes__header {
+    max-width: 646px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 43px;
+    text-align: center;
+  }
+
+  .nossasdivisoes__title {
+    margin: 0;
+    max-width: 494px;
+  }
+  .nossasdivisoes__body {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+  .nossasdivisoes__body p {
+    margin: 0;
+  }
+  .nossasdivisoes__cards {
+    max-width: 1052px;
+    width: 100%;
+    display: flex;
+    gap: 30px;
+    align-items: stretch;
+  }
+
+  @media (max-width: 1200px) {
+    .nossasdivisoes {
+      padding: 80px 16px;
+    }
+  }
+
+  @media (max-width: 768px) {
+
+    .nossasdivisoes {
+      gap: 42px;
+    }
+
+    .nossasdivisoes__cards {
+      flex-direction: column;
+      gap: 20px;
+
+      max-width: 400px;
+    }
+
+    .nossasdivisoes__subtitle.font-subtitle {
+      text-align: left;
+      width: 100%;
+    }
+
+    .nossasdivisoes__header {
+      max-width: 276px;
+      gap: 24px;
+      text-align: left;
+    }
+  }
+</style>

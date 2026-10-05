@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "skills": {
+    "frontend-design": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "516bd2154eb843a8240e43d5b285229129853114ad7075a5e141e1c08e408c84"
+    },
+    "image-manipulation-image-magick": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "computedHash": "f4f81a1054a423c5eff04f05c1b72335beae2251201c5b5729b0dce4bee06f7e"
+    },
+    "image-optimization": {
+      "source": "kostja94/marketing-skills",
+      "sourceType": "github",
+      "computedHash": "790b50241759efc0adc12d066dd107f2bd8d40577942bfe6581cacf3079e4edf"
+    },
+    "pagespeed-insights": {
+      "source": "enderpuentes/ai-agent-skills",
+      "sourceType": "github",
+      "computedHash": "80a9e00c680f7341b442efae1e9d05572681dbf57db1cee0db8cc8d920b14a7c"
+    }
+  }
+}

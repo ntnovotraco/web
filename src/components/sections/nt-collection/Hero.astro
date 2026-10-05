@@ -1,0 +1,104 @@
+---
+---
+
+<section class="hero">
+  <div class="hero__inner">
+    <div class="hero__header">
+      <p class="hero__label font-subtitle">NT COLLECTION</p>
+      <h1 class="hero__title font-title" style="font-size: 56px; line-height: 1.2;">O Brasil produz gênios como nenhum outro lugar. E os perde.</h1>
+    </div>
+    <div class="hero__body">
+      <p>Os processos criativos de Tom Jobim existem em fragmentos dispersos. A filosofia estética de Niemeyer foi reduzida a citações de parachoques. O pensamento musical de Cartola foi enterrado com ele. Gerações inteiras de genialidade criativa — evaporadas.</p>
+      <p>Não porque faltou talento. Mas porque ninguém considerou que valia a pena arquivar a alma. Apenas o resultado. O NT Collection nasceu para mudar isso.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    background-color: var(--color-light);
+    color: var(--color-dark);
+    display: flex;
+    justify-content: center;
+    padding: 76px 219px 109px;
+  }
+
+  .hero__inner {
+    max-width: 1030px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
+  }
+
+  .hero__header {
+    display: flex;
+    flex-direction: column;
+    gap: 29px;
+    max-width: 711px;
+  }
+
+  .hero__label {
+    margin: 0;
+  }
+
+  .hero__title {
+    margin: 0;
+  }
+
+  .hero__body {
+    display: flex;
+    gap: 28px;
+    font-size: 18px;
+    line-height: 1.45;
+  }
+
+  .hero__body p {
+    margin: 0;
+  }
+
+  .hero__body p:first-child {
+    width: 609px;
+    flex-shrink: 0;
+  }
+
+  .hero__body p:last-child {
+    flex: 1;
+  }
+
+  @media (max-width: 1200px) {
+    .hero {
+      padding: 76px 80px 109px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: 48px 20px 64px;
+    }
+
+    .hero__inner {
+      gap: 32px;
+    }
+
+    .hero__header {
+      max-width: 100%;
+      gap: 20px;
+    }
+
+    .hero__title {
+      font-size: 36px !important;
+      line-height: 1.2 !important;
+    }
+
+    .hero__body {
+      flex-direction: column;
+      gap: 20px;
+      font-size: 16px;
+    }
+
+    .hero__body p:first-child {
+      width: 100%;
+    }
+  }
+</style>

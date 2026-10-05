@@ -1,0 +1,107 @@
+---
+import '../styles/pdv.css';
+import PdvFormPopup from '../components/pdv/PdvFormPopup.astro';
+import PdvPrivacyModal from '../components/pdv/PdvPrivacyModal.astro';
+import PdvTermsModal from '../components/pdv/PdvTermsModal.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  checkoutUrl?: string;
+  socialImage?: string;
+  preloadImage?: string;
+}
+
+const { title, description = 'NT Collection', checkoutUrl, socialImage, preloadImage } = Astro.props;
+const pageTitle = title ?? 'NT Collection';
+const socialImageUrl = socialImage ? new URL(socialImage, Astro.site ?? Astro.url).href : undefined;
+---
+
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{pageTitle}</title>
+    <link rel="icon" href="/images/pdv/Favicon.png" />
+    <meta name="description" content={description} />
+
+    <!-- Resource hints (third-party origins used on this page) -->
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    <link rel="preconnect" href="https://www.youtube-nocookie.com" crossorigin />
+    <link rel="preconnect" href="https://i.ytimg.com" crossorigin />
+    <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+
+    <!-- Preload critical fonts used in hero LCP -->
+    <link rel="preload" href="/fonts/RoslindaleVariable-Testing.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="preload" href="/fonts/MargemVariableTest.ttf" as="font" type="font/ttf" crossorigin />
+
+    {preloadImage && (
+      <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />
+    )}
+
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url.href} />
+    <meta property="og:description" content={description} />
+    {socialImageUrl && (
+      <>
+        <meta property="og:image" content={socialImageUrl} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content={socialImageUrl} />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={description} />
+      </>
+    )}
+
+    <!-- Google Tag Manager — deferred to idle to avoid blocking LCP -->
+    <script is:inline>
+      (function(w,d,s,l,i){
+        function load(){
+          if (w.__gtmLoaded) return; w.__gtmLoaded = true;
+          w[l]=w[l]||[]; w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+          var f=d.getElementsByTagName(s)[0],j=d.createElement(s),
+              dl=l!='dataLayer'?'&l='+l:'';
+          j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+          f.parentNode.insertBefore(j,f);
+        }
+        if ('requestIdleCallback' in w) {
+          w.requestIdleCallback(load, { timeout: 3000 });
+        } else {
+          w.addEventListener('load', function(){ setTimeout(load, 1500); });
+        }
+      })(window,document,'script','dataLayer','GTM-M72JCCF6');
+    </script>
+  </head>
+  <body class="pdv">
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M72JCCF6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <slot />
+
+    <PdvFormPopup checkoutUrl={checkoutUrl} />
+    <PdvPrivacyModal />
+    <PdvTermsModal />
+
+    <script is:inline>
+      (function() {
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in-view');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
+
+        var targets = document.querySelectorAll('section, footer');
+        targets.forEach(function(el, i) {
+          el.style.transitionDelay = (i === 0 ? 0 : 60) + 'ms';
+          el.classList.add('scroll-reveal');
+          observer.observe(el);
+        });
+      })();
+    </script>
+  </body>
+</html>

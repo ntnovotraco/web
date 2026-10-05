@@ -1,0 +1,139 @@
+---
+---
+
+<section class="collection">
+  <div class="collection__inner">
+    <div class="collection__card">
+      <div class="collection__info">
+        <div class="collection__info-header">
+          <h2 class="collection__title font-title">Dezenove anos construindo o que não se esquece.</h2>
+          <p class="collection__tagline">Agora, para sempre.</p>
+        </div>
+        <div class="collection__bio">
+          <p>A Novo Traço passou quase duas décadas levando cultura para onde o GPS muitas vezes nem mapeia. Orquestras na favela. Jazz no morro. Meio milhão de pessoas cantando juntas na praia de Copacabana, sem um único incidente. Beleza oferecida com excelência — e sem catraca.</p>
+          <p>O NT Collection é a passagem do espaço para o tempo. De quem ocupa praças para quem ocupa gerações. De quem monta palcos efêmeros para quem constrói patrimônio permanente.</p>
+        </div>
+      </div>
+      <div class="collection__img-wrap">
+        <img src="/images/nt-collections/section3.webp" alt="Rafaello Ramundo" class="collection__img" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .collection {
+    background-color: #FB6C1B;
+    color: var(--color-dark);
+    overflow: hidden;
+  }
+
+  .collection__inner {
+    width: 100%;
+    margin: 0 auto;
+    padding: 124px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .collection__card {
+    display: flex;
+    width: 100%;
+    max-width: 1049px;
+  }
+
+  .collection__info {
+    flex: 1;
+    background-color: var(--color-light);
+    padding: 88px 86px;
+    display: flex;
+    flex-direction: column;
+    gap: 42px;
+    justify-content: center;
+    max-width: 50%;
+  }
+
+  .collection__info-header {
+    display: flex;
+    flex-direction: column;
+    gap: 38px;
+  }
+
+  .collection__title {
+    margin: 0;
+    font-size: 44px;
+    line-height: 1.21;
+  }
+
+  .collection__tagline {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  .collection__bio {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    font-size: 16px;
+    line-height: 1.3;
+  }
+
+  .collection__bio p {
+    margin: 0;
+  }
+
+  .collection__img-wrap {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    min-height: 400px;
+  }
+
+  .collection__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    object-position: top;
+  }
+
+  @media (max-width: 1081px) {
+    .collection__card {
+      margin: 0 16px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .collection__inner {
+      padding: 64px 16px;
+    }
+
+    .collection__card {
+      flex-direction: column;
+      margin: 0 16px;
+    }
+
+    .collection__info {
+      padding: 40px 24px;
+      gap: 24px;
+      max-width: 100%;
+    }
+
+    .collection__info-header {
+      gap: 20px;
+    }
+
+    .collection__title {
+      font-size: 36px;
+    }
+
+    .collection__bio {
+      font-size: 14px;
+    }
+  }
+</style>

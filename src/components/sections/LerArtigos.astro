@@ -1,0 +1,204 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import ArticleCard from '../ui/ArticleCard.astro';
+import ButtonPill from '../ui/ButtonPill.astro';
+
+const allPosts = await getCollection('posts');
+
+const artigos = await Promise.all(
+  allPosts.map(async (post) => {
+    const cat = await getEntry(post.data.categoria);
+    return {
+      image: post.data.imagemDestacada,
+      categoryLabel: cat?.data.nome ?? '',
+      categoryColor: cat?.data.cor ?? '#191718',
+      title: post.data.titulo,
+      excerpt: post.data.resumo,
+      readTime: post.data.tempoDeLeitura,
+      href: `/blog/${post.data.slug}`,
+    };
+  })
+);
+---
+
+<section class="lerartigos">
+  <div class="lerartigos__inner">
+
+    <div class="lerartigos__header">
+      <p class="lerartigos__label">Leia artigos</p>
+      <div class="lerartigos__arrows">
+        <button class="lerartigos__arrow lerartigos__arrow--prev" aria-label="Anterior">
+          <img src="/icons/arrow-left.svg" alt="" width="29" height="25" />
+        </button>
+        <button class="lerartigos__arrow lerartigos__arrow--next" aria-label="Próximo">
+          <img src="/icons/arrow-right.svg" alt="" width="29" height="25" />
+        </button>
+      </div>
+    </div>
+
+    <div id="artigos-splide" class="splide" aria-label="Artigos do blog">
+      <div class="splide__track">
+        <ul class="splide__list">
+          {artigos.map((artigo) => (
+            <li class="splide__slide">
+              <ArticleCard {...artigo} />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <ButtonPill href="/blog">Visitar blog</ButtonPill>
+
+  </div>
+</section>
+
+<style>
+  .lerartigos {
+    width: 100%;
+    background-color: var(--color-light);
+    color: var(--color-dark);
+    overflow: hidden;
+    border-top: 1px solid rgba(25, 23, 24, 0.21);
+  }
+
+  .lerartigos__inner {
+    max-width: 1260px;
+    margin: 0 auto;
+    padding: 80px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 42px;
+  }
+
+  .lerartigos__header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .lerartigos__label {
+    margin: 0;
+    flex-shrink: 0;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .lerartigos__arrows {
+    display: flex;
+    gap: 12.931px;
+  }
+
+  .lerartigos__arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14.548px 11.315px;
+    border: 0.808px solid #191718;
+    border-radius: 142.243px;
+    background: transparent;
+    cursor: pointer;
+    overflow: hidden;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .lerartigos__arrow:hover {
+    background: rgba(25, 23, 24, 0.06);
+  }
+
+  .lerartigos__arrow img {
+    display: block;
+    width: 29px;
+    height: 25px;
+  }
+
+  /* Splide overrides */
+  .splide {
+    width: 100%;
+    overflow: visible;
+  }
+
+  :global(#artigos-splide .splide__track) {
+    overflow: visible;
+  }
+
+  :global(#artigos-splide .splide__list) {
+    display: flex;
+  }
+
+  :global(#artigos-splide .splide__slide) {
+    flex-shrink: 0;
+    list-style: none;
+    width: inherit;
+  }
+
+  :global(#artigos-splide .splide__pagination) {
+    display: none !important;
+  }
+  :global(#artigos-splide .splide__sr) {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+
+  @media (max-width: 1200px) {
+    .lerartigos__inner {
+      padding: 80px 16px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    :global(#artigos-splide .splide__slide) {
+      max-width: 100%;
+    }
+
+    .lerartigos__header {
+      max-width: 276px;
+    }
+
+    .lerartigos__arrow {
+      padding: 13px 11px;
+    }
+  }
+</style>
+
+<script>
+  import Splide from '@splidejs/splide';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const splide = new Splide('#artigos-splide', {
+      type: 'slide',
+      perPage: 3,
+      perMove: 1,
+      gap: '30px',
+      autoWidth: true,
+      arrows: false,
+      pagination: false,
+      drag: true,
+      snap: true,
+      breakpoints: {
+      768: {
+        perPage: 2,
+        gap: '20px'
+      }
+  }
+    });
+
+    splide.mount();
+
+    const prevBtn = document.querySelector('.lerartigos__arrow--prev');
+    const nextBtn = document.querySelector('.lerartigos__arrow--next');
+
+    prevBtn?.addEventListener('click', () => splide.go('<'));
+    nextBtn?.addEventListener('click', () => splide.go('>'));
+  });
+</script>

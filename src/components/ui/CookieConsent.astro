@@ -1,0 +1,207 @@
+---
+// CookieConsent.astro
+import CookiePolicyModal from './CookiePolicyModal.astro';
+---
+
+<div id="cookie-banner" aria-live="polite" aria-label="Consentimento de cookies">
+  <div id="cookie-card">
+    <div class="cookie-content">
+      <div class="cookie-header">
+        <!-- Cookie icon SVG -->
+        <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="15.5" cy="15.5" r="14.5" stroke="#191718" stroke-width="1.5"/>
+          <circle cx="10" cy="10" r="2" fill="#191718"/>
+          <circle cx="19" cy="9" r="1.5" fill="#191718"/>
+          <circle cx="21" cy="19" r="2" fill="#191718"/>
+          <circle cx="11" cy="20" r="1.5" fill="#191718"/>
+          <circle cx="15" cy="15" r="1.5" fill="#191718"/>
+        </svg>
+        <h2 class="cookie-title">Cookies</h2>
+      </div>
+      <div class="cookie-body">
+        <p>A Novo Traço usa cookies no seu dispositivo para oferecer serviços mais confiáveis, melhorar a qualidade do nosso site e habilitar recursos personalizados.</p>
+        <p>Para mais informações, consulte nosso <a href="#" class="cookie-link">Aviso de Cookies</a>.</p>
+      </div>
+    </div>
+    <div class="cookie-actions">
+      <button id="cookie-reject" type="button" class="cookie-btn cookie-btn--outline">
+        Rejeitar todos os cookies
+      </button>
+      <button id="cookie-accept" type="button" class="cookie-btn cookie-btn--filled">
+        Aceitar todos os cookies
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  #cookie-banner {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    transform: translateY(120%);
+    z-index: 9998;
+    width: min(504px, calc(100vw - 28px));
+    opacity: 0;
+    transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1), opacity 400ms ease;
+    pointer-events: none;
+  }
+
+  #cookie-banner.visible {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  #cookie-card {
+    background: var(--color-light);
+    border: 2px solid var(--color-dark);
+    border-radius: 45px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .cookie-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .cookie-header {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .cookie-title {
+    font-family: var(--font-secondary);
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.25;
+    color: var(--color-dark);
+    margin: 0;
+  }
+
+  .cookie-body {
+    font-family: var(--font-primary);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: var(--color-dark);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .cookie-body p {
+    margin: 0;
+  }
+
+  .cookie-body p:first-child {
+    margin-bottom: 16px;
+  }
+
+  .cookie-link {
+    color: var(--color-dark);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .cookie-actions {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .cookie-btn {
+    flex: 1;
+    height: 48px;
+    padding: 13px 24px;
+    border-radius: 132px;
+    font-family: var(--font-primary);
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.3;
+    text-align: center;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .cookie-btn--outline {
+    background: transparent;
+    border: 1px solid var(--color-dark);
+    color: var(--color-dark);
+  }
+
+  .cookie-btn--outline:hover {
+    background: var(--color-dark);
+    color: var(--color-light);
+  }
+
+  .cookie-btn--filled {
+    background: var(--color-dark);
+    border: 1px solid var(--color-dark);
+    color: var(--color-light);
+  }
+
+  .cookie-btn--filled:hover {
+    background: #2d2b2c;
+  }
+
+  @media (max-width: 600px) {
+    #cookie-banner {
+      left: 50%;
+      width: calc(100vw - 32px);
+      transform: translateX(-50%) translateY(120%);
+      bottom: 14px;
+    }
+
+    #cookie-banner.visible {
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .cookie-actions {
+      flex-direction: column-reverse;
+    }
+
+    .cookie-btn {
+      height: 44px;
+    }
+  }
+</style>
+
+<CookiePolicyModal />
+
+<script is:inline>
+  (function () {
+    var STORAGE_KEY = 'nt_cookie_consent';
+
+    if (localStorage.getItem(STORAGE_KEY)) return;
+
+    var banner = document.getElementById('cookie-banner');
+    if (!banner) return;
+
+    // Pequeno delay para a animação entrar após o carregamento da página
+    setTimeout(function () {
+      banner.classList.add('visible');
+    }, 800);
+
+    function dismiss(choice) {
+      localStorage.setItem(STORAGE_KEY, choice);
+      banner.classList.remove('visible');
+    }
+
+    document.getElementById('cookie-accept').addEventListener('click', function () {
+      dismiss('accepted');
+    });
+
+    document.getElementById('cookie-reject').addEventListener('click', function () {
+      dismiss('rejected');
+    });
+  })();
+</script>

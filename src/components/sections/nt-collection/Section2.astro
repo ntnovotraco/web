@@ -1,0 +1,109 @@
+---
+import Card from '../../ui/Card.astro';
+---
+
+<section class="section2">
+  <div class="section2__inner">
+    <div class="section2__header">
+      <h2 class="section2__title font-title">O que você vai encontrar no NT Collection</h2>
+    </div>
+
+    <div class="section2__cards">
+      <Card
+        iconSrc="/images/nt-collections/icon-processos.svg"
+        title="Processos, não resultados."
+        content="Filmamos o caminho tortuoso, não o destino polido. O gênio que falha, recomeça, questiona e então — finalmente — encontra."
+        iconBottom="/icons/arrow-right.svg"
+        borderRadius="45px"
+      />
+      <Card
+        iconSrc="/images/nt-collections/icon-patrimonio.svg"
+        title="Patrimônio que amadurece."
+        content="Nada no Collection caduca. O conteúdo foi feito para ser revisitado. Na primeira vez, você capta uma camada. Na terceira, descobre outra. É a estrutura de uma grande obra de arte: inesgotável."
+        iconBottom="/icons/arrow-right.svg"
+        borderRadius="45px"
+      />
+      <Card
+        iconSrc="/images/nt-collections/icon-brasil.svg"
+        title="O Brasil profundo e completo."
+        content="Macapá ao Rio Grande do Sul. Do sertão ao litoral. Da academia ao terreiro. O acervo da genialidade brasileira não é o acervo de uma cidade. É o de um país inteiro."
+        iconBottom="/images/nt-collections/check.svg"
+        borderRadius="45px"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .section2 {
+    background-color: var(--color-light);
+    color: var(--color-dark);
+    display: flex;
+    justify-content: center;
+    padding: 104px 163px;
+  }
+
+  .section2__inner {
+    max-width: 1117px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 68px;
+  }
+
+  .section2__header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .section2__title {
+    margin: 0;
+    max-width: 804px;
+  }
+
+  .section2__cards {
+    display: flex;
+    gap: 30px;
+    width: 100%;
+  }
+
+  .section2__cards :global(.card) {
+    height: 445px;
+  }
+
+  @media (max-width: 1200px) {
+    .section2 {
+      padding: 80px 40px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .section2 {
+      padding: 48px 20px;
+    }
+
+    .section2__inner {
+      gap: 40px;
+    }
+
+    .section2__cards {
+      flex-direction: column;
+    }
+
+    .section2__cards :global(.card) {
+      height: auto;
+    }
+
+    .section2__title {
+      max-width: 276px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .section2__cards :global(.card:last-child .card__icon-bottom) {
+      transform: none;
+    }
+  }
+</style>

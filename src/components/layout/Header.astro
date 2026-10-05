@@ -1,0 +1,360 @@
+---
+interface Props {
+  /** 'absolute' = flutua sobre o conteúdo, transparente, logo/links claros
+   *  'solid'    = no fluxo, fundo claro (#f0efeb), logo/links escuros */
+  variant?: 'absolute' | 'solid';
+}
+
+const { variant = 'absolute' } = Astro.props;
+
+const navLinks = [
+  { href: '/nt-artists',       label: 'NT Artists'         },
+  { href: '/live-xp',          label: 'NT Live XP'         },
+  { href: '/ntcollection',     label: 'NT Collection'      },
+  { href: '/contact',          label: 'Entre em Contato'   },
+];
+
+const logoSrc = variant === 'absolute' ? '/images/logo-nt-white.svg' : '/images/logo-nt-dark.svg';
+const lottiePath = variant === 'absolute' ? '/NT_logo_lottie.json' : '/NT_logo-preto_lottie.json';
+---
+
+<header class:list={['header', `header--${variant}`]}>
+  <div class="header__inner">
+
+    <a href="/" class="header__logo-link" aria-label="Página inicial">
+      <img src={logoSrc} alt="Novo Traço" class="header__logo" />
+      <div class="header__logo-lottie" aria-hidden="true" data-lottie-logo data-lottie-path={lottiePath}></div>
+    </a>
+
+    <nav class="header__nav" aria-label="Navegação principal">
+      <ul class="header__nav-list">
+        {navLinks.map((item) => (
+          <li>
+            <a href={item.href} class="header__nav-link">{item.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <button
+      class="header__hamburger"
+      aria-label="Abrir menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <span class="header__hamburger-bar" />
+      <span class="header__hamburger-bar" />
+      <span class="header__hamburger-bar" />
+    </button>
+
+  </div>
+
+  <div class="header__mobile-menu" id="mobile-menu" aria-hidden="true">
+    <nav aria-label="Navegação mobile">
+      <ul class="header__mobile-list">
+        {navLinks.map((item) => (
+          <li>
+            <a href={item.href} class="header__mobile-link">{item.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  /* ── BASE ────────────────────────────────────── */
+  .header {
+    width: 100%;
+    z-index: 50;
+  }
+
+  .header--absolute {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: transparent;
+    background: rgba(25, 23, 24, 0.35);
+    --header-color: #f0efeb;
+    --header-hover: var(--color-yellow);
+    --header-mobile-bg: var(--color-dark);
+    --header-mobile-border: rgba(240, 239, 235, 0.12);
+  }
+
+  .header--solid {
+    position: relative;
+    background-color: var(--color-light);
+    border-bottom: 1px solid rgba(25, 23, 24, 0.1);
+    --header-color: #191718;
+    --header-hover: var(--color-yellow);
+    --header-mobile-bg: var(--color-light);
+    --header-mobile-border: rgba(25, 23, 24, 0.1);
+  }
+
+  /* ── INNER ───────────────────────────────────── */
+  .header__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 38px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* ── LOGO ────────────────────────────────────── */
+  .header__logo-link {
+    display: block;
+    flex-shrink: 0;
+    position: relative;
+    width: 69px;
+    height: 69px;
+  }
+
+  .header__logo {
+    display: block;
+    width: 69px;
+    height: 69px;
+    object-fit: contain;
+    transition: opacity 0.05s;
+  }
+
+  .header__logo-lottie {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    pointer-events: none;
+    transition: opacity 0.05s;
+    opacity: 0;
+  }
+
+  .header__logo-link:hover .header__logo {
+    opacity: 0;
+  }
+
+  .header__logo-link:hover .header__logo-lottie {
+    opacity: 1;
+  }
+
+  /* ── NAV DESKTOP ─────────────────────────────── */
+  .header__nav-list {
+    display: flex;
+    align-items: center;
+    gap: 43px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .header__nav-link {
+    font-size: 15.43px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: var(--header-color);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.2s;
+  }
+
+  .header__nav-link:hover {
+    color: var(--header-hover);
+  }
+
+
+  .header--solid .header__nav-link:hover {
+    color: #000;
+  }
+
+  /* ── HAMBURGER ───────────────────────────────── */
+  .header__hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .header__hamburger-bar {
+    display: block;
+    width: 100%;
+    height: 1.5px;
+    background: var(--header-color);
+    border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
+    transform-origin: center;
+  }
+
+  /* Estado aberto do hamburger */
+  .header--open .header__hamburger-bar:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+  }
+  .header--open .header__hamburger-bar:nth-child(2) {
+    opacity: 0;
+  }
+  .header--open .header__hamburger-bar:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+  }
+
+  /* ── MENU MOBILE ─────────────────────────────── */
+  .header__mobile-menu {
+    display: none;
+    flex-direction: column;
+    background: var(--header-mobile-bg);
+    border-top: 1px solid var(--header-mobile-border);
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.35s ease;
+  }
+
+  .header__mobile-list {
+    list-style: none;
+    margin: 0;
+    padding: 12px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .header__mobile-link {
+    display: block;
+    padding: 16px 0;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: var(--header-color);
+    text-decoration: none;
+    border-bottom: 1px solid var(--header-mobile-border);
+    transition: color 0.2s;
+  }
+
+  .header__mobile-list li:last-child .header__mobile-link {
+    border-bottom: none;
+  }
+
+  .header__mobile-link:hover {
+    color: var(--header-hover);
+  }
+
+  @media (max-width: 1200px) {
+		.header__inner {
+			padding: 16px;
+		}
+
+		.header__logo {
+			width: 60px;
+			height: 60px;
+		}
+
+		.header__logo-link {
+			width: 60px;
+			height: 60px;
+		}
+
+		.header__logo-lottie {
+			width: 104px;
+			height: 104px;
+		}
+	}
+
+  /* ── RESPONSIVE ──────────────────────────────── */
+  @media (max-width: 900px) {
+    .header__nav {
+      display: none;
+    }
+
+    .header__hamburger {
+      display: flex;
+    }
+
+    .header__mobile-menu {
+      display: flex;
+    }
+
+    .header--open .header__mobile-menu {
+      max-height: 600px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .header__logo {
+      width: 40px;
+      height: 40px;
+    }
+
+    .header__logo-link {
+      width: 40px;
+      height: 40px;
+    }
+
+    .header__logo-lottie {
+      width: 70px;
+      height: 70px;
+    }
+
+    .header__hamburger {
+      width: 28px;
+      height: 28px;
+    }
+  }
+</style>
+
+<script>
+  import lottie from 'lottie-web';
+
+  // ── Lottie logo ───────────────────────────────────────────────────
+  const logoLink        = document.querySelector('.header__logo-link') as HTMLAnchorElement | null;
+  const lottieContainer = logoLink?.querySelector('[data-lottie-logo]') as HTMLElement | null;
+
+  if (logoLink && lottieContainer) {
+    const lottiePath = lottieContainer.getAttribute('data-lottie-path') || '/NT_logo_lottie.json';
+    let animation: ReturnType<typeof lottie.loadAnimation> | null = null;
+
+    logoLink.addEventListener('mouseenter', () => {
+      if (!animation) {
+        animation = lottie.loadAnimation({
+          container: lottieContainer,
+          renderer: 'svg',
+          loop: false,
+          autoplay: false,
+          path: lottiePath,
+        });
+      }
+      animation.goToAndPlay(0, true);
+    });
+
+    logoLink.addEventListener('mouseleave', () => {
+      animation?.stop();
+    });
+  }
+
+  // ── Hamburger ─────────────────────────────────────────────────────
+  const header = document.querySelector('.header') as HTMLElement | null;
+  const btn    = header?.querySelector('.header__hamburger') as HTMLButtonElement | null;
+  const menu   = header?.querySelector('.header__mobile-menu') as HTMLElement | null;
+
+  btn?.addEventListener('click', () => {
+    const isOpen = header?.classList.toggle('header--open');
+    btn.setAttribute('aria-expanded', String(isOpen));
+    btn.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
+    if (menu) menu.setAttribute('aria-hidden', String(!isOpen));
+  });
+
+  // Fecha o menu ao clicar em qualquer link mobile
+  menu?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      header?.classList.remove('header--open');
+      btn?.setAttribute('aria-expanded', 'false');
+      btn?.setAttribute('aria-label', 'Abrir menu');
+      menu.setAttribute('aria-hidden', 'true');
+    });
+  });
+</script>

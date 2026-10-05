@@ -1,0 +1,133 @@
+---
+// PdvTermsModal.astro — termos de uso escopados pro /ntc
+---
+
+<div id="pdv-terms-overlay" class="pdv-modal-overlay" aria-modal="true" role="dialog" aria-label="Termos de Uso" aria-hidden="true">
+  <div class="pdv-modal-card">
+
+    <div class="pdv-modal-scroll">
+
+      <div class="pdv-modal-header">
+        <div class="pdv-modal-title-group">
+          <h2 class="pdv-modal-title">Termos de Uso — NT Collection</h2>
+          <p class="pdv-modal-date">Vigente a partir de: 25/04/2026</p>
+        </div>
+        <button class="pdv-modal-close" id="pdv-terms-close" type="button" aria-label="Fechar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="pdv-modal-body">
+        <div class="pdv-modal-section">
+          <h3 class="pdv-modal-section-title">1. Identificação do Prestador de Serviço</h3>
+          <p>O NT Collection é uma plataforma digital operada pela NOVO TRAÇO PUBLICIDADE E PROPAGANDA LTDA., doravante denominada simplesmente Novo Traço.</p>
+        </div>
+
+        <div class="pdv-modal-section">
+          <h3 class="pdv-modal-section-title">2. Natureza do Serviço</h3>
+          <p>O NT Collection é uma plataforma de acesso a conteúdo audiovisual digital por assinatura, posicionada como um acervo vivo da genialidade criativa brasileira. Não se trata de curso, formação técnica ou certificação de qualquer espécie.</p>
+          <p>O acervo é composto por:</p>
+          <p><strong>Coleções:</strong> conteúdo cinematográfico que documenta a trajetória de artistas brasileiros — origens, história pessoal, formação, processos criativos, bastidores e revelações. O escopo de cada coleção é definido pela curadoria editorial de cada temporada, podendo contemplar o processo criativo do artista, aspectos íntimos de sua história de vida, ou ambos.</p>
+          <p><strong>NT Sessions em qualidade premium:</strong> pocket shows íntimos gravados com qualidade cinematográfica. Os NT Sessions também estão disponíveis gratuitamente no YouTube em qualidade padrão; dentro da plataforma, o assinante acessa versões com qualidade superior de imagem e áudio.</p>
+          <p>O conteúdo é perene e permanece disponível no acervo enquanto a assinatura estiver ativa.</p>
+        </div>
+
+        <div class="pdv-modal-section">
+          <h3 class="pdv-modal-section-title">3. Cadastro e Acesso</h3>
+          <p>O acesso à plataforma é liberado mediante cadastro e pagamento da assinatura vigente.</p>
+          <p>O checkout e a gestão da área de membros são operados pela Curseduca, plataforma terceirizada de área de membros, responsável pelo ambiente de compra e pelo gerenciamento do acesso do assinante.</p>
+          <p>O usuário é responsável pela veracidade das informações fornecidas no cadastro e pela confidencialidade de seus dados de acesso.</p>
+        </div>
+
+        <div class="pdv-modal-section">
+          <h3 class="pdv-modal-section-title">4. Propriedade Intelectual e Restrições de Uso</h3>
+          <p>Todo o conteúdo disponível na plataforma — incluindo vídeos, áudios, imagens, textos e demais materiais — é de propriedade intelectual da Novo Traço e/ou dos artistas envolvidos, protegido pela Lei nº 9.610/1998 (Lei de Direitos Autorais) e demais normas aplicáveis.</p>
+          <p>O assinante adquire exclusivamente o direito de acesso para visualização pessoal e intransferível. É expressamente proibido:</p>
+          <p>Reproduzir, copiar ou duplicar o conteúdo em qualquer suporte;<br/>
+          Realizar download, gravação de tela (screen recording) ou captura de qualquer parte do conteúdo;<br/>
+          Distribuir, compartilhar, sublicenciar ou comercializar o conteúdo, total ou parcialmente;<br/>
+          Utilizar o conteúdo para fins comerciais ou institucionais sem autorização expressa da Novo Traço.</p>
+          <p>A violação dessas disposições sujeitará o infrator às sanções civis e penais previstas na legislação vigente, além do cancelamento imediato do acesso à plataforma independente do tempo de assinatura restante.</p>
+        </div>
+
+        <div class="pdv-modal-section">
+          <h3 class="pdv-modal-section-title">5. Atualização do Acervo</h3>
+          <p>A Novo Traço reserva-se o direito de atualizar, adicionar ou remover conteúdos do acervo a qualquer momento, sem necessidade de aviso prévio, desde que mantida a essência do serviço contratado.</p>
+        </div>
+
+        <div class="pdv-modal-section">
+          <h3 class="pdv-modal-section-title">6. Cancelamento e Política de Reembolso</h3>
+          <p>O assinante poderá cancelar sua assinatura a qualquer momento, sem multa. O cancelamento terá efeito ao final do período já pago, sendo mantido o acesso até essa data.</p>
+          <p>Nos termos do art. 49 do Código de Defesa do Consumidor (Lei nº 8.078/1990), o assinante tem direito ao arrependimento e reembolso integral no prazo de 7 (sete) dias corridos a contar da data da contratação, desde que o pedido seja formalizado pelo e-mail [e-mail de suporte].</p>
+          <p>O processamento do reembolso ocorrerá conforme os prazos e procedimentos da Hotmart, plataforma responsável pelo checkout.</p>
+        </div>
+
+        <div class="pdv-modal-section">
+          <h3 class="pdv-modal-section-title">7. Responsabilidades da Hotmart</h3>
+          <p>O processamento de pagamentos (cartão de crédito, PIX e demais modalidades) é realizado exclusivamente pela Hotmart em seu ambiente de checkout seguro. A Novo Traço não armazena nem tem acesso aos dados de pagamento do assinante.</p>
+          <p>Questões relacionadas à cobrança, falhas no acesso à área de membros ou problemas técnicos na plataforma devem ser direcionadas ao suporte da Hotmart, sem prejuízo ao atendimento da Novo Traço pelo site <a href="https://help.hotmart.com/pt-br" target="_blank" rel="noopener noreferrer">https://help.hotmart.com/pt-br</a>.</p>
+        </div>
+
+        <div class="pdv-modal-section">
+          <h3 class="pdv-modal-section-title">8. Suspensão e Encerramento de Conta</h3>
+          <p>A Novo Traço reserva-se o direito de suspender ou encerrar, a qualquer tempo, o acesso de qualquer assinante que:</p>
+          <p>Viole as restrições de uso descritas na cláusula 4;<br/>
+          Compartilhe suas credenciais de acesso com terceiros;<br/>
+          Utilize a plataforma de forma abusiva, fraudulenta ou contrária à legislação vigente.</p>
+          <p>Em caso de encerramento por violação dos termos, não haverá direito a reembolso pelo período não utilizado.</p>
+        </div>
+
+        <div class="pdv-modal-section">
+          <h3 class="pdv-modal-section-title">9. Limitação de Responsabilidade</h3>
+          <p>A Novo Traço não se responsabiliza por interrupções temporárias no serviço decorrentes de manutenção, falhas de infraestrutura de terceiros ou eventos de força maior. Eventuais indisponibilidades prolongadas serão comunicadas aos assinantes com a maior brevidade possível.</p>
+        </div>
+
+        <div class="pdv-modal-section">
+          <h3 class="pdv-modal-section-title">10. Alterações nos Termos</h3>
+          <p>A Novo Traço poderá atualizar estes Termos de Uso a qualquer momento. Alterações relevantes serão comunicadas por e-mail ou por aviso na plataforma com antecedência mínima necessária. O uso continuado do serviço após o prazo implica aceitação das novas condições.</p>
+        </div>
+
+        <div class="pdv-modal-section">
+          <h3 class="pdv-modal-section-title">11. Legislação e Foro</h3>
+          <p>Estes Termos de Uso são regidos pela legislação brasileira, em especial pela Lei nº 8.078/1990 (CDC), pela Lei nº 9.610/1998 (Lei de Direitos Autorais) e pela Lei nº 13.709/2018 (LGPD). Fica eleito o Foro Central da Comarca da Capital do Rio de Janeiro – RJ para dirimir quaisquer controvérsias, com renúncia a qualquer outro foro, por mais privilegiado que seja.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script is:inline>
+(function () {
+  const overlay = document.getElementById('pdv-terms-overlay');
+  const closeBtn = document.getElementById('pdv-terms-close');
+  if (!overlay) return;
+  const scrollEl = overlay.querySelector('.pdv-modal-scroll');
+
+  function openModal() {
+    overlay.removeAttribute('aria-hidden');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    if (scrollEl) scrollEl.scrollTop = 0;
+  }
+
+  function closeModal() {
+    overlay.setAttribute('aria-hidden', 'true');
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  window.addEventListener('pdv:open-terms', openModal);
+
+  closeBtn && closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) closeModal();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
+  });
+})();
+</script>

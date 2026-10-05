@@ -1,0 +1,373 @@
+---
+// CookiePolicyModal.astro
+---
+
+<!-- Overlay -->
+<div id="policy-overlay" aria-modal="true" role="dialog" aria-label="Política de Cookies" aria-hidden="true">
+  <div id="policy-card">
+
+    <!-- Conteúdo com scroll oculto -->
+    <div id="policy-scroll">
+
+      <!-- Cabeçalho -->
+      <div id="policy-header">
+        <div id="policy-header-left">
+          <!-- Ícone caderneta + pena -->
+          <img src="/images/notes-quill-10.svg" alt="">
+
+          <div id="policy-title-group">
+            <h2 id="policy-title">Política de Cookies</h2>
+            <p id="policy-date">Vigente a partir de: 03 de abril de 2026</p>
+          </div>
+        </div>
+
+        <!-- Botão fechar -->
+        <button id="policy-close" type="button" aria-label="Fechar">
+          <img src="/images/close-popup.svg" alt="">
+        </button>
+      </div>
+
+      <!-- Corpo de texto -->
+      <div id="policy-body">
+        <div class="policy-section">
+          <h3 class="policy-section-title">1. O que são cookies?</h3>
+          <p>Cookies são pequenos arquivos de texto gravados no seu dispositivo (computador, tablet ou smartphone) quando você acessa o site da Novo Traço. Eles permitem que o site reconheça seu navegador, armazene preferências e colete informações sobre sua navegação com o objetivo de melhorar continuamente a experiência do visitante.</p>
+        </div>
+
+        <div class="policy-section">
+          <h3 class="policy-section-title">2. Quais cookies utilizamos?</h3>
+          <p><strong>2.1 Cookies essenciais:</strong> São indispensáveis para o funcionamento básico do site. Permitem a navegação entre páginas, o funcionamento do formulário de contato, newsletter e demais funcionalidades estruturais. Por serem estritamente necessários, não podem ser desativados sem comprometer o funcionamento do site.</p>
+          <p><strong>2.2 Cookies analíticos:</strong> Utilizamos o Google Analytics para compreender como os visitantes interagem com nosso conteúdo — quais ambientes do site geram mais interesse, quais artigos do blog são mais acessados e quais caminhos levam ao contato comercial. Todos os dados são coletados de forma anonimizada e agregada.</p>
+          <p><strong>2.3 Cookies de desempenho e funcionalidade:</strong> Utilizados para personalizar conteúdos editoriais, recomendar artigos do blog com base no comportamento de navegação e manter preferências durante a sessão.</p>
+        </div>
+
+        <div class="policy-section">
+          <h3 class="policy-section-title">3. Base legal (LGPD)</h3>
+          <p>O tratamento de dados pessoais vinculado a cookies não essenciais é realizado pela NOVO TRACO PUBLICIDADE E PROPAGANDA LTDA, CNPJ nº 04.582.964/0001-46, na condição de controladora de dados, com fundamento no consentimento livre, informado e inequívoco do titular, nos termos do art. 7º, inciso I, da Lei nº 13.709/2018 (Lei Geral de Proteção de Dados Pessoais — LGPD) e poderá ser compartilhado institucionalmente entre suas empresas derivadas, coligadas, associadas e afiliadas. O consentimento é registrado quando o visitante clica em "Aceitar todos os cookies" e pode ser revogado a qualquer tempo, sem prejuízo à legalidade do tratamento realizado anteriormente.</p>
+        </div>
+
+        <div class="policy-section">
+          <h3 class="policy-section-title">4. Como gerenciar ou revogar seu consentimento?</h3>
+          <p>Você pode recusar cookies não essenciais clicando em "Rejeitar todos os cookies" no aviso exibido ao acessar o site. Também é possível gerenciar ou excluir cookies diretamente nas configurações do seu navegador. A desativação de cookies analíticos não compromete o acesso ao conteúdo do site.</p>
+        </div>
+
+        <div class="policy-section">
+          <h3 class="policy-section-title">5. Compartilhamento de dados</h3>
+          <p>As informações coletadas por cookies são tratadas pela Novo Traço e pelos seus fornecedores de tecnologia (como Google LLC), que atuam na condição de operadores de dados e estão sujeitos a acordos de confidencialidade e às exigências da LGPD. Os dados de visitantes não são comercializados a terceiros em nenhuma hipótese.</p>
+        </div>
+
+        <div class="policy-section">
+          <h3 class="policy-section-title">6. Prazo de retenção</h3>
+          <p>Cookies de sessão são automaticamente eliminados ao encerrar o navegador. Cookies persistentes possuem prazo de expiração individual — geralmente de 12 a 24 meses — após o qual são removidos automaticamente.</p>
+        </div>
+
+        <div class="policy-section">
+          <h3 class="policy-section-title">7. Seus direitos como titular</h3>
+          <p>Nos termos da LGPD, você tem direito a: confirmação da existência de tratamento; acesso aos dados; correção de dados incompletos ou incorretos; anonimização, bloqueio ou eliminação de dados desnecessários; portabilidade; e revogação do consentimento. Para exercer esses direitos, entre em contato pelo email contato@novotraco.com.</p>
+        </div>
+
+        <div class="policy-section">
+          <h3 class="policy-section-title">8. Alterações nesta política</h3>
+          <p>A Novo Traço reserva-se o direito de atualizar esta Política de Cookies a qualquer momento. Alterações relevantes serão comunicadas por meio de aviso no site. O uso continuado do site após a publicação de novas versões implica a aceitação das condições atualizadas.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scrollbar customizada -->
+    <div id="policy-sb-track">
+      <div id="policy-sb-thumb"></div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+  /* ── Overlay ── */
+  #policy-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: rgba(0, 0, 0, 0.72);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 300ms ease;
+  }
+
+  #policy-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* ── Card ── */
+  #policy-card {
+    background: var(--color-light);
+    border: 2px solid var(--color-dark);
+    border-radius: 45px;
+    width: min(660px, 100%);
+    max-height: min(88vh, 720px);
+    padding: 32px 5px 32px 49px;
+    display: flex;
+    gap: 12px;
+    overflow: hidden;
+    transform: translateY(16px) scale(0.98);
+    transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  #policy-overlay.open #policy-card {
+    transform: translateY(0) scale(1);
+  }
+
+  /* ── Área de scroll (nativo oculto) ── */
+  #policy-scroll {
+    flex: 1;
+    min-width: 0;
+    overflow-y: scroll;
+    scrollbar-width: none;       /* Firefox */
+    -ms-overflow-style: none;    /* IE/Edge */
+    display: flex;
+    flex-direction: column;
+    gap: 31px;
+    padding-right: 16px;
+  }
+
+  #policy-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* ── Cabeçalho ── */
+  #policy-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  #policy-header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  #policy-header-left img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+  }
+
+  #policy-title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  #policy-title {
+    font-family: var(--font-secondary);
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1.25;
+    color: var(--color-dark);
+    margin: 0;
+  }
+
+  #policy-date {
+    font-family: var(--font-primary);
+    font-size: 14px;
+    font-style: italic;
+    line-height: 1.4;
+    color: var(--color-dark);
+    margin: 0;
+  }
+
+  /* ── Botão fechar ── */
+  #policy-close {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+  }
+
+  #policy-close:hover {
+    opacity: 1;
+  }
+
+  /* ── Corpo do texto ── */
+  #policy-body {
+    font-family: var(--font-primary);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: var(--color-dark);
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  #policy-body p {
+    margin: 0;
+  }
+
+  .policy-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .policy-section-title {
+    font-family: var(--font-primary);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--color-dark);
+    margin: 0;
+  }
+
+  /* ── Scrollbar customizada ── */
+  #policy-sb-track {
+    flex-shrink: 0;
+    width: 11px;        /* 7px thumb + 2px padding cada lado */
+    align-self: stretch;
+    background: #E0E0E0;
+    border-radius: 205px;
+    padding: 2px;
+    position: relative;
+  }
+
+  #policy-sb-thumb {
+    width: 7px;
+    height: 60px;       /* inicial, atualizado via JS */
+    background: #87CDE7;
+    border-radius: 14px;
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    transition: top 0.05s linear;
+    cursor: pointer;
+  }
+
+  /* ── Responsivo mobile ── */
+  @media (max-width: 600px) {
+    #policy-overlay {
+      padding: 16px;
+    }
+
+    #policy-card {
+      border-radius: 20px;
+      padding: 24px 5px 24px 24px;
+      max-height: 82vh;
+      width: 100%;
+    }
+
+    #policy-title {
+      font-size: 24px;
+    }
+
+    #policy-scroll {
+      padding-right: 12px;
+    }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var overlay = document.getElementById('policy-overlay');
+    var scrollEl = document.getElementById('policy-scroll');
+    var thumb = document.getElementById('policy-sb-thumb');
+    var track = document.getElementById('policy-sb-track');
+
+    // ── Scrollbar customizada ──
+    function updateThumb() {
+      if (!scrollEl || !thumb || !track) return;
+
+      var trackH = track.clientHeight - 4; // descontando padding (2+2)
+      var ratio = scrollEl.clientHeight / scrollEl.scrollHeight;
+      var thumbH = Math.max(40, Math.round(trackH * ratio));
+      thumb.style.height = thumbH + 'px';
+
+      var maxScroll = scrollEl.scrollHeight - scrollEl.clientHeight;
+      var maxTop = trackH - thumbH;
+      var scrollPct = maxScroll > 0 ? scrollEl.scrollTop / maxScroll : 0;
+      thumb.style.top = (2 + Math.round(scrollPct * maxTop)) + 'px';
+    }
+
+    // Arrastar thumb
+    var dragging = false;
+    var dragStartY = 0;
+    var dragStartScrollTop = 0;
+
+    thumb && thumb.addEventListener('mousedown', function (e) {
+      dragging = true;
+      dragStartY = e.clientY;
+      dragStartScrollTop = scrollEl.scrollTop;
+      e.preventDefault();
+    });
+
+    document.addEventListener('mousemove', function (e) {
+      if (!dragging) return;
+      var trackH = track.clientHeight - 4;
+      var thumbH = thumb.offsetHeight;
+      var maxTop = trackH - thumbH;
+      var maxScroll = scrollEl.scrollHeight - scrollEl.clientHeight;
+      var delta = e.clientY - dragStartY;
+      var scrollDelta = (delta / maxTop) * maxScroll;
+      scrollEl.scrollTop = Math.max(0, Math.min(maxScroll, dragStartScrollTop + scrollDelta));
+    });
+
+    document.addEventListener('mouseup', function () { dragging = false; });
+
+    scrollEl && scrollEl.addEventListener('scroll', updateThumb);
+
+    // ── Abrir/fechar modal ──
+    function openModal() {
+      overlay.removeAttribute('aria-hidden');
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      scrollEl.scrollTop = 0;
+      setTimeout(updateThumb, 50);
+    }
+
+    function closeModal() {
+      overlay.setAttribute('aria-hidden', 'true');
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // Link "Aviso de Cookies" dentro do banner
+    var cookieLink = document.querySelector('.cookie-link');
+    cookieLink && cookieLink.addEventListener('click', function (e) {
+      e.preventDefault();
+      openModal();
+    });
+
+    // Botão fechar
+    var closeBtn = document.getElementById('policy-close');
+    closeBtn && closeBtn.addEventListener('click', closeModal);
+
+    // Fechar clicando no overlay
+    overlay && overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) closeModal();
+    });
+
+    // Fechar com ESC
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
+    });
+
+    // Calcula thumb ao carregar e ao redimensionar
+    window.addEventListener('resize', updateThumb);
+    setTimeout(updateThumb, 100);
+  })();
+</script>

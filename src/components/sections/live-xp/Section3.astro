@@ -1,0 +1,300 @@
+---
+const passos = [
+  {
+    numero: '01',
+    titulo: 'Escuta Radical | A Dor Antes do Budget',
+    texto: 'Antes de falar de artistas, formatos ou datas, mergulhamos na psique da sua marca e na biografia do seu público. Qual é a tensão que a sua marca vive? O que o seu consumidor está com fome de sentir? Esse diagnóstico guia tudo. É aqui que a maioria dos projetos falha, porque pulam essa etapa.',
+  },
+  {
+    numero: '02',
+    titulo: 'O Conceito | A Coisa Mais Difícil e a Mais Importante',
+    texto: 'Rafaello Ramundo diz que o processo de encontrar o conceito certo é doloroso. E é. Porque sem o conceito certo, tudo o que vem depois é execução de algo mediano. O conceito é o fio da meada narrativo que conecta valores da marca + contexto do público + momento cultural + artistas certos. Quando você encontra, tudo vira desdobramento natural.',
+  },
+  {
+    numero: '03',
+    titulo: 'Curadoria Autoral | O Artista Certo, Não o Mais Famoso',
+    texto: 'Não somos um iFood de artistas. Não entregamos quem está no topo do Spotify desta semana. Entregamos o artista cujo DNA narrativo serve à história que precisa ser contada. Às vezes é o maior nome do Brasil. Às vezes é um músico da Baixada Fluminense que ninguém conhece, ainda.',
+  },
+  {
+    numero: '04',
+    titulo: 'Engenharia da Emoção | O Solo Firme Onde o Impossível Dança',
+    texto: 'Criatividade sem entrega é alucinação. Para que a mágica aconteça no palco, a engrenagem nos bastidores precisa ser invisível e infalível. Segurança. Logística. Compliance. Rider técnico. Gestão de multidão. 19 anos de operação nacional nos deram a musculatura para colocar de pé o que outros nem ousam propor.',
+  },
+  {
+    numero: '05',
+    titulo: 'Medição de Latência | O ROL que Convence o CFO',
+    texto: 'Entregamos mais do que relatório de ROI. Entregamos evidências de ROL, Return on Latency. Monitoramos o sentimento que persiste semanas e meses depois do evento. A história que o pai contou pro filho. O post espontâneo três meses depois. O NPS da marca medido no longo prazo. Isso é o ativo que nenhuma outra métrica captura.',
+  },
+];
+---
+
+<section class="nts3">
+  <img src="/images/bird-left.svg" alt="" class="nts3__bird nts3__bird--left" aria-hidden="true" />
+  <img src="/images/bird-right.svg" alt="" class="nts3__bird nts3__bird--right" aria-hidden="true" />
+  <div class="nts3__inner">
+
+    <div class="nts3__head">
+      <span class="nts3__label">O MÉTODO POR TRÁS DA MÁGICA</span>
+      <h2 class="nts3__title font-title">5 Passos que o mercado <span class="nts3__highlight">não sabe replicar.</span></h2>
+      <p class="nts3__desc">Todo produtor tem processo. A Novo Traço tem o Sistema NT de Curadoria, uma metodologia construída ao longo de 19 anos e centenas de projetos que transforma o briefing da sua marca em uma experiência que o público vai carregar por décadas.</p>
+    </div>
+
+    <div class="nts3__steps">
+      <p class="nts3__steps-intro">Não abrimos o playbook inteiro aqui. Mas você precisa entender a lógica:</p>
+
+      {passos.map((p) => (
+        <div class="nts3__step-wrapper">
+          <hr class="nts3__sep" />
+          <div class="nts3__step">
+            <div class="nts3__step-left">
+              <span class="nts3__step-num">{p.numero}</span>
+              <p class="nts3__step-title">{p.titulo}</p>
+            </div>
+            <p class="nts3__step-text">{p.texto}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .nts3 {
+    width: 100%;
+    background-color: var(--color-light);
+    color: var(--color-dark);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .nts3__bird {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .nts3__bird--left {
+    left: 45px;
+    top: 345px;
+    width: 206px;
+    height: auto;
+  }
+
+  .nts3__bird--right {
+    right: 0;
+    top: 55px;
+    width: 225px;
+    height: auto;
+    transform: rotate(15deg);
+  }
+
+  .nts3__inner {
+    max-width: 1046px;
+    margin: 0 auto;
+    padding: 113px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 78px;
+  }
+
+  .nts3__head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    text-align: center;
+  }
+
+  .nts3__label {
+    font-size: 11.25px;
+    line-height: 15px;
+    letter-spacing: 0.5625px;
+    text-transform: uppercase;
+    color: var(--color-dark);
+  }
+
+  .nts3__title {
+    margin: 0;
+    font-size: 44.8px;
+    line-height: 1.15;
+    color: var(--color-dark);
+    max-width: 548px;
+  }
+
+  .nts3__highlight {
+    background: linear-gradient(to top, #efec4b 70%, transparent 40%);
+    padding: 0 4px;
+    font-family: var(--font-secondary);
+    display: block;
+  }
+
+  .nts3__desc {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.4;
+    color: var(--color-dark);
+    max-width: 640px;
+  }
+
+  .nts3__steps {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 41px;
+    width: 100%;
+  }
+
+  .nts3__steps-intro {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.51;
+    color: var(--color-dark);
+    text-align: center;
+    max-width: 660px;
+  }
+
+  .nts3__step-wrapper {
+    width: 100%;
+  }
+
+  .nts3__sep {
+    border: none;
+    border-top: 1px solid #3e3e3e;
+    margin: 0 0 41px 0;
+  }
+
+  .nts3__step {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 40px;
+    width: 100%;
+  }
+
+  .nts3__step-left {
+    display: flex;
+    align-items: flex-start;
+    gap: 72px;
+    flex-shrink: 0;
+    max-width: 460px;
+  }
+
+  .nts3__step-num {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 36px;
+    color: var(--color-dark);
+    flex-shrink: 0;
+  }
+
+  .nts3__step-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.24;
+    color: var(--color-dark);
+    max-width: 307px;
+  }
+
+  .nts3__step-text {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.4;
+    color: var(--color-dark);
+    opacity: 0.75;
+    max-width: 512px;
+  }
+
+  /* Responsivo: 1046 + 32 = 1078 */
+  @media (max-width: 1078px) {
+    .nts3__inner {
+      padding: 113px 16px;
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .nts3__bird--left {
+      left: 10px;
+      width: 140px;
+    }
+
+    .nts3__bird--right {
+      width: 160px;
+    }
+  }
+
+  @media (max-width: 960px) {
+    .nts3__bird {
+      display: none;
+    }
+    .nts3__step {
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .nts3__step-left {
+      gap: 24px;
+      max-width: 100%;
+    }
+
+    .nts3__step-text {
+      max-width: 100%;
+    }
+
+    .nts3__title {
+      font-size: 36px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .nts3__inner {
+      padding: 60px 16px;
+      gap: 48px;
+    }
+
+    .nts3__title {
+      font-size: 30px;
+    }
+
+    .nts3__desc {
+      font-size: 16px;
+    }
+
+    .nts3__step-left {
+      gap: 16px;
+    }
+
+    .nts3__step-num {
+      font-size: 20px;
+    }
+
+    .nts3__step-title {
+      font-size: 16px;
+    }
+
+    .nts3__step-text {
+      font-size: 14px;
+    }
+
+    .nts3__sep {
+      margin-bottom: 28px;
+    }
+
+    .nts3__steps {
+      gap: 28px;
+    }
+
+    .nts3__head {
+      gap: 24px;
+      max-width: 276px;
+      text-align: left;
+    }
+
+    .nts3__label {
+      width: 100%;
+    }
+  }
+</style>

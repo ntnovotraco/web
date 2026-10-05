@@ -1,0 +1,175 @@
+---
+const VIDEO_ID = 'ynohbp_uV8A';
+const embedUrl =
+  `https://www.youtube-nocookie.com/embed/${VIDEO_ID}` +
+  `?autoplay=1&mute=1&loop=1&controls=0&playlist=${VIDEO_ID}` +
+  `&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1&disablekb=1`;
+---
+
+<section class="hero">
+  <!-- Vídeo de fundo -->
+  <div class="hero__bg" aria-hidden="true">
+    <div class="hero__overlay"></div>
+    <iframe
+      src={embedUrl}
+      title=""
+      allow="autoplay; encrypted-media"
+      allowfullscreen
+      loading="eager"
+      tabindex="-1"
+      aria-hidden="true"
+    ></iframe>
+  </div>
+
+  <div class="hero__content">
+    <div class="hero__inner">
+
+      <div class="hero__left">
+        <p class="hero__subtitle font-subtitle">NÃO PRODUZIMOS EVENTOS</p>
+        <h1 class="hero__title font-title">Nós construímos o que não se esquece.</h1>
+      </div>
+
+      <div class="hero__right">
+        <p class="hero__text font-body">19 anos nos bastidores, enquanto construíamos um legado sociocultural</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-dark);
+    color: var(--color-light);
+    overflow: hidden;
+  }
+
+  /* ── Fundo do vídeo ── */
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  /* Overlay escuro para legibilidade do texto */
+  .hero__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+      180deg,
+      rgba(25, 23, 24, 0.35) 0%,
+      rgba(25, 23, 24, 0.55) 70%,
+      rgba(25, 23, 24, 0.80) 100%
+    );
+  }
+
+  /* iframe cobre o container independente do aspect-ratio da viewport */
+  .hero__bg iframe {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* Garante cobertura total: usa o maior entre 100% e a projeção de 16:9 */
+    width: max(100%, calc(100vh * 16 / 9));
+    height: max(100%, calc(100vw * 9 / 16));
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    border: none;
+  }
+
+  /* ── Conteúdo ── */
+  .hero__content {
+    position: relative;
+    z-index: 10;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%;
+  }
+
+  .hero__inner {
+    max-width: 1255px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 0px 90px;
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+    justify-content: space-between;
+  }
+
+  .hero__left {
+    max-width: 578.55px;
+    display: flex;
+    flex-direction: column;
+    gap: 48.3px;
+  }
+
+  .hero__subtitle {
+    margin: 0;
+  }
+
+  .hero__title {
+    margin: 0;
+    font-size: 66.335px;
+  }
+
+  .hero__right {
+    width: 355.95px;
+    flex-shrink: 0;
+  }
+
+  .hero__text {
+    margin: 0;
+    max-width: 236px;
+    margin-left: auto;
+    text-align: right;
+  }
+
+  @media (max-width: 1200px) {
+    .hero__inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+      padding: 0 16px 48px;
+    }
+    .hero__title {
+      font-size: 32px;
+      text-align: center;
+      max-width: 300px;
+    }
+    .hero__right {
+      width: 100%;
+      text-align: center;
+    }
+    .hero__left {
+      gap: 20px;
+      margin: 0 auto;
+    }
+    .hero__text {
+      margin-left: 0;
+      text-align: center;
+      max-width: 100%;
+    }
+    .hero__subtitle {
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      height: 563px;
+      min-height: 563px;
+    }
+    .hero__inner {
+      max-width: 300px;
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+  }
+</style>

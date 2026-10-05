@@ -1,0 +1,140 @@
+---
+import ButtonPill from './ButtonPill.astro';
+
+interface Props {
+  iconSrc: string;
+  title: string;
+  content: string;
+  link?: string;
+  buttonText?: string;
+  iconBottom?: string;
+  borderRadius?: string;
+}
+
+const { iconSrc, title, content, link, buttonText = "Conhecer", iconBottom, borderRadius = '22px' } = Astro.props;
+---
+
+<article class="card" style={`--card-radius: ${borderRadius}`}>
+  <div class="card__top">
+    <div class="card__icon-clip">
+      <img src={iconSrc} alt="" class="card__icon" />
+    </div>
+    <div class="card__text-group">
+      <p class="card__title">{title}</p>
+      <p class="card__body">{content}</p>
+    </div>
+  </div>
+  {iconBottom ? (
+    <span class="card__icon-bottom">
+      <img src={iconBottom} alt="" class="card__icon-bottom-img" />
+    </span>
+  ) : link && (
+    <ButtonPill href={link}>{buttonText}</ButtonPill>
+  )}
+</article>
+
+<style>
+  .card {
+    border: 2px solid #000;
+    border-radius: var(--card-radius, 22px);
+    padding: 32px 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex: 1 0 0;
+    min-width: 0;
+    box-sizing: border-box;
+    gap: 20px;
+  }
+
+  .card__top {
+    display: flex;
+    flex-direction: column;
+    gap: 31px;
+    width: 100%;
+    flex-shrink: 0;
+  }
+
+  .card__icon-clip {
+    width: 61px;
+    height: 61px;
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .card__icon {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  .card__text-group {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    width: 100%;
+  }
+
+  .card__title {
+    margin: 0;
+    color: #000;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.37;
+  }
+
+  .card__body {
+    margin: 0;
+    color: var(--color-dark);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.3;
+  }
+
+  .card__icon-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+  }
+
+  .card__icon-bottom-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    .card {
+      padding: 32px 36px;
+      gap: 32px;
+      border-radius: 32px;
+    }
+
+
+    .card__icon-bottom {
+      transform: rotate(90deg);
+    }
+
+    .card__title {
+      font-size: 16px;
+    }
+
+    .card__body {
+      font-size: 14px;
+    }
+
+    .card__icon-clip {
+      width: 42px;
+      height: 42px;
+    }
+  }
+</style>

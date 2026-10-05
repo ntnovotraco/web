@@ -1,0 +1,401 @@
+---
+import PrivacyPolicyModal from '../ui/PrivacyPolicyModal.astro';
+
+const navLinks = [
+  { href: '/nt-artists',       label: 'NT Artists'      },
+  { href: '/live-xp',          label: 'NT Live XP'      },
+  { href: '/nt-collection',      label: 'NT Collection'   },
+  { href: '/contact',          label: 'Entre em Contato'},
+];
+
+// Links sociais estáticos — editar conforme necessário
+const socialLinks = [
+  { href: 'https://www.instagram.com/novo.traco/', label: 'Instagram', icon: '/icons/icon-instagram.svg' },
+  { href: 'https://www.linkedin.com/company/novotraco', label: 'LinkedIn', icon: '/icons/icon-linkedin.svg' },
+  // { href: 'https://www.tiktok.com/@novotraco', label: 'TikTok', icon: '/icons/icon-tiktok.svg' },
+  { href: 'https://www.youtube.com/@novotraco7195', label: 'Youtube', icon: '/images/youtube.svg' }
+];
+---
+
+<footer class="footer">
+
+  <div class="footer__top">
+    <div class="footer__top-inner">
+
+      <div class="footer__brand">
+        <img src="/images/logo-nt-dark.svg" alt="Novo Traço" class="footer__logo" />
+        <p class="footer__claim">
+          A Novo Traço reconhece que não criamos cultura — criamos pontes para ela. Honramos os mestres e comunidades que abriram caminhos antes de nós, respeitamos os artistas e criadores que transformam vidas hoje, e preparamos palcos dignos para os sonhadores que ainda virão.
+        </p>
+      </div>
+
+      <div class="footer__newsletter">
+        <p class="footer__newsletter-text">
+          Se inscreva na nossa newsletter e seja sempre o primeiro a saber sobre as novidades da Novo Traço
+        </p>
+        <form class="footer__form" data-newsletter-form>
+          <div class="footer__form-field">
+            <img src="/icons/icon-email.svg" alt="" width="24" height="24" class="footer__form-icon" aria-hidden="true" />
+            <input
+              type="email"
+              name="email"
+              placeholder="Seu email"
+              class="footer__form-input"
+              required
+              autocomplete="email"
+            />
+          </div>
+          <button type="submit" class="footer__form-btn">Enviar</button>
+        </form>
+        <p class="footer__form-success" data-newsletter-success hidden>Inscrição realizada com sucesso!</p>
+      </div>
+
+      <p class="footer__claim2">
+          A Novo Traço reconhece que não criamos cultura — criamos pontes para ela. Honramos os mestres e comunidades que abriram caminhos antes de nós, respeitamos os artistas e criadores que transformam vidas hoje, e preparamos palcos dignos para os sonhadores que ainda virão.
+       </p>
+
+    </div>
+  </div>
+
+  <div class="footer__bottom">
+    <div class="footer__bottom-inner">
+
+      <div class="footer__social">
+        {socialLinks.map((item) => (
+          <a href={item.href} target="_blank" rel="noopener noreferrer" class="footer__social-link" aria-label={item.label}>
+            <img src={item.icon} alt="" width="22" height="22" />
+          </a>
+        ))}
+      </div>
+
+      <nav class="footer__nav" aria-label="Navegação do rodapé">
+        <ul class="footer__nav-list">
+          {navLinks.map((item) => (
+            <li><a href={item.href} class="footer__nav-link">{item.label}</a></li>
+          ))}
+        </ul>
+      </nav>
+
+      <button id="footer-privacy-btn" type="button" class="footer__privacy-btn">
+        Políticas de Privacidade
+      </button>
+
+    </div>
+  </div>
+
+</footer>
+
+<PrivacyPolicyModal />
+
+<style>
+  /* ── PARTE CLARA ─────────────────────────────── */
+  .footer__top {
+    background-color: var(--color-light);
+    color: var(--color-dark);
+    border-top: 1px solid rgba(25, 23, 24, 0.21);
+  }
+
+  .footer__top-inner {
+    max-width: 1260px;
+    margin: 0 auto;
+    padding: 100px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+    flex-wrap: wrap;
+  }
+
+  .footer__brand {
+    display: flex;
+    align-items: center;
+    gap: 140px;
+    min-width: 0;
+  }
+
+  .footer__logo {
+    display: block;
+    width: 80px;
+    height: auto;
+    flex-shrink: 0;
+    object-fit: contain;
+  }
+
+  .footer__claim, .footer__claim2 {
+    margin: 0;
+    max-width: 390px;
+    font-size: 12.6px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: rgba(25, 23, 24, 0.65);
+  }
+
+  .footer__claim2 {
+    display: none;
+  }
+
+  .footer__newsletter {
+    flex: 0 1;
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    min-width: 403px;
+  }
+
+  .footer__newsletter-text {
+    margin: 0;
+    max-width: 356px;
+    font-size: 14.7px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: rgba(25, 23, 24, 0.65);
+    text-align: center;
+  }
+
+  .footer__form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border: 1.05px solid rgba(25, 23, 24, 0.53);
+    border-radius: 283.5px;
+    padding: 7px 7.35px 7px 26.25px;
+    box-sizing: border-box;
+  }
+
+  .footer__form-field {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+  }
+
+  .footer__form-icon {
+    display: block;
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+  }
+
+  .footer__form-input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    background: transparent;
+    font-size: 14.7px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: rgba(25, 23, 24, 0.8);
+    padding: 0;
+  }
+
+  .footer__form-input::placeholder {
+    color: rgba(25, 23, 24, 0.5);
+  }
+
+  .footer__form-input:focus {
+    outline: none;
+  }
+
+  .footer__form-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 38px;
+    background: #191718;
+    color: var(--color-light);
+    border: none;
+    border-radius: 132.3px;
+    font-size: 16.8px;
+    font-weight: 700;
+    line-height: 1.3;
+    white-space: nowrap;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: opacity 0.2s;
+  }
+
+  .footer__form-btn:hover {
+    opacity: 0.85;
+  }
+
+  .footer__form-success {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    margin: 0;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #3aa845;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  /* ── PARTE ESCURA ────────────────────────────── */
+  .footer__bottom {
+    background-color: var(--color-dark);
+    border-top: 1.05px solid rgba(25, 23, 24, 0.15);
+  }
+
+  .footer__bottom-inner {
+    max-width: 1260px;
+    margin: 0 auto;
+    padding: 34px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .footer__social {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .footer__social-link {
+    display: flex;
+    align-items: center;
+    opacity: 0.9;
+    transition: opacity 0.2s;
+  }
+
+  .footer__social-link:hover {
+    opacity: 1;
+  }
+
+  .footer__nav-list {
+    display: flex;
+    align-items: center;
+    gap: 43px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+  }
+
+  .footer__nav-link {
+    font-size: 15.43px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: var(--color-light);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.2s;
+  }
+
+  .footer__nav-link:hover {
+    color: var(--color-yellow);
+  }
+
+  .footer__privacy-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-size: 15.43px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: rgba(255, 255, 255, 0.45);
+    white-space: nowrap;
+    transition: color 0.2s;
+  }
+
+  .footer__privacy-btn:hover {
+    color: var(--color-light);
+  }
+
+  @media (max-width: 1200px) {
+    .footer__top-inner {
+      padding: 80px 16px;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .footer__bottom-inner {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .footer__brand {
+      gap: 40px;
+      flex-direction: column;
+    }
+
+    .footer__bottom-inner {
+      justify-content: center;
+    }
+
+    .footer__newsletter {
+      flex: 1;
+      max-width: 100%;
+      min-width: auto;
+    }
+
+    .footer__claim {
+      display: none;
+    }
+
+    .footer__claim2 {
+      display: block;
+      max-width: 276px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .footer__form {
+      padding-left: 20px;
+    }
+
+    .footer__form-btn {
+      padding: 13px 33px;
+    }
+
+    .footer__newsletter {
+      max-width: 276px;
+    }
+
+    .footer__nav-list {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const form = document.querySelector('[data-newsletter-form]') as HTMLFormElement | null;
+  const success = document.querySelector('[data-newsletter-success]') as HTMLElement | null;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+
+    const btn = form.querySelector<HTMLButtonElement>('.footer__form-btn');
+    if (btn) btn.disabled = true;
+
+    const email = (form.querySelector<HTMLInputElement>('[name="email"]')?.value || '').trim();
+
+    try {
+      const res = await fetch('https://ac.matheusiaromo.workers.dev/?form=newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      if (!res.ok) throw new Error('server error');
+
+      success?.removeAttribute('hidden');
+      form.reset();
+    } catch {
+      alert('Erro ao inscrever. Tente novamente.');
+    } finally {
+      if (btn) btn.disabled = false;
+    }
+  });
+</script>

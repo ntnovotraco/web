@@ -1,0 +1,123 @@
+---
+import ContactForm from '../../ui/ContactForm.astro';
+---
+
+<section class="chero">
+  <div class="chero__inner">
+
+    <div class="chero__left">
+      <span class="chero__label">CONTATO</span>
+      <h1 class="chero__title font-title">A conversa<br/>começa aqui</h1>
+      <div class="chero__text font-body">
+        <p>Você tem um projeto, uma ideia ou uma pergunta. A gente tem 19 anos de metodologia, 600 mil pessoas como referência e um time que trata o negócio do cliente como se fosse o próprio.</p>
+        <p>Conta o que você tem em mente. Quanto mais contexto você trouxer, mais precisa e útil fica a nossa resposta.</p>
+      </div>
+    </div>
+
+    <div class="chero__right">
+      <ContactForm />
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .chero {
+    width: 100%;
+    background-color: #87cde7;
+    color: var(--color-dark);
+  }
+
+  .chero__inner {
+    max-width: 1044px;
+    margin: 0 auto;
+    padding: 109px 0;
+    display: flex;
+    align-items: center;
+    gap: 67px;
+  }
+
+  .chero__left {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    padding: 0 40px 51px;
+  }
+
+  .chero__label {
+    font-size: 11.25px;
+    font-weight: 400;
+    line-height: 15px;
+    letter-spacing: 0.5625px;
+    text-transform: uppercase;
+    color: var(--color-dark);
+  }
+
+  .chero__title {
+    margin: 0;
+    font-size: 56px;
+    line-height: 1.15;
+    color: var(--color-dark);
+  }
+
+  .chero__text {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .chero__text p {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.4;
+    color: var(--color-dark);
+  }
+
+  .chero__right {
+    flex-shrink: 0;
+  }
+
+  /* Responsivo: 1044 + 32 = 1076 */
+  @media (max-width: 1076px) {
+    .chero__inner {
+      padding: 109px 16px;
+    }
+  }
+
+  @media (max-width: 960px) {
+    .chero__inner {
+      flex-direction: column;
+      gap: 48px;
+      padding: 80px 16px;
+    }
+
+    .chero__left {
+      padding: 0;
+    }
+
+    .chero__right {
+      width: 100%;
+    }
+
+    .chero__right :global(.cform) {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .chero__inner {
+      padding: 60px 16px;
+      gap: 40px;
+    }
+
+    .chero__title {
+      font-size: 36px;
+    }
+
+    .chero__text p {
+      font-size: 16px;
+    }
+  }
+</style>

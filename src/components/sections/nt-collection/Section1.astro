@@ -1,0 +1,48 @@
+---
+---
+
+<section class="banner">
+  <p class="banner__text">
+    <span>NT Collection: Mais informações </span><strong>em breve</strong><span>.</span>
+  </p>
+</section>
+
+<style>
+  .banner {
+    background-color: #31BEFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 19px 40px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .banner__text {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--color-dark);
+    text-align: center;
+  }
+
+  .banner__text strong {
+    font-weight: 700;
+    animation: blink 2s ease-in-out infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  @media (max-width: 768px) {
+    .banner {
+      padding: 16px 20px;
+    }
+
+    .banner__text {
+      font-size: 14px;
+    }
+  }
+</style>

@@ -1,0 +1,99 @@
+---
+import ButtonPill from '../ui/ButtonPill.astro';
+
+interface Props {
+  subtitle?: string;
+  title?: string;
+  text?: string;
+  buttonText?: string;
+  buttonHref?: string;
+}
+
+const {
+  subtitle = 'PATROCÍNIO',
+  title = 'Vamos construir o que não se esquece?',
+  text = 'Se a sua marca está cansada de comprar segundos de atenção e quer conquistar décadas de memória, a conversa começa aqui.',
+  buttonText = 'Falar com time',
+  buttonHref = '/contact',
+} = Astro.props;
+---
+
+<section class="patrocinio">
+  <div class="patrocinio__inner">
+
+    <div class="patrocinio__header">
+      {subtitle && <p class="patrocinio__subtitle font-subtitle">{subtitle}</p>}
+      <h2 class="patrocinio__title font-title">{title}</h2>
+    </div>
+
+    <p class="patrocinio__text font-body">
+      {text}
+    </p>
+
+    <ButtonPill href={buttonHref}>{buttonText}</ButtonPill>
+
+  </div>
+</section>
+
+<style>
+  .patrocinio {
+    width: 100%;
+    background-color: #87CDE7;
+    border-top: 1px solid rgba(25, 23, 24, 0.21);
+    border-bottom: 1px solid rgba(25, 23, 24, 0.21);
+  }
+
+  .patrocinio__inner {
+    max-width: 1260px;
+    margin: 0 auto;
+    padding: 128px 127px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    text-align: center;
+  }
+
+  .patrocinio__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 29px;
+    max-width: 504px;
+    z-index: 999;
+  }
+
+  .patrocinio__subtitle {
+    margin: 0;
+    z-index: 999;
+  }
+
+  .patrocinio__title {
+    margin: 0;
+    max-width: 459px;
+  }
+
+  .patrocinio__text {
+    margin: 0;
+    max-width: 392px;
+    z-index: 999;
+  }
+
+  @media (max-width: 1200px) {
+    .patrocinio__inner {
+      padding: 80px 16px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .patrocinio__inner {
+      padding: 80px 0px;
+      max-width: 276px;
+    }
+    
+    .patrocinio__header {
+      gap: 24px;
+    }
+  }
+
+</style>

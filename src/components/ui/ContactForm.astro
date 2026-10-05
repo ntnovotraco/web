@@ -1,0 +1,346 @@
+---
+interface Props {
+  /** Título exibido acima do formulário */
+  title?: string;
+}
+
+const { title = 'Preencha o formulário abaixo para entrar em contato' } = Astro.props;
+---
+
+<div class="cform__wrap">
+<form class="cform" data-contact-form>
+  {title && <p class="cform__title">{title}</p>}
+
+  <div class="cform__fields">
+
+    <label class="cform__field">
+      <img src="/icons/form-name.svg" alt="">
+      <input type="text" name="nome" placeholder="Seu nome" required class="cform__input" />
+    </label>
+
+    <label class="cform__field">
+      <img src="/icons/form-email.svg" alt="">
+      <input type="email" name="email" placeholder="Seu email" required class="cform__input" />
+    </label>
+
+    <label class="cform__field">
+      <img src="/icons/form-whatsapp.svg" alt="">
+      <input type="tel" name="whatsapp" placeholder="(xx) xxxxx-xxxx" maxlength="16" class="cform__input" data-phone />
+    </label>
+
+    <label class="cform__field">
+      <img src="/icons/form-business.svg" alt="">
+      <input type="text" name="empresa" placeholder="Nome da empresa" class="cform__input" />
+    </label>
+
+    <label class="cform__field cform__field--textarea">
+      <img src="/icons/form-message.svg" alt="">
+      <div class="cform__textarea-wrap">
+        <textarea name="mensagem" rows="3" required class="cform__textarea"></textarea>
+        <span class="cform__placeholder" aria-hidden="true">
+          <span class="cform__placeholder-title">Mensagem</span>
+          <span class="cform__hint">Descreva o projeto, a dúvida ou o contexto. Quanto mais detalhe, melhor.</span>
+        </span>
+      </div>
+    </label>
+
+  </div>
+
+  <div class="cform__actions">
+    <button type="submit" class="cform__submit">Enviar mensagem</button>
+    <p class="cform__note">A equipe entrará em contato em até 5 dias úteis.</p>
+  </div>
+</form>
+</div>
+
+<style>
+  .cform {
+    background: var(--color-light);
+    border: 2px solid var(--color-dark);
+    border-radius: 22px;
+    padding: 62px 42px 43px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 504px;
+    max-width: 100%;
+  }
+
+  .cform__title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--color-dark);
+    text-align: center;
+    max-width: 291px;
+    align-self: center;
+  }
+
+  .cform__fields {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .cform__field {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    border: 1.05px solid rgba(25, 23, 24, 0.53);
+    border-radius: 283.5px;
+    padding: 18px 7.35px 18px 26.25px;
+    cursor: text;
+  }
+
+  .cform__field--textarea {
+    align-items: flex-start;
+    border-radius: 22px;
+  }
+
+  .cform__field--error {
+    border-color: #e03131;
+  }
+
+  .cform__icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+  }
+
+  .cform__icon--top {
+    margin-top: 2px;
+  }
+
+  .cform__input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 14.7px;
+    line-height: 1.3;
+    color: var(--color-dark);
+  }
+
+  .cform__input::placeholder {
+    color: rgba(25, 23, 24, 0.8);
+  }
+
+  .cform__textarea-wrap {
+    flex: 1;
+    position: relative;
+  }
+
+  .cform__textarea {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 14.7px;
+    line-height: 1.3;
+    color: var(--color-dark);
+    resize: vertical;
+    min-height: 40px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cform__placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    color: rgba(25, 23, 24, 0.8);
+  }
+
+  .cform__placeholder-title {
+    font-size: 14.7px;
+    line-height: 1.3;
+  }
+
+  .cform__textarea-wrap.has-value .cform__placeholder {
+    display: none;
+  }
+
+  .cform__hint {
+    font-size: 10px;
+    line-height: 1.3;
+    color: rgba(25, 23, 24, 0.8);
+    max-width: 250px;
+  }
+
+  .cform__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+  }
+
+  .cform__submit {
+    width: 228px;
+    padding: 16px 19.95px;
+    background: var(--color-dark);
+    color: var(--color-light);
+    font-size: 16.8px;
+    font-weight: 700;
+    line-height: 1.3;
+    text-align: center;
+    border: none;
+    border-radius: 132.3px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  .cform__submit:hover {
+    opacity: 0.85;
+  }
+
+  .cform__submit--loading {
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
+  .cform__submit--success {
+    background: #3aa845;
+    pointer-events: none;
+  }
+
+  .cform__submit--success:hover {
+    opacity: 1;
+  }
+
+  .cform__note {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.4;
+    color: rgba(25, 23, 24, 0.6);
+    text-align: center;
+    max-width: 228px;
+  }
+
+  .cform__wrap {
+    width: 504px;
+    max-width: 100%;
+  }
+
+  @media (max-width: 560px) {
+    .cform {
+      padding: 40px 20px 32px;
+    }
+  }
+</style>
+
+<script>
+  // ── Máscara de telefone ──────────────────────────────────────────
+  function applyPhoneMask(value: string): string {
+    const d = value.replace(/\D/g, '').slice(0, 11);
+    if (d.length <= 2)  return d.length ? `(${d}` : '';
+    if (d.length <= 7)  return `(${d.slice(0, 2)}) ${d.slice(2)}`;
+    return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
+  }
+
+  function stripPhoneMask(value: string): string {
+    return value.replace(/\D/g, '');
+  }
+
+  document.querySelectorAll<HTMLInputElement>('[data-phone]').forEach((input) => {
+    input.addEventListener('input', function () {
+      const cursorPos = this.selectionStart ?? this.value.length;
+
+      // Quantos dígitos existem antes do cursor no valor atual (já alterado)
+      const digitsBeforeCursor = this.value.slice(0, cursorPos).replace(/\D/g, '').length;
+
+      const masked = applyPhoneMask(this.value);
+      this.value = masked;
+
+      // Acha a posição no valor mascarado após o digitsBeforeCursor-ésimo dígito
+      let digitCount = 0;
+      let newPos = masked.length;
+      for (let i = 0; i < masked.length; i++) {
+        if (/\d/.test(masked[i])) {
+          digitCount++;
+          if (digitCount === digitsBeforeCursor) {
+            newPos = i + 1;
+            break;
+          }
+        }
+      }
+
+      this.setSelectionRange(newPos, newPos);
+
+      // Limpa erro ao digitar
+      this.closest('.cform__field')?.classList.remove('cform__field--error');
+    });
+  });
+
+  // ── Formulário ───────────────────────────────────────────────────
+  document.querySelectorAll('[data-contact-form]').forEach((form) => {
+    form.querySelectorAll<HTMLTextAreaElement>('.cform__textarea').forEach((textarea) => {
+      const wrap = textarea.closest<HTMLElement>('.cform__textarea-wrap');
+      const update = () => wrap?.classList.toggle('has-value', textarea.value.length > 0);
+      textarea.addEventListener('input', update);
+      update();
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const f = form as HTMLFormElement;
+      if (!f.checkValidity()) { f.reportValidity(); return; }
+
+      // Valida que o WhatsApp tem exatamente 11 dígitos
+      const phoneInput = f.querySelector<HTMLInputElement>('[data-phone]');
+      if (phoneInput && phoneInput.value) {
+        const digits = stripPhoneMask(phoneInput.value);
+        if (digits.length !== 11) {
+          phoneInput.closest('.cform__field')?.classList.add('cform__field--error');
+          phoneInput.focus();
+          return;
+        }
+      }
+
+      const btn = f.querySelector<HTMLButtonElement>('.cform__submit');
+      if (btn) {
+        btn.disabled = true;
+        btn.classList.add('cform__submit--loading');
+        btn.textContent = 'Enviando...';
+      }
+
+      // Monta payload com telefone sem máscara
+      const raw = Object.fromEntries(new FormData(f)) as Record<string, string>;
+      if (raw.whatsapp) raw.whatsapp = stripPhoneMask(raw.whatsapp);
+
+      try {
+        const res = await fetch('https://ac.matheusiaromo.workers.dev/?form=contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(raw),
+        });
+        if (!res.ok) throw new Error('server error');
+
+        // Reseta formulário e repõe placeholder do textarea
+        f.reset();
+        f.querySelectorAll<HTMLTextAreaElement>('.cform__textarea').forEach((textarea) => {
+          textarea.closest<HTMLElement>('.cform__textarea-wrap')?.classList.remove('has-value');
+        });
+
+        // Botão vira verde
+        if (btn) {
+          btn.classList.remove('cform__submit--loading');
+          btn.classList.add('cform__submit--success');
+          btn.textContent = 'Mensagem enviada!';
+        }
+      } catch {
+        alert('Erro ao enviar. Tente novamente.');
+        if (btn) {
+          btn.disabled = false;
+          btn.classList.remove('cform__submit--loading');
+          btn.textContent = 'Enviar mensagem';
+        }
+      }
+    });
+  });
+</script>

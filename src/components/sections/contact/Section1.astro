@@ -1,0 +1,194 @@
+---
+const departamentos = [
+  /* {
+    nome: 'NT Artists',
+    descricao: 'Booking e Parcerias',
+    email: 'contato@novotraco.com',
+  },
+  {
+    nome: 'NT Events',
+    descricao: 'Festivais white label, IPs proprietários, consultoria de curadoria',
+    email: 'contato@novotraco.com',
+  },
+  {
+    nome: 'NT Collection',
+    descricao: 'Cursos e Parcerias Acadêmicas',
+    email: 'contato@novotraco.com',
+  },
+  {
+    nome: 'Imprensa e Comunicação',
+    descricao: 'Entrevistas, pautas, materiais de referência',
+    email: 'contato@novotraco.com',
+  }, */
+  {
+    nome: 'Geral',
+    descricao: 'Entre em contato direto via email',
+    email: 'contato@novotraco.com',
+  },
+];
+
+---
+
+<section class="csection1">
+  <div class="csection1__inner">
+
+    <h2 class="csection1__title font-title">Se preferir, fale direto com quem resolve.</h2>
+
+    <div class="csection1__cards">
+      {departamentos.map((dep) => (
+        <div class="csection1__card">
+          <div class="csection1__card-content">
+            <div class="csection1__card-info">
+              <p class="csection1__card-name">{dep.nome}</p>
+              <p class="csection1__card-desc">{dep.descricao}</p>
+            </div>
+            <div class="csection1__card-email">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="4" stroke="#fb6c1b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94" stroke="#fb6c1b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <a href={`mailto:${dep.email}`} class="csection1__card-link">{dep.email}</a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .csection1 {
+    width: 100%;
+    background-color: var(--color-light);
+    color: var(--color-dark);
+    border-top: 1px solid rgba(25, 23, 24, 0.21);
+  }
+
+  .csection1__inner {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 104px 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 67px;
+  }
+
+  .csection1__title {
+    margin: 0;
+    font-size: 44.8px;
+    line-height: 1.25;
+    color: var(--color-dark);
+    max-width: 451px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 120px;
+  }
+
+  .csection1__cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    width: 504px;
+    flex-shrink: 0;
+  }
+
+  .csection1__card {
+    width: 100%;
+    border: 2px solid var(--color-dark);
+    border-radius: 22px;
+    padding: 31px 42px;
+  }
+
+  .csection1__card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 0 10px;
+  }
+
+  .csection1__card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .csection1__card-name {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--color-dark);
+  }
+
+  .csection1__card-desc {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: var(--color-dark);
+  }
+
+  .csection1__card-email {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .csection1__card-email svg {
+    flex-shrink: 0;
+  }
+
+  .csection1__card-link {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: #fb6c1b;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .csection1__card-link:hover {
+    opacity: 0.7;
+  }
+
+  /* Responsivo: 1040 + 32 = 1072 */
+  @media (max-width: 1072px) {
+    .csection1__inner {
+      padding: 104px 16px;
+    }
+  }
+
+  @media (max-width: 960px) {
+    .csection1__inner {
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    .csection1__title {
+      position: static;
+      max-width: 100%;
+      font-size: 36px;
+    }
+
+    .csection1__cards {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .csection1__inner {
+      padding: 60px 16px;
+      gap: 40px;
+    }
+
+    .csection1__title {
+      font-size: 30px;
+    }
+
+    .csection1__card {
+      padding: 24px 24px;
+    }
+  }
+</style>

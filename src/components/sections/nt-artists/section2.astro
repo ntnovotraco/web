@@ -1,0 +1,161 @@
+---
+import Card from '../../ui/Card.astro';
+---
+
+<section class="section2">
+  <div class="section2__inner">
+
+    <div class="section2__header">
+      <h2 class="section2__title font-title">Não te entregamos um simples catálogo frio de artistas.</h2>
+      <div class="section2__body font-body">
+        <p>O mercado de booking funciona assim: você pede um artista, a gente entrega. Simples, frio, efêmero.</p>
+        <p><strong>O NT Artists funciona diferente. Cada artista que você vai encontrar aqui passou por um processo que nenhuma agência replica:</strong></p>
+      </div>
+    </div>
+
+    <div class="section2__cards">
+      <Card
+        iconSrc="/images/nt-artists/card1.svg"
+        title="1. Descoberto dentro dos festivais Novo Traço"
+        content="não no algoritmo, mas no palco real, diante de público real."
+        iconBottom="/icons/arrow-right.svg"
+        borderRadius="45px"
+      />
+      <Card
+        iconSrc="/images/nt-artists/card2.svg"
+        title="2. Desenvolvido pela NT Music"
+        content="com produção musical, direção artística e posicionamento de carreira."
+        iconBottom="/icons/arrow-right.svg"
+        borderRadius="45px"
+      />
+      <Card
+        iconSrc="/images/nt-artists/card3.svg"
+        title="3. Curado por Rafaello Ramundo"
+        content="Que não contrata quem está no topo do chart, mas quem tem o conceito certo para a história certa."
+        iconBottom="/icons/arrow-right.svg"
+        borderRadius="45px"
+      />
+      <Card
+        iconSrc="/images/nt-artists/card4.svg"
+        title="4. Apresentado com palco garantido"
+        content="porque artista sem palco é potencial desperdiçado."
+        iconBottom="/images/nt-artists/check.svg"
+        borderRadius="45px"
+      />
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .section2 {
+    background-color: var(--color-light);
+    color: var(--color-dark);
+    padding: 102px 0;
+  }
+
+  .section2__inner {
+    max-width: 1255px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 102px;
+  }
+
+  /* ≥ 1287px → sem padding lateral (1255 + 16×2 = 1287) */
+  @media (max-width: 1287px) {
+    .section2__inner {
+      padding: 0 16px;
+    }
+  }
+
+  .section2__header {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .section2__title {
+    margin: 0;
+    max-width: 560px;
+    flex-shrink: 0;
+  }
+
+  .section2__body {
+    max-width: 524px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    color: rgba(25, 23, 24, 0.65);
+  }
+
+  .section2__body p {
+    margin: 0;
+  }
+
+  .section2__cards {
+    width: 100%;
+    display: flex;
+    gap: 30px;
+    align-items: stretch;
+  }
+
+  @media (max-width: 900px) {
+    .section2 {
+      padding: 64px 0;
+    }
+
+    .section2__inner {
+      gap: 64px;
+    }
+
+    .section2__header {
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .section2__title,
+    .section2__body {
+      max-width: 100%;
+      flex-shrink: 1;
+    }
+
+    .section2__cards {
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    /* 2 cards por linha em tablet */
+    .section2__cards > :global(.card) {
+      flex: 1 1 calc(50% - 8px);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .section2__inner {
+      gap: 32px;
+    }
+
+    .section2__header {
+      max-width: 276px;
+      margin: 0 auto;
+    }
+
+    .section2__cards {
+      flex-direction: column;
+      max-width: 400px;
+    }
+
+    .section2__cards > :global(.card) {
+      flex: 1 1 100%;
+    }
+
+    .section2__cards :global(.card:last-child .card__icon-bottom) {
+      transform: none;
+    }
+  }
+</style>

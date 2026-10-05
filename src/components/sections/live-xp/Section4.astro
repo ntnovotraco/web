@@ -1,0 +1,130 @@
+---
+import ContactForm from '../../ui/ContactForm.astro';
+---
+
+<section class="nts4">
+  <div class="nts4__inner">
+
+    <div class="nts4__left">
+      <span class="nts4__label">CONTATO</span>
+      <h2 class="nts4__title font-title">Pronto para transformar sua marca em parte da memória das pessoas?</h2>
+      <div class="nts4__text">
+        <p>O briefing ideal não precisa estar pronto. Precisa ter uma pergunta honesta: como a minha marca pode deixar de ser vista para começar a ser sentida?</p>
+        <p>A partir daí, a gente constrói junto. Traga o contexto, o desafio, a ambição. Quanto mais você trazer, mais precisa fica a curadoria.</p>
+      </div>
+    </div>
+
+    <div class="nts4__right">
+      <ContactForm />
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .nts4 {
+    width: 100%;
+    background-color: #87cde7;
+    color: var(--color-dark);
+  }
+
+  .nts4__inner {
+    max-width: 1044px;
+    margin: 0 auto;
+    padding: 109px 0;
+    display: flex;
+    align-items: center;
+    gap: 67px;
+  }
+
+  .nts4__left {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    padding-right: 40px;
+    padding-bottom: 51px;
+  }
+
+  .nts4__label {
+    font-size: 11.25px;
+    font-weight: 400;
+    line-height: 15px;
+    letter-spacing: 0.5625px;
+    text-transform: uppercase;
+    color: var(--color-dark);
+  }
+
+  .nts4__title {
+    margin: 0;
+    font-size: 48px;
+    line-height: 1.15;
+    color: var(--color-dark);
+  }
+
+  .nts4__text {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .nts4__text p {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.4;
+    color: var(--color-dark);
+  }
+
+  .nts4__right {
+    flex-shrink: 0;
+  }
+
+  /* Responsivo: 1044 + 32 = 1076 */
+  @media (max-width: 1076px) {
+    .nts4__inner {
+      padding: 109px 16px;
+    }
+  }
+
+  @media (max-width: 960px) {
+    .nts4__inner {
+      flex-direction: column;
+      gap: 48px;
+      padding: 80px 16px;
+    }
+
+    .nts4__left {
+      padding-right: 0;
+      padding-bottom: 0;
+    }
+
+    .nts4__right {
+      width: 100%;
+    }
+
+    .nts4__right :global(.cform) {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .nts4__inner {
+      padding: 60px 16px;
+      gap: 40px;
+    }
+
+    .nts4__title {
+      font-size: 32px;
+    }
+
+    .nts4__text p {
+      font-size: 16px;
+    }
+
+    .nts4__left {
+      max-width: 276px;
+      gap: 24px;
+    }
+  }
+</style>

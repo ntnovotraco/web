@@ -1,0 +1,299 @@
+---
+const artistas = [
+  {
+    nome: 'Josiel Konrad',
+    tagline: 'A síntese do Rio em uma voz',
+    imagem: '/images/nt-artists/josiel-konrad.webp',
+    bio: [
+      'Tem histórias que parecem impossíveis até você ouvi-las. A de Josiel Konrad é uma delas.',
+      'Criado na Baixada Fluminense, filho de família evangélica, ex-músico da Marinha, Josiel carrega em si uma contradição que só o Rio sabe produzir: o erudito e o popular, o sagrado e o profano, a ordem e a reinvenção constante.',
+      'Quando Rafaello o viu pela primeira vez, não viu um artista que estava no topo do mercado. Viu um artista que tinha o que nenhum mercado consegue fabricar: autenticidade de origem e uma voz capaz de contar histórias que o público ainda não sabia que precisava ouvir.',
+      'Foi escalado para o Jazz Proibidão, o projeto que levou jazz ao Morro da Providência, a primeira favela do Rio, pela primeira vez na história.',
+      'Josiel não foi contratado para \'representar\' o morro. Foi contratado porque era exatamente o artista certo para aquela história.',
+    ],
+  },
+  {
+    nome: 'Orquestra Novo Traço',
+    tagline: 'Onde o clássico encontra a rua',
+    imagem: '/images/nt-artists/orquestra.webp',
+    bio: [
+      'A ONT nasceu de uma recusa: a de aceitar que a música clássica pertence a salas fechadas, a ingressos caros, a plateias de terno e gravata.',
+      'Nasceu da convicção de que o arrepio que um violino causa na Sala Cecília Meireles é o mesmo que causa numa praça da Baixada Fluminense.',
+      'A proposta é tão simples de dizer quanto corajosa de fazer: conectar o clássico ao urbano através dos melhores instrumentistas do Brasil ao lado de artistas da rua. Bach à batida. O concerto ao funk. A excelência não é negociável. O que muda é para quem ela toca.',
+      'A Orquestra Novo Traço não foi criada para preservar a tradição intocada. Foi criada para potencializá-la — provando que a sofisticação e a rua são o mesmo mundo. Sempre foram.',
+    ],
+  }
+];
+---
+
+<section class="roster">
+  <div class="roster__inner">
+    <p class="roster__label font-subtitle">NOSSO ROSTER</p>
+
+    <div id="roster-splide" class="splide" aria-label="Nosso Roster">
+      <div class="splide__track">
+        <ul class="splide__list">
+          {artistas.map((artista) => (
+            <li class="splide__slide">
+              <div class="roster__slide">
+                <div class="roster__info">
+                  <div class="roster__info-header">
+                    <h2 class="roster__nome font-title">{artista.nome}</h2>
+                    <p class="roster__tagline">{artista.tagline}</p>
+                  </div>
+                  <div class="roster__bio">
+                    {artista.bio.map((p) => (
+                      <p>{p}</p>
+                    ))}
+                  </div>
+                </div>
+                <div class="roster__img-wrap">
+                  <img src={artista.imagem} alt={artista.nome} class="roster__img" />
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div class="roster__arrows">
+      <button class="roster__arrow roster__arrow--prev" aria-label="Anterior">
+        <img src="/icons/arrow-left.svg" alt="" width="29" height="25" />
+      </button>
+      <button class="roster__arrow roster__arrow--next" aria-label="Próximo">
+        <img src="/icons/arrow-right.svg" alt="" width="29" height="25" />
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .roster {
+    background-color: #FB6C1B;
+    color: var(--color-dark);
+    overflow: hidden;
+  }
+
+  .roster__inner {
+    width: 100%;
+    margin: 0 auto;
+    padding: 124px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 45px;
+  }
+
+  .roster__nome {
+    max-width: 280px;
+  }
+
+  /* 1049 + 16×2 = 1081 */
+  @media (max-width: 1081px) {
+    .roster__inner {
+      padding: 124px 0px;
+    }
+  }
+
+  .roster__label {
+    margin: 0;
+    text-align: center;
+  }
+
+  /* Splide */
+  .splide {
+    width: 100%;
+  }
+
+  :global(#roster-splide .splide__track) {
+    overflow: hidden;
+  }
+
+  :global(#roster-splide .splide__list) {
+    display: flex;
+  }
+
+  :global(#roster-splide .splide__slide) {
+    flex-shrink: 0;
+    list-style: none;
+    width: 100%;
+    max-width: 1049px;
+  }
+
+  :global(#roster-splide .splide__pagination) {
+    display: none !important;
+  }
+
+  :global(#roster-splide .splide__sr) {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+
+  .roster__slide {
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
+
+  .roster__info {
+    flex: 1;
+    background-color: var(--color-light);
+    padding: 88px 86px;
+    display: flex;
+    flex-direction: column;
+    gap: 42px;
+    max-width: 50%;
+  }
+
+  .roster__info-header {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .roster__nome {
+    margin: 0;
+    font-size: 44px;
+  }
+
+  .roster__tagline {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  .roster__bio {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    font-size: 16px;
+    line-height: 1.3;
+  }
+
+  .roster__bio p {
+    margin: 0;
+  }
+
+  .roster__img-wrap {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    min-height: 400px;
+  }
+
+  .roster__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .roster__arrows {
+    display: flex;
+    gap: 16px;
+  }
+
+  .roster__arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 14px;
+    border: 1px solid var(--color-dark);
+    border-radius: 176px;
+    background: transparent;
+    cursor: pointer;
+    overflow: hidden;
+    transition: background 0.2s;
+  }
+
+  .roster__arrow:hover {
+    background: rgba(25, 23, 24, 0.1);
+  }
+
+  .roster__arrow img {
+    display: block;
+    width: 36px;
+    height: 30px;
+  }
+
+  @media (max-width: 768px) {
+    .roster__inner {
+      padding: 64px 0px;
+      gap: 32px;
+    }
+
+    :global(#roster-splide .splide__slide) {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    .roster__slide {
+      flex-direction: column;
+    }
+
+    .roster__info {
+      padding: 40px 24px;
+      gap: 24px;
+      max-width: 100%;
+    }
+
+    .roster__nome {
+      font-size: 36px;
+    }
+
+    .roster__img-wrap {
+      height: 400px;
+      min-height: 400px;
+      max-height: 400px;
+    }
+
+    .roster__arrow {
+      padding: 13px 11px;
+    }
+
+    .roster__bio {
+      font-size: 14px;
+    }
+
+    .roster__tagline {
+      font-size: 14px;
+    }
+  }
+</style>
+
+<script>
+  import Splide from '@splidejs/splide';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const splide = new Splide('#roster-splide', {
+      type: 'loop',
+      perPage: 1,
+      perMove: 1,
+      arrows: false,
+      pagination: false,
+      drag: true,
+      snap: true,
+      gap: '30px',
+      focus: 'center'
+    });
+
+    splide.mount();
+
+    const prevBtn = document.querySelector('.roster__arrow--prev');
+    const nextBtn = document.querySelector('.roster__arrow--next');
+
+    prevBtn?.addEventListener('click', () => splide.go('<'));
+    nextBtn?.addEventListener('click', () => splide.go('>'));
+  });
+</script>

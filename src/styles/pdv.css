@@ -1,0 +1,422 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Roslindale';
+  src: url('/fonts/RoslindaleVariable-Testing.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Margem';
+  src: url('/fonts/MargemVariableTest.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+body.pdv,
+body.pdv * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scrollbar-width: thin;
+  scrollbar-color: #87CDE7 rgba(135,205,231,0.08);
+}
+
+body.pdv {
+  scroll-behavior: smooth;
+
+  /* ── Type scale ──────────────────────────────────── */
+  --font-display: 'Roslindale', Georgia, serif;
+  --font-body:    'Margem', 'Inter', sans-serif;
+
+  /* sizes */
+  --text-h1:      clamp(3.5rem, 6vw, 6.5rem);
+  --text-h2:      clamp(2rem,   4vw, 3.2rem);
+  --text-h3:      clamp(1.4rem, 2vw, 1.8rem);
+  --text-h4:      1.2rem;
+  --text-body1:   1.125rem;
+  --text-body2:   0.9375rem;
+  --text-body3:   0.8125rem;
+  --text-caption: 0.75rem;
+  --text-eyebrow: 0.6875rem;
+
+  /* line-heights */
+  --lh-display: 1.0;
+  --lh-heading: 1.15;
+  --lh-body:    1.3;
+  --lh-loose:   1.9;
+
+  /* letter-spacing */
+  --ls-eyebrow: 0.2em;
+  --ls-button:  0.04em;
+  --ls-tight:   0.02em;
+
+  background-color: #020305;
+  color: #EFEFEF;
+  font-family: 'Margem', 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body.pdv ::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+body.pdv ::-webkit-scrollbar-track {
+  background: rgba(135,205,231,0.06);
+}
+
+body.pdv ::-webkit-scrollbar-thumb {
+  background: #87CDE7;
+  border-radius: 3px;
+}
+
+body.pdv ::-webkit-scrollbar-thumb:hover {
+  background: #6bbcd8;
+}
+
+/* ── Typography classes ────────────────────────────── */
+body.pdv .t-h1 {
+  font-family: var(--font-display);
+  font-size: var(--text-h1);
+  font-weight: 400;
+  line-height: var(--lh-display);
+}
+body.pdv .t-h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: 400;
+  line-height: var(--lh-heading);
+}
+body.pdv .t-h3 {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  font-weight: 400;
+  line-height: var(--lh-heading);
+}
+body.pdv .t-h4 {
+  font-family: var(--font-display);
+  font-size: var(--text-h4);
+  font-weight: 400;
+  line-height: var(--lh-heading);
+}
+body.pdv .t-body1 {
+  font-family: var(--font-body);
+  font-size: var(--text-body1);
+  font-weight: 300;
+  line-height: var(--lh-body);
+}
+body.pdv .t-body2 {
+  font-family: var(--font-body);
+  font-size: var(--text-body2);
+  font-weight: 400;
+  line-height: var(--lh-body);
+}
+body.pdv .t-body3 {
+  font-family: var(--font-body);
+  font-size: var(--text-body3);
+  font-weight: 400;
+  line-height: var(--lh-body);
+}
+body.pdv .t-caption {
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  font-weight: 400;
+  line-height: 1.6;
+}
+body.pdv .t-eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--text-eyebrow);
+  font-weight: 400;
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+/* ── Global radius ─────────────────────────────────── */
+body.pdv button { border-radius: 4px; }
+
+/* ── Focus visible — acessibilidade ───────────────── */
+body.pdv :focus-visible {
+  outline: 2px solid #87CDE7;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+body.pdv button:focus-visible {
+  outline-offset: 2px;
+}
+body.pdv a:focus-visible {
+  outline-offset: 4px;
+}
+
+/* ══════════════════════════════════════════════════════
+   RESPONSIVE SYSTEM — mobile-first
+   Mobile S  : ≤ 374px  (iPhone SE)
+   Mobile    : 375 – 767px
+   Tablet    : 768 – 1023px
+   Desktop   : 1024 – 1535px
+   Wide      : ≥ 1536px
+══════════════════════════════════════════════════════ */
+
+/* ── Wide ──────────────────────────────────────────── */
+@media (min-width: 1536px) {
+  body.pdv .r-container { max-width: 1440px !important; }
+}
+
+/* ── Tablet (768–1023px) ───────────────────────────── */
+@media (max-width: 1023px) {
+  body.pdv .r-nav          { padding: 0 40px !important; height: 64px !important; }
+  body.pdv .r-container    { padding: 0 40px !important; }
+  body.pdv .r-section      { padding: 80px 0 !important; }
+  body.pdv .r-grid-3       { grid-template-columns: 1fr 1fr !important; gap: 40px !important; }
+  body.pdv .r-pricing-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
+  body.pdv .r-impact-outer { padding: 80px 40px !important; }
+  body.pdv .r-impact-card  { padding: 64px 48px !important; }
+  body.pdv .r-impact-grid  { grid-template-columns: 1fr !important; gap: 48px !important; }
+  body.pdv .r-footer-inner { padding: 64px 40px 36px !important; }
+  body.pdv .r-footer-grid  { grid-template-columns: 1fr 1fr 1fr !important; gap: 40px !important; }
+  body.pdv .r-faq-inner    { padding: 0 40px !important; }
+  body.pdv .r-quote-inner  { padding: 0 40px !important; }
+  body.pdv .r-artist-text  { padding: 64px 40px !important; }
+  body.pdv .hero-grid         { grid-template-columns: 60fr 40fr !important; gap: 48px !important; }
+  body.pdv .r-community-grid  { gap: 48px !important; }
+  body.pdv .r-about-grid      { gap: 48px !important; }
+}
+
+/* ── Mobile (≤ 767px) ──────────────────────────────── */
+@media (max-width: 767px) {
+  /* Navbar — fixa sobre o conteúdo, só logo */
+  body.pdv .r-nav {
+    position: fixed !important;
+    padding: 0 max(20px, env(safe-area-inset-left)) !important;
+    padding-right: max(20px, env(safe-area-inset-right)) !important;
+    height: 64px !important;
+    background: linear-gradient(to bottom, rgba(2,3,5,0.7), transparent) !important;
+    backdrop-filter: none !important;
+  }
+  body.pdv .r-nav-entrar   { display: none !important; }
+  body.pdv .r-nav-cta      { display: none !important; }
+
+  /* Layout */
+  body.pdv .r-container    { padding: 0 20px !important; }
+  body.pdv .r-section      { padding: 64px 0 !important; }
+
+  /* Hero home */
+  body.pdv .r-hero {
+    min-height: 100svh !important;
+    min-height: 100vh !important;
+  }
+
+  body.pdv .r-hero-iframe {
+    transform: translate(-50%, -62%) !important;
+  }
+
+  body.pdv .r-hero-overlay {
+    background: linear-gradient(to bottom,
+      rgba(2,3,5,0.10) 0%,
+      rgba(2,3,5,0.15) 35%,
+      rgba(2,3,5,0.60) 60%,
+      rgba(2,3,5,0.92) 100%
+    ) !important;
+  }
+
+  body.pdv .hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+    align-items: flex-start !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    padding-top: 80px !important;
+    padding-bottom: 120px !important;
+  }
+  body.pdv .r-hero-cta     { width: 100% !important; padding: 18px !important; text-align: center !important; }
+
+  /* Artist hero — stack foto / texto, svh evita bug de vh no iOS */
+  body.pdv .r-artist-hero  {
+    height: auto !important;
+    min-height: 100svh !important;
+    min-height: 100vh !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: 45svh 1fr;
+    grid-template-rows: 45vh 1fr;
+  }
+  body.pdv .r-artist-photo { height: 45svh !important; height: 45vh !important; }
+  body.pdv .r-artist-text  { padding: 40px 20px 56px !important; }
+
+  /* Botões do hero do artista — empilhar */
+  body.pdv .r-artist-btns              { flex-direction: column !important; width: 100% !important; }
+  body.pdv .r-artist-btns button       { width: 100% !important; justify-content: center !important; }
+
+  /* Collections — mobile: stacked image + content */
+  body.pdv .r-collections-grid    { grid-template-columns: 1fr !important; gap: 24px !important; }
+  body.pdv .r-collection-card     { height: auto !important; display: flex !important; flex-direction: column !important; }
+  body.pdv .r-card-img-wrap       { aspect-ratio: 4/5 !important; width: 100% !important; height: auto !important; flex-shrink: 0 !important; }
+  body.pdv .r-card-overlay        { display: none !important; }
+  body.pdv .r-card-content-desktop { display: none !important; }
+  body.pdv .r-card-content-mobile { display: flex !important; }
+
+  /* Hero — ocultar vídeo de fundo em mobile */
+  body.pdv .r-hero-video { display: none !important; }
+
+  /* Upcoming — esconder setas */
+  body.pdv .r-arrow-controls { display: none !important; }
+
+  /* Pricing */
+  body.pdv .r-pricing-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+  body.pdv .r-pricing-card { padding: 28px 20px !important; }
+
+  /* Impact */
+  body.pdv .r-impact-outer { padding: 64px 20px !important; }
+  body.pdv .r-impact-card  { padding: 40px 20px !important; border-radius: 8px !important; }
+  body.pdv .r-impact-grid  { grid-template-columns: 1fr !important; gap: 32px !important; }
+
+  /* 3-col grids */
+  body.pdv .r-grid-3 { grid-template-columns: 1fr !important; gap: 32px !important; }
+
+  /* Community */
+  body.pdv .r-community-grid { grid-template-columns: 1fr !important; gap: 56px !important; }
+
+  /* About */
+  body.pdv .r-about-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
+
+  /* Mockups */
+  body.pdv .r-macbook-screen { max-width: 100% !important; }
+  body.pdv .r-iphone-mockup  { width: 220px !important; height: 456px !important; }
+
+  /* Footer */
+  body.pdv .r-footer-inner {
+    padding: 56px 20px !important;
+    padding-bottom: max(32px, env(safe-area-inset-bottom)) !important;
+  }
+  body.pdv .r-footer-grid   { grid-template-columns: 1fr !important; gap: 40px !important; }
+  body.pdv .r-footer-bottom { flex-direction: column !important; align-items: flex-start !important; gap: 16px !important; }
+
+  /* FAQ */
+  body.pdv .r-faq-inner { padding: 0 20px !important; }
+
+  /* Quote */
+  body.pdv .r-quote-inner { padding: 0 20px !important; }
+
+  /* Upcoming Artists header */
+  body.pdv .r-upcoming-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+    margin-bottom: 48px !important;
+  }
+}
+
+/* ── Mobile S (≤ 374px) ────────────────────────────── */
+@media (max-width: 374px) {
+  body.pdv .r-nav          { padding: 0 16px !important; }
+  body.pdv .r-container    { padding: 0 16px !important; }
+  body.pdv .hero-grid      { padding-left: 16px !important; padding-right: 16px !important; }
+  body.pdv .r-impact-card  { padding: 32px 16px !important; }
+  body.pdv .r-footer-inner { padding-left: 16px !important; padding-right: 16px !important; }
+  body.pdv .r-faq-inner    { padding: 0 16px !important; }
+  body.pdv .r-quote-inner  { padding: 0 16px !important; }
+  body.pdv .r-artist-text  { padding: 32px 16px 48px !important; }
+}
+
+/* ── Hover apenas em dispositivos com ponteiro ─────── */
+@media (hover: none) {
+  body.pdv .r-collection-card img { transform: scale(1) !important; }
+}
+
+/* ── Feedback de toque ─────────────────────────────── */
+body.pdv button:active {
+  opacity: 0.85;
+  transform: scale(0.97);
+  transition: opacity 0.08s ease-in-out, transform 0.08s ease-in-out !important;
+}
+
+/* ── Movimento reduzido ────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  body.pdv .scroll-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  body.pdv * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── Scroll reveal ─────────────────────────────────── */
+body.pdv .scroll-reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.8s ease-in-out,
+              transform 0.8s ease-in-out;
+}
+body.pdv .scroll-reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Trailer overlay fade-in ───────────────────────── */
+body.pdv .trailer-overlay {
+  animation: overlayIn 0.3s ease-in-out forwards;
+}
+body.pdv .trailer-overlay-inner {
+  animation: overlayScaleIn 0.3s ease-in-out forwards;
+}
+@keyframes overlayIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes overlayScaleIn {
+  from { opacity: 0; transform: scale(0.97); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ── Badge shimmer ─────────────────────────────────── */
+body.pdv .badge-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+body.pdv .badge-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,0.45) 50%, transparent 65%);
+  background-size: 200% 100%;
+  animation: shimmer 2.8s ease-in-out infinite;
+}
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes grain {
+  0%   { transform: translate(0, 0); }
+  10%  { transform: translate(-2%, -3%); }
+  20%  { transform: translate(3%, 2%); }
+  30%  { transform: translate(-1%, 4%); }
+  40%  { transform: translate(4%, -1%); }
+  50%  { transform: translate(-3%, 3%); }
+  60%  { transform: translate(2%, -4%); }
+  70%  { transform: translate(-4%, 1%); }
+  80%  { transform: translate(1%, -2%); }
+  90%  { transform: translate(3%, 4%); }
+  100% { transform: translate(0, 0); }
+}
+
+body.pdv::after {
+  content: '';
+  position: fixed;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.13;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  animation: grain 0.5s steps(1) infinite;
+}

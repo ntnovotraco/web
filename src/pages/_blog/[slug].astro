@@ -1,0 +1,487 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import BlogLayout from '../../layouts/blogLayout.astro';
+import LerArtigos from '../../components/sections/LerArtigos.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map((post) => ({
+    params: { slug: post.data.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const categoriaEntry = await getEntry(post.data.categoria);
+const autorEntry = await getEntry(post.data.autor);
+
+const postUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).href;
+---
+
+<BlogLayout
+  title={post.data.titulo}
+  description={post.data.resumo}
+  image={post.data.imagemDestacada}
+>
+  <article>
+
+    <!-- S1: Hero -->
+    <section class="phero">
+      <div class="phero__inner">
+        <div class="phero__meta">
+          <div class="phero__category">
+            <span class="phero__dot" style={`background-color: ${categoriaEntry?.data.cor};`}></span>
+            <span class="phero__category-label">{categoriaEntry?.data.nome}</span>
+          </div>
+          <span class="phero__readtime">{post.data.tempoDeLeitura}</span>
+        </div>
+        <h1 class="phero__title font-title">{post.data.titulo}</h1>
+        <p class="phero__excerpt">{post.data.resumo}</p>
+      </div>
+    </section>
+
+    <!-- S2: Imagem destacada 100% largura -->
+    <section class="pimage">
+      <img src={post.data.imagemDestacada} alt={post.data.titulo} class="pimage__img" />
+    </section>
+
+    <!-- S3: Conteúdo 3 colunas -->
+    <section class="pbody">
+      <div class="pbody__inner">
+
+        <!-- Esquerda: Compartilhe (sticky) -->
+        <aside class="pshare">
+          <p class="pshare__label">Compartilhe</p>
+          <div class="pshare__icons">
+            <a
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(postUrl)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Compartilhar no LinkedIn"
+              class="pshare__icon"
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.58 1.58C3.58 2.47 2.87 3.18 1.98 3.18C1.09 3.18 0.38 2.47 0.38 1.58C0.38 0.69 1.09 0 1.98 0C2.87 0 3.58 0.69 3.58 1.58ZM3.6 4.42H0.36V15.75H3.6V4.42ZM8.65 4.42H5.43V15.75H8.65V9.82C8.65 6.52 12.88 6.25 12.88 9.82V15.75H16.1V8.68C16.1 3.37 10.07 3.57 8.65 6.19V4.42Z" fill="#191718"/>
+              </svg>
+            </a>
+            <a
+              href={`https://api.whatsapp.com/send?text=${encodeURIComponent(post.data.titulo + ' — ' + postUrl)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Compartilhar no WhatsApp"
+              class="pshare__icon"
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13.6 2.33A7.96 7.96 0 008.01 0C3.63 0 .07 3.56.07 7.93a7.9 7.9 0 001.06 3.96L0 16l4.2-1.1a7.94 7.94 0 003.8.97h.01c4.38 0 7.93-3.56 7.93-7.93a7.88 7.88 0 00-2.34-5.61zM8.01 14.52a6.58 6.58 0 01-3.36-.92l-.24-.14-2.5.65.67-2.43-.16-.25a6.56 6.56 0 01-1.01-3.5c0-3.63 2.96-6.59 6.6-6.59a6.56 6.56 0 014.66 1.93 6.56 6.56 0 011.94 4.67c0 3.64-2.96 6.58-6.6 6.58zm3.62-4.93c-.2-.1-1.17-.58-1.35-.64-.18-.07-.31-.1-.44.1-.13.2-.5.64-.62.78-.11.13-.23.15-.43.05a5.44 5.44 0 01-1.6-1 6.03 6.03 0 01-1.11-1.38c-.12-.2-.01-.3.09-.4.09-.1.2-.24.3-.37.1-.13.13-.2.2-.34.06-.13.03-.25-.02-.35-.05-.1-.44-1.06-.6-1.45-.16-.38-.32-.33-.44-.34h-.38c-.13 0-.34.05-.52.25-.18.2-.68.66-.68 1.62 0 .95.7 1.87.79 2 .1.13 1.37 2.1 3.33 2.94.47.2.83.32 1.11.41.47.15.9.13 1.23.08.38-.06 1.17-.48 1.33-.94.17-.46.17-.86.12-.94-.05-.08-.18-.13-.38-.23z" fill="#191718"/>
+              </svg>
+            </a>
+            <button
+              class="pshare__icon pshare__copy"
+              aria-label="Copiar link"
+              data-url={postUrl}
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.75 9.25C7.09 9.72 7.53 10.1 8.04 10.37C8.55 10.63 9.11 10.78 9.68 10.79C10.25 10.8 10.82 10.68 11.34 10.44C11.86 10.2 12.32 9.84 12.68 9.39L14.68 6.89C15.32 6.09 15.62 5.08 15.52 4.07C15.42 3.06 14.93 2.13 14.15 1.47C13.37 0.81 12.37 0.47 11.35 0.53C10.34 0.59 9.38 1.04 8.68 1.79L7.73 2.84" stroke="#191718" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M9.25 6.75C8.91 6.28 8.47 5.9 7.96 5.63C7.45 5.37 6.89 5.22 6.32 5.21C5.75 5.2 5.18 5.32 4.66 5.56C4.14 5.8 3.68 6.16 3.32 6.61L1.32 9.11C0.68 9.91 0.38 10.92 0.48 11.93C0.58 12.94 1.07 13.87 1.85 14.53C2.63 15.19 3.63 15.53 4.65 15.47C5.66 15.41 6.62 14.96 7.32 14.21L8.27 13.16" stroke="#191718" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        </aside>
+
+        <!-- Centro: Conteúdo do post -->
+        <div class="pcontent">
+          <Content />
+        </div>
+
+        <!-- Direita: Card do autor (sticky) -->
+        <aside class="pauthor">
+          <span class="pauthor__label">AUTOR</span>
+          <div class="pauthor__info">
+            {autorEntry?.data.foto && (
+              <img src={autorEntry.data.foto} alt={autorEntry.data.nome} class="pauthor__photo" />
+            )}
+            <div class="pauthor__text">
+              <p class="pauthor__name">{autorEntry?.data.nome}</p>
+              <p class="pauthor__role">{autorEntry?.data.profissao}</p>
+            </div>
+          </div>
+          <p class="pauthor__bio">{autorEntry?.data.resumo}</p>
+        </aside>
+
+      </div>
+    </section>
+
+  </article>
+
+  <LerArtigos />
+</BlogLayout>
+
+<style>
+  /* ── S1: Hero ── */
+  .phero {
+    width: 100%;
+    background-color: var(--color-light);
+    color: var(--color-dark);
+  }
+
+  .phero__inner {
+    max-width: 990px;
+    margin: 0 auto;
+    padding: 76px 0 109px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .phero__meta {
+    display: flex;
+    align-items: center;
+    gap: 29px;
+  }
+
+  .phero__category {
+    display: flex;
+    align-items: center;
+    gap: 11.25px;
+  }
+
+  .phero__dot {
+    width: 11.25px;
+    height: 11.25px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .phero__category-label {
+    font-size: 11.25px;
+    font-weight: 400;
+    line-height: 15px;
+    letter-spacing: 0.5625px;
+    text-transform: uppercase;
+    color: var(--color-dark);
+  }
+
+  .phero__readtime {
+    font-size: 11.25px;
+    font-weight: 400;
+    line-height: 15px;
+    color: rgba(25, 23, 24, 0.9);
+  }
+
+  .phero__title {
+    margin: 0;
+    font-size: 56px;
+    line-height: 1.2;
+    color: var(--color-dark);
+    text-align: center;
+    max-width: 640px;
+  }
+
+  .phero__excerpt {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.4;
+    color: var(--color-dark);
+    text-align: center;
+    max-width: 514px;
+  }
+
+  /* ── S2: Imagem destacada ── */
+  .pimage {
+    width: 100%;
+  }
+
+  .pimage__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* ── S3: Conteúdo 3 colunas ── */
+  .pbody {
+    width: 100%;
+    background-color: var(--color-light);
+    color: var(--color-dark);
+  }
+
+  .pbody__inner {
+    max-width: 1260px;
+    margin: 0 auto;
+    padding: 132px 0;
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+  }
+
+  /* ── Compartilhe (sticky left) ── */
+  .pshare {
+    width: 193px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .pshare__label {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.11;
+    color: var(--color-dark);
+  }
+
+  .pshare__icons {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .pshare__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: var(--color-dark);
+    transition: opacity 0.2s;
+  }
+
+  .pshare__icon:hover {
+    opacity: 0.6;
+  }
+
+  /* ── Conteúdo central ── */
+  .pcontent {
+    flex: 1;
+    min-width: 0;
+    font-size: 16px;
+    line-height: 1.3;
+    color: var(--color-dark);
+    margin-right: 110px;
+  }
+
+  .pcontent :global(h1) {
+    color: var(--color-dark);
+    font-family: var(--font-secondary);
+    font-size: 54px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 111%;
+    margin-bottom: 24px;
+  }
+
+  .pcontent :global(h2) {
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 1.11;
+    margin: 48px 0 24px 0;
+    color: var(--color-dark);
+  }
+
+  .pcontent :global(h2:first-child) {
+    margin-top: 0;
+  }
+
+  .pcontent :global(h3) {
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.2;
+    margin: 48px 0 18px 0;
+    color: var(--color-dark);
+  }
+
+  .pcontent :global(p) {
+    margin: 0 0 24px 0;
+  }
+
+  .pcontent :global(ul),
+  .pcontent :global(ol) {
+    margin: 24px 0;
+    padding-left: 24px;
+  }
+
+  .pcontent :global(li) {
+    margin-bottom: 12px;
+  }
+
+  .pcontent :global(strong) {
+    font-weight: 700;
+  }
+
+  .pcontent :global(blockquote) {
+    border-left: 4px solid var(--color-dark);
+    padding-left: 24px;
+    margin: 32px 0;
+    font-style: italic;
+    color: rgba(25, 23, 24, 0.8);
+  }
+
+  /* ── Card do autor (sticky right) ── */
+  .pauthor {
+    width: 294px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 120px;
+    background: #efec4b;
+    padding: 44px 27px;
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+  }
+
+  .pauthor__label {
+    font-size: 11.25px;
+    font-weight: 400;
+    line-height: 15px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #000;
+  }
+
+  .pauthor__info {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+  }
+
+  .pauthor__photo {
+    width: 57px;
+    height: 57px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .pauthor__text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+  }
+
+  .pauthor__name {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--color-dark);
+  }
+
+  .pauthor__role {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: var(--color-dark);
+  }
+
+  .pauthor__bio {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: var(--color-dark);
+  }
+
+  /* ── Responsivo ── */
+  @media (max-width: 1292px) {
+    .pbody__inner {
+      padding: 132px 16px;
+    }
+  }
+
+  @media (max-width: 1022px) {
+    .phero__inner {
+      padding: 76px 16px 109px;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .pbody__inner {
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    .pshare {
+      position: static;
+      width: 100%;
+      flex-direction: row;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .pcontent {
+      margin-right: 0;
+      flex: 1 1 100%;
+      order: 2;
+    }
+
+    .pauthor {
+      position: static;
+      width: 100%;
+      order: 1;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .phero__inner {
+      padding: 48px 16px 60px;
+      gap: 20px;
+    }
+
+    .phero__title {
+      font-size: 32px;
+    }
+
+    .phero__excerpt {
+      font-size: 16px;
+    }
+
+    .pbody__inner {
+      padding: 60px 16px;
+      gap: 32px;
+    }
+
+    .pcontent :global(h1) {
+      font-size: 36px;
+      margin: 40px 0 16px 0;
+    }
+
+    .pcontent :global(h2) {
+      font-size: 22px;
+      margin: 40px 0 16px 0;
+    }
+
+    .pcontent :global(h3) {
+      font-size: 18px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const copyBtn = document.querySelector<HTMLButtonElement>('.pshare__copy');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', async () => {
+        const url = copyBtn.getAttribute('data-url') || window.location.href;
+        try {
+          await navigator.clipboard.writeText(url);
+          copyBtn.setAttribute('aria-label', 'Link copiado!');
+          setTimeout(() => copyBtn.setAttribute('aria-label', 'Copiar link'), 2000);
+        } catch {
+          /* fallback silencioso */
+        }
+      });
+    }
+  });
+</script>

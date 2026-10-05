@@ -1,0 +1,321 @@
+---
+const cases = [
+  {
+    titulo: 'TIM MUSIC RIO',
+    image: '/images/live-xp/tim.svg',
+    cor: '#87cde7',
+    bulletColor: '#001D47',
+    videoId: '4gNmpdXISfk',
+    bullets: [
+      'Maior festival gratuito do Brasil',
+      '600 mil pessoas em Copacabana (edição 2024)',
+      'Lineup nacional e internacional de primeira linha',
+      'Parceria estratégica de longo prazo com TIM',
+    ],
+  },
+  {
+    titulo: 'FESTIVAL TROPICANA',
+    image: '/images/live-xp/tropicana.svg',
+    cor: '#FB2A54',
+    bulletColor: '#EFEC4B',
+    videoId: 'wFQaSXZIw4A',
+    bullets: [
+      'Mais de 250.000 pessoas presentes por edição',
+      'Festival itinerante de cinema e música pelo Norte e Nordeste do Brasil',
+      'Valorização de artistas locais de cada cidade',
+      'Alinhamento fino ao guide da Petrobras: Celebração da Brasilidade',
+    ],
+  },
+  {
+    titulo: 'PRUDENTIAL CONCERTS',
+    image: '/images/live-xp/prudential.svg',
+    bulletColor: '#001D47',
+    cor: '#3aa845',
+    videoId: 'kwtv_HNL7WU',
+    bullets: [
+      '8 anos consecutivos de realização',
+      'União de orquestras sinfônicas com grandes artistas populares',
+      'Democratização de música erudita e popular',
+      'Turnê nacional',
+    ],
+  },
+  {
+    titulo: 'FESTIVAL DE NATAL EQUATORIAL',
+    image: '/images/live-xp/festival.svg',
+    cor: '#fb2a54',
+    bulletColor: '#fff',
+    videoId: 'MrrwlHNdSBg',
+    bullets: [
+      'Maior festival de Natal gratuito do Maranhão',
+      'Festival consolidado no calendário de São Luís/MA com 04 edições realizadas nos últimos anos',
+      'Mais de 300.000 pessoas impactadas',
+    ],
+  },
+];
+---
+
+<section class="nts2">
+  <div class="nts2__inner">
+
+    <div class="nts2__head">
+      <span class="nts2__label">CASES</span>
+      <h2 class="nts2__title font-title">Projetos que viraram referência</h2>
+    </div>
+
+    <div class="nts2__cases">
+      {cases.map((c) => (
+        <article class="nts2__case" style={`--case-color: ${c.cor}; --bullet-color: ${c.bulletColor || '#fff'};`}>
+          <div class="nts2__case-video">
+            <iframe
+              src={`https://www.youtube.com/embed/${c.videoId}?rel=0&modestbranding=1`}
+              title={c.titulo}
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+
+          <div class="nts2__overlay-left">
+            <img src={c.image} alt={c.titulo} />
+          </div>
+
+          <div class="nts2__overlay-right">
+            <ul class="nts2__case-bullets">
+              {c.bullets.map((b) => (
+                <li class="nts2__case-bullet">
+                  <span class="nts2__bullet-icon">›</span>
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </article>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .nts2 {
+    width: 100%;
+    background-color: var(--color-dark);
+    color: var(--color-light);
+  }
+
+  .nts2__inner {
+    max-width: 1260px;
+    margin: 0 auto;
+    padding: 132px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 72px;
+  }
+
+  .nts2__head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    text-align: center;
+  }
+
+  .nts2__label {
+    font-size: 11.25px;
+    line-height: 15px;
+    letter-spacing: 0.5625px;
+    text-transform: uppercase;
+    color: var(--color-light);
+  }
+
+  .nts2__title {
+    margin: 0;
+    font-size: 44.8px;
+    line-height: 1.15;
+    color: var(--color-light);
+    max-width: 548px;
+  }
+
+  .nts2__cases {
+    display: flex;
+    flex-direction: column;
+    gap: 72px;
+    width: 100%;
+  }
+
+  /* ---- Card container ---- */
+  .nts2__case {
+    width: 100%;
+    background-color: var(--case-color);
+    border-radius: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ---- Responsive YouTube embed ---- */
+  .nts2__case-video {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    overflow: hidden;
+    border: 24px solid var(--case-color);
+
+  }
+
+  .nts2__case-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    border-radius: 20px;
+  }
+
+  /* ---- Overlays ---- */
+  .nts2__overlay-left {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: var(--case-color);
+    border-radius: 0 40px 0 0;
+    padding: 28px 40px 32px 36px;
+    max-width: 380px;
+    z-index: 2;
+  }
+
+  .nts2__overlay-right {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: var(--case-color);
+    border-radius: 24px 0 0 0;
+    padding: 24px 36px 28px 36px;
+    max-width: 440px;
+    z-index: 2;
+  }
+
+  .nts2__case-title {
+    margin: 0;
+    font-size: 44px;
+    line-height: 1.05;
+    color: var(--color-dark);
+  }
+
+  .nts2__case-bullets {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    color: var(--bullet-color);
+  }
+
+  .nts2__case-bullet {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 15px;
+    line-height: 1.4;
+  }
+
+  .nts2__bullet-icon {
+    font-size: 18px;
+    line-height: 1.2;
+    flex-shrink: 0;
+    font-weight: 700;
+  }
+
+  /* Responsivo: 1260 + 32 = 1292 */
+  @media (max-width: 1292px) {
+    .nts2__inner {
+      padding: 132px 16px;
+    }
+  }
+
+  @media (max-width: 960px) {
+    .nts2__case {
+      border-radius: 28px;
+    }
+
+    .nts2__case-video iframe {
+      border-radius: 28px;
+    }
+
+    .nts2__overlay-left {
+      border-radius: 0 24px 0 0;
+      padding: 20px 28px 24px 24px;
+      max-width: 260px;
+    }
+
+    .nts2__overlay-right {
+      border-radius: 28px 0 0 0;
+      padding: 18px 24px 22px 28px;
+      max-width: 340px;
+    }
+
+    .nts2__case-title {
+      font-size: 28px;
+    }
+
+    .nts2__case-bullet {
+      font-size: 13px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .nts2__inner {
+      padding: 80px 16px;
+      gap: 48px;
+    }
+
+    .nts2__title {
+      font-size: 32px;
+    }
+
+     .nts2__cases {
+gap: 32px;
+    }
+
+    .nts2__case {
+      border-radius: 20px;
+    }
+
+    .nts2__case-video {
+      border: 16px solid var(--case-color);
+    }
+
+    .nts2__case-video iframe {
+      border-radius: 8px;
+    }
+
+    .nts2__overlay-left,
+    .nts2__overlay-right {
+      position: relative;
+      border-radius: 0;
+      max-width: 100%;
+      padding: 16px 20px;
+    }
+    .nts2__overlay-right {
+      padding-bottom: 32px;
+      padding-top: 0px;
+    }
+
+    .nts2__case-title {
+      font-size: 24px;
+    }
+
+    .nts2__case-bullet {
+      font-size: 13px;
+    }
+
+    .nts2__head {
+      max-width: 276px;
+      gap: 24px;
+    }
+  }
+</style>

@@ -1,0 +1,138 @@
+---
+// =====================================================================
+// PÁGINA TEMPORÁRIA — "Em Desenvolvimento"
+// Substitui o site enquanto a equipe resolve uma pendência.
+// Página autônoma de propósito (NÃO usa BaseLayout/componentes) para
+// ficar imune a qualquer problema no resto do site.
+// Para restaurar o site original: `git revert` do commit desta alteração.
+// =====================================================================
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Novo Traço — Em Desenvolvimento</title>
+    <link rel="icon" href="/icons/favicon.svg" />
+
+    <style>
+      @font-face {
+        font-family: "Margem Test";
+        src: url("/fonts/MargemTest-Regular.woff2") format("woff2"),
+             url("/fonts/MargemTest-Regular.ttf") format("truetype");
+        font-weight: 400;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "Margem Test";
+        src: url("/fonts/MargemTest-Bold.woff2") format("woff2"),
+             url("/fonts/MargemTest-Bold.ttf") format("truetype");
+        font-weight: 700;
+        font-display: swap;
+      }
+
+      :root {
+        --nt-yellow: #EFEC4B;
+        --nt-dark: #191718;
+      }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      html, body { height: 100%; }
+
+      body {
+        min-height: 100dvh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--nt-yellow);
+        color: var(--nt-dark);
+        font-family: "Margem Test", system-ui, -apple-system, sans-serif;
+        padding: 6vw 24px;
+        text-align: center;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: clamp(28px, 5vw, 48px);
+        max-width: 640px;
+        width: 100%;
+        animation: fade-in 0.8s ease both;
+      }
+
+      .logo {
+        width: clamp(180px, 34vw, 300px);
+        height: auto;
+        display: block;
+      }
+
+      .titulo {
+        font-weight: 700;
+        font-size: clamp(1.5rem, 5vw, 2.4rem);
+        letter-spacing: -0.01em;
+        line-height: 1.1;
+      }
+
+      .subtitulo {
+        font-weight: 400;
+        font-size: clamp(0.95rem, 2.6vw, 1.1rem);
+        line-height: 1.5;
+        max-width: 38ch;
+        opacity: 0.72;
+        margin-top: -0.6em;
+      }
+
+      /* Barra de progresso indeterminada — sinaliza "em andamento" */
+      .barra {
+        position: relative;
+        width: clamp(160px, 40vw, 240px);
+        height: 4px;
+        border-radius: 999px;
+        background: rgba(25, 23, 24, 0.14);
+        overflow: hidden;
+      }
+      .barra::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        width: 40%;
+        border-radius: 999px;
+        background: var(--nt-dark);
+        animation: slide 1.6s ease-in-out infinite;
+      }
+
+      @keyframes slide {
+        0%   { transform: translateX(-100%); }
+        50%  { transform: translateX(150%); }
+        100% { transform: translateX(150%); }
+      }
+
+      @keyframes fade-in {
+        from { opacity: 0; transform: translateY(8px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .wrap { animation: none; }
+        .barra::after { animation: none; width: 100%; opacity: 0.5; }
+      }
+    </style>
+  </head>
+
+  <body>
+    <main class="wrap">
+      <!-- Logo Novo Traço (wordmark, versão escura) -->
+      <img class="logo" src="/images/logo-dark.svg" alt="Novo Traço" width="180" height="218" />
+
+      <h1 class="titulo">Em Desenvolvimento</h1>
+      <p class="subtitulo">Estamos preparando algo novo. Voltamos em breve.</p>
+
+      <div class="barra" role="presentation" aria-hidden="true"></div>
+    </main>
+  </body>
+</html>

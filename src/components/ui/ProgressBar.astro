@@ -1,0 +1,140 @@
+---
+interface Props {
+  percentage?: number;
+}
+
+const { percentage = 80 } = Astro.props;
+---
+
+<div class="progress-bar" data-percentage={percentage}>
+  <div class="progress-bar__track">
+    <div class="progress-bar__fill" style={`--target-width: ${percentage}%`}>
+      <div class="progress-bar__stripes"></div>
+    </div>
+  </div>
+  <p class="progress-bar__label">
+    <span class="progress-bar__value">0</span>% CONCLUÍDO
+  </p>
+</div>
+
+<style>
+  .progress-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 448px;
+  }
+
+  .progress-bar__track {
+    width: 100%;
+    height: 44px;
+    border: 1px solid var(--color-lp-dark);
+    border-radius: 9999px;
+    background: var(--color-lp-light);
+    padding: 9px;
+    box-sizing: border-box;
+  }
+
+  .progress-bar__fill {
+    width: 0%;
+    height: 100%;
+    background: var(--color-lp-blue);
+    border-radius: 9999px;
+    position: relative;
+    overflow: hidden;
+    transition: width 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .progress-bar__fill.animate {
+    width: var(--target-width);
+  }
+
+  .progress-bar__stripes {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      115deg,
+      transparent 0px,
+      transparent 30px,
+      #4AB2D8 30px,
+      #4AB2D8 68px,
+      transparent 68px,
+      transparent 82px
+    );
+    background-size: 82px 100%;
+    animation: stripe-slide 2s linear infinite;
+  }
+
+  @keyframes stripe-slide {
+    0% { background-position: 0 0; }
+    100% { background-position: 82px 0; }
+  }
+
+  .progress-bar__label {
+    font-family: 'Univers Next Pro', var(--font-primary);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--color-lp-dark);
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    .progress-bar__label {
+      font-size: 14px;
+      line-height: 1.3;
+    }
+
+    .progress-bar__track {
+      height: 40px;
+      padding: 7px 9px;
+    }
+  }
+</style>
+
+<script>
+  function initProgressBars() {
+    const bars = document.querySelectorAll<HTMLElement>('.progress-bar');
+
+    bars.forEach((bar) => {
+      const fill = bar.querySelector<HTMLElement>('.progress-bar__fill');
+      const valueEl = bar.querySelector<HTMLElement>('.progress-bar__value');
+      const target = parseInt(bar.dataset.percentage || '80', 10);
+
+      if (!fill || !valueEl) return;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              // Inicia a animação da barra
+              fill.classList.add('animate');
+
+              // Anima o número
+              let current = 0;
+              const duration = 1500;
+              const stepTime = duration / target;
+
+              const counter = setInterval(() => {
+                current++;
+                valueEl.textContent = String(current);
+                if (current >= target) clearInterval(counter);
+              }, stepTime);
+
+              observer.unobserve(bar);
+            }
+          });
+        },
+        { threshold: 0.3 }
+      );
+
+      observer.observe(bar);
+    });
+  }
+
+  // Roda na carga da página e em transições de view
+  document.addEventListener('astro:page-load', initProgressBars);
+  initProgressBars();
+</script>

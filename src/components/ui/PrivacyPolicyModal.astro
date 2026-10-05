@@ -1,0 +1,398 @@
+---
+// PrivacyPolicyModal.astro
+---
+
+<!-- Overlay -->
+<div id="privacy-overlay" aria-modal="true" role="dialog" aria-label="Políticas de Privacidade" aria-hidden="true">
+  <div id="privacy-card">
+
+    <!-- Conteúdo com scroll oculto -->
+    <div id="privacy-scroll">
+
+      <!-- Cabeçalho -->
+      <div id="privacy-header">
+        <div id="privacy-header-left">
+          <img src="/images/notes-quill-10.svg" alt="">
+
+          <div id="privacy-title-group">
+            <h2 id="privacy-title">Políticas de Privacidade</h2>
+            <p id="privacy-date">Vigente a partir de: 3 de abril de 2026</p>
+          </div>
+        </div>
+
+        <!-- Botão fechar -->
+        <button id="privacy-close" type="button" aria-label="Fechar">
+          <img src="/images/close-popup.svg" alt="">
+        </button>
+      </div>
+
+      <!-- Corpo de texto -->
+      <div id="privacy-body">
+        <div class="privacy-section">
+          <h3 class="privacy-section-title">1. Identificação do Controlador</h3>
+          <p>A presente Política de Privacidade é aplicada em todo o site da NOVO TRACO PUBLICIDADE E PROPAGANDA LTDA., inscrita no CNPJ sob o nº 04.582.964/0001-46, com sede na Rua Jardim Botânico, 568, Sala 613, Jardim Botânico, Rio de Janeiro — RJ, CEP: 22461-002, doravante denominada simplesmente Novo Traço.</p>
+          <p>Para exercer seus direitos ou esclarecer dúvidas sobre o tratamento de dados, o titular poderá entrar em contato com nosso Setor Encarregado de Proteção de Dados (DPO) pelo e-mail: contato@novotraco.com.</p>
+        </div>
+
+        <div class="privacy-section">
+          <h3 class="privacy-section-title">2. Quais dados coletamos e por quê?</h3>
+          <p>A Novo Traço coleta apenas os dados estritamente necessários para as finalidades descritas abaixo.</p>
+          <p><strong>2.1 Formulário de contato comercial:</strong> Ao preencher o formulário disponível na página de contato, coletamos: nome completo, endereço de e-mail, número de WhatsApp, nome da empresa e a mensagem enviada. Esses dados são utilizados exclusivamente para responder à sua solicitação, avaliar oportunidades de parceria e estabelecer comunicação comercial inicial. A base legal é o legítimo interesse da Novo Traço no atendimento de demandas espontâneas (art. 7º, inciso IX, LGPD).</p>
+          <p><strong>2.2 Newsletter:</strong> Ao informar seu endereço de e-mail para receber nossa newsletter, coletamos apenas esse dado, utilizado para o envio de conteúdos editoriais, novidades sobre projetos, eventos e demais conteúdos da Novo Traço. A base legal é o consentimento do titular (art. 7º, inciso I, LGPD). Você pode cancelar a inscrição a qualquer momento clicando no link de descadastro presente em todos os e-mails enviados.</p>
+          <p><strong>2.3 Dados de navegação (cookies):</strong> Coletamos automaticamente, por meio de cookies, informações técnicas de navegação, como endereço IP, tipo de dispositivo, páginas visitadas e tempo de permanência. Para mais detalhes, consulte nossa Política de Cookies.</p>
+        </div>
+
+        <div class="privacy-section">
+          <h3 class="privacy-section-title">3. Como utilizamos seus dados?</h3>
+          <p>Os dados coletados são utilizados para as seguintes finalidades: responder a contatos e solicitações comerciais recebidas pelo formulário; enviar comunicações editoriais e institucionais aos assinantes da newsletter; analisar o comportamento de navegação de forma agregada e anonimizada para melhoria contínua do site; cumprir obrigações legais e regulatórias aplicáveis.</p>
+          <p>A Novo Traço não utiliza dados pessoais para tomada de decisões automatizadas ou elaboração de perfis individuais para fins de marketing terceirizado.</p>
+        </div>
+
+        <div class="privacy-section">
+          <h3 class="privacy-section-title">4. Compartilhamento de dados</h3>
+          <p>A Novo Traço não vende, aluga ou cede dados pessoais a terceiros. O compartilhamento ocorre apenas nas seguintes situações:</p>
+          <p><strong>Prestadores de serviço tecnológico:</strong> plataformas utilizadas para envio de e-mails, análise de tráfego (Google Analytics) e hospedagem do site, que atuam como operadores de dados e estão vinculados a acordos de confidencialidade e às exigências da LGPD.</p>
+          <p><strong>Cumprimento de obrigação legal:</strong> quando exigido por autoridade competente, decisão judicial ou normativa aplicável.</p>
+          <p><strong>Empresas do mesmo grupo econômico:</strong> dados poderão ser compartilhados com empresas coligadas, afiliadas ou associadas à Novo Traço exclusivamente para finalidades operacionais e administrativas internas. Esse compartilhamento tem como base legal o legítimo interesse da Novo Traço (art. 7º, IX, LGPD), sendo vedada a utilização dos dados por essas empresas para finalidades próprias ou autônomas não previstas nesta Política.</p>
+        </div>
+
+        <div class="privacy-section">
+          <h3 class="privacy-section-title">5. Armazenamento e segurança dos dados</h3>
+          <p>Os dados coletados são armazenados em servidores seguros, com adoção de medidas técnicas e organizacionais adequadas para proteger as informações contra acesso não autorizado, perda, alteração ou divulgação indevida, incluindo: comunicação criptografada via protocolo HTTPS; acesso restrito aos dados por parte de colaboradores autorizados; revisões periódicas das práticas de segurança.</p>
+          <p>Ainda que adotemos as melhores práticas disponíveis, nenhum ambiente digital oferece garantia absoluta de segurança. Em caso de incidente relevante que possa afetar seus direitos, a Novo Traço notificará os titulares afetados e a Autoridade Nacional de Proteção de Dados (ANPD) nos prazos previstos em lei.</p>
+        </div>
+
+        <div class="privacy-section">
+          <h3 class="privacy-section-title">6. Prazo de retenção dos dados</h3>
+          <p><strong>Dados do formulário de contato:</strong> até 36 meses após o encerramento da tratativa comercial.<br/>
+          <strong>E-mail da newsletter:</strong> enquanto houver consentimento ativo; excluído após descadastro.<br/>
+          <strong>Dados de navegação (cookies):</strong> conforme Política de Cookies.<br/>
+          <strong>Registros de comunicação:</strong> até 15 anos, para fins de cumprimento de obrigação legal.</p>
+          <p>Após o término dos respectivos prazos, os dados são eliminados ou anonimizados de forma segura.</p>
+        </div>
+
+        <div class="privacy-section">
+          <h3 class="privacy-section-title">7. Seus direitos como titular (LGPD)</h3>
+          <p>Nos termos dos arts. 17 a 22 da LGPD, você tem direito a: confirmação da existência de tratamento dos seus dados; acesso aos dados que possuímos sobre você; correção de dados incompletos, inexatos ou desatualizados; anonimização, bloqueio ou eliminação de dados desnecessários ou tratados em desconformidade com a lei; portabilidade dos dados a outro fornecedor de serviço, mediante requisição; eliminação dos dados tratados com base no consentimento, ressalvadas as hipóteses legais de retenção; informação sobre com quem seus dados são compartilhados; revogação do consentimento, a qualquer tempo e sem prejuízo à legalidade do tratamento anterior.</p>
+          <p>Para exercer qualquer um desses direitos, entre em contato pelo e-mail contato@novotraco.com. Responderemos em até 15 dias úteis.</p>
+        </div>
+
+        <div class="privacy-section">
+          <h3 class="privacy-section-title">8. Transferência internacional de dados</h3>
+          <p>Algumas ferramentas utilizadas pela Novo Traço (como Google Analytics e plataformas de e-mail) podem envolver transferência de dados para servidores localizados fora do Brasil. Nesses casos, exigimos que os fornecedores adotem salvaguardas adequadas, em conformidade com o art. 33 da LGPD e as diretrizes da ANPD.</p>
+        </div>
+
+        <div class="privacy-section">
+          <h3 class="privacy-section-title">9. Links externos</h3>
+          <p>O site da Novo Traço pode conter links para sites de terceiros (redes sociais, parceiros, veículos de imprensa). Esta Política de Privacidade aplica-se exclusivamente ao nosso site. Recomendamos que o usuário consulte as políticas de privacidade de cada plataforma acessada.</p>
+        </div>
+
+        <div class="privacy-section">
+          <h3 class="privacy-section-title">10. Alterações nesta política</h3>
+          <p>A Novo Traço reserva-se o direito de atualizar esta Política de Privacidade a qualquer momento, em razão de mudanças na legislação, nas práticas de tratamento ou nos serviços oferecidos. Alterações relevantes serão comunicadas por meio de aviso destacado no site. O uso continuado do site após a publicação de novas versões implica a aceitação das condições atualizadas.</p>
+        </div>
+
+        <div class="privacy-section">
+          <h3 class="privacy-section-title">11. Legislação e foro</h3>
+          <p>Esta Política de Privacidade é regida pela Lei nº 13.709/2018 (LGPD) e demais normas aplicáveis à proteção de dados pessoais no Brasil. Fica eleito o Foro Central da Comarca da Capital do Rio de Janeiro — RJ para dirimir quaisquer controvérsias decorrentes deste documento, com renúncia a qualquer outro, por mais privilegiado que seja.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scrollbar customizada -->
+    <div id="privacy-sb-track">
+      <div id="privacy-sb-thumb"></div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+  /* ── Overlay ── */
+  #privacy-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: rgba(0, 0, 0, 0.72);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 300ms ease;
+  }
+
+  #privacy-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* ── Card ── */
+  #privacy-card {
+    background: var(--color-light);
+    border: 2px solid var(--color-dark);
+    border-radius: 45px;
+    width: min(660px, 100%);
+    max-height: min(88vh, 720px);
+    padding: 32px 5px 32px 49px;
+    display: flex;
+    gap: 12px;
+    overflow: hidden;
+    transform: translateY(16px) scale(0.98);
+    transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  #privacy-overlay.open #privacy-card {
+    transform: translateY(0) scale(1);
+  }
+
+  /* ── Área de scroll (nativo oculto) ── */
+  #privacy-scroll {
+    flex: 1;
+    min-width: 0;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 31px;
+    padding-right: 16px;
+  }
+
+  #privacy-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* ── Cabeçalho ── */
+  #privacy-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  #privacy-header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  #privacy-header-left img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+  }
+
+  #privacy-title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  #privacy-title {
+    font-family: var(--font-secondary);
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1.25;
+    color: var(--color-dark);
+    margin: 0;
+  }
+
+  #privacy-date {
+    font-family: var(--font-primary);
+    font-size: 14px;
+    font-style: italic;
+    line-height: 1.4;
+    color: var(--color-dark);
+    margin: 0;
+  }
+
+  /* ── Botão fechar ── */
+  #privacy-close {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+  }
+
+  #privacy-close:hover {
+    opacity: 1;
+  }
+
+  /* ── Corpo do texto ── */
+  #privacy-body {
+    font-family: var(--font-primary);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: var(--color-dark);
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  #privacy-body p {
+    margin: 0;
+  }
+
+  .privacy-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .privacy-section-title {
+    font-family: var(--font-primary);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--color-dark);
+    margin: 0;
+  }
+
+  /* ── Scrollbar customizada ── */
+  #privacy-sb-track {
+    flex-shrink: 0;
+    width: 11px;
+    align-self: stretch;
+    background: #E0E0E0;
+    border-radius: 205px;
+    padding: 2px;
+    position: relative;
+  }
+
+  #privacy-sb-thumb {
+    width: 7px;
+    height: 60px;
+    background: #87CDE7;
+    border-radius: 14px;
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    transition: top 0.05s linear;
+    cursor: pointer;
+  }
+
+  /* ── Responsivo mobile ── */
+  @media (max-width: 600px) {
+    #privacy-overlay {
+      padding: 16px;
+    }
+
+    #privacy-card {
+      border-radius: 20px;
+      padding: 24px 5px 24px 24px;
+      max-height: 82vh;
+      width: 100%;
+    }
+
+    #privacy-title {
+      font-size: 24px;
+    }
+
+    #privacy-scroll {
+      padding-right: 12px;
+    }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var overlay = document.getElementById('privacy-overlay');
+    var scrollEl = document.getElementById('privacy-scroll');
+    var thumb = document.getElementById('privacy-sb-thumb');
+    var track = document.getElementById('privacy-sb-track');
+
+    // ── Scrollbar customizada ──
+    function updateThumb() {
+      if (!scrollEl || !thumb || !track) return;
+
+      var trackH = track.clientHeight - 4;
+      var ratio = scrollEl.clientHeight / scrollEl.scrollHeight;
+      var thumbH = Math.max(40, Math.round(trackH * ratio));
+      thumb.style.height = thumbH + 'px';
+
+      var maxScroll = scrollEl.scrollHeight - scrollEl.clientHeight;
+      var maxTop = trackH - thumbH;
+      var scrollPct = maxScroll > 0 ? scrollEl.scrollTop / maxScroll : 0;
+      thumb.style.top = (2 + Math.round(scrollPct * maxTop)) + 'px';
+    }
+
+    // Arrastar thumb
+    var dragging = false;
+    var dragStartY = 0;
+    var dragStartScrollTop = 0;
+
+    thumb && thumb.addEventListener('mousedown', function (e) {
+      dragging = true;
+      dragStartY = e.clientY;
+      dragStartScrollTop = scrollEl.scrollTop;
+      e.preventDefault();
+    });
+
+    document.addEventListener('mousemove', function (e) {
+      if (!dragging) return;
+      var trackH = track.clientHeight - 4;
+      var thumbH = thumb.offsetHeight;
+      var maxTop = trackH - thumbH;
+      var maxScroll = scrollEl.scrollHeight - scrollEl.clientHeight;
+      var delta = e.clientY - dragStartY;
+      var scrollDelta = (delta / maxTop) * maxScroll;
+      scrollEl.scrollTop = Math.max(0, Math.min(maxScroll, dragStartScrollTop + scrollDelta));
+    });
+
+    document.addEventListener('mouseup', function () { dragging = false; });
+
+    scrollEl && scrollEl.addEventListener('scroll', updateThumb);
+
+    // ── Abrir/fechar modal ──
+    function openModal() {
+      overlay.removeAttribute('aria-hidden');
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      scrollEl.scrollTop = 0;
+      setTimeout(updateThumb, 50);
+    }
+
+    function closeModal() {
+      overlay.setAttribute('aria-hidden', 'true');
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // Botão no rodapé
+    var footerBtn = document.getElementById('footer-privacy-btn');
+    footerBtn && footerBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      openModal();
+    });
+
+    // Botão fechar
+    var closeBtn = document.getElementById('privacy-close');
+    closeBtn && closeBtn.addEventListener('click', closeModal);
+
+    // Fechar clicando no overlay
+    overlay && overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) closeModal();
+    });
+
+    // Fechar com ESC
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
+    });
+
+    window.addEventListener('resize', updateThumb);
+    setTimeout(updateThumb, 100);
+  })();
+</script>

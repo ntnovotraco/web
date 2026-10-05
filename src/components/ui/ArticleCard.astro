@@ -1,0 +1,210 @@
+---
+interface Props {
+  image: string;
+  categoryLabel: string;
+  categoryColor: string;
+  title: string;
+  excerpt: string;
+  readTime: string;
+  href: string;
+}
+
+const { image, categoryLabel, categoryColor, title, excerpt, readTime, href } = Astro.props;
+---
+
+<div class="articlecard">
+  <a href={href} class="articlecard__image-link">
+    <div class="articlecard__image-wrapper">
+      <img src={image} alt="" class="articlecard__image" loading="lazy" />
+    </div>
+  </a>
+
+  <div class="articlecard__content">
+    <div class="articlecard__top">
+      <div class="articlecard__category">
+        <span class="articlecard__dot" style={`background-color: ${categoryColor};`} />
+        <span class="articlecard__category-label">{categoryLabel}</span>
+      </div>
+      <div class="articlecard__text-group">
+        <a href={href} class="articlecard__title-link"><h3 class="articlecard__title">{title}</h3></a>
+        <p class="articlecard__excerpt">{excerpt}</p>
+      </div>
+    </div>
+
+    <div class="articlecard__footer">
+      <span class="articlecard__readtime">{readTime}</span>
+      <a href={href} class="articlecard__link">&rarr; Ler artigo completo</a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .articlecard {
+    border: 2px solid var(--color-dark);
+    border-radius: 22px;
+    max-width: 380px;
+    padding: 24px 24px 42px;
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    align-items: center;
+    justify-content: flex-end;
+    color: var(--color-dark);
+    flex-shrink: 0;
+    box-sizing: border-box;
+    transition: box-shadow 0.25s;
+  }
+
+  .articlecard:hover {
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  }
+
+  .articlecard__image-link,
+  .articlecard__title-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    width: 100%;
+  }
+
+  .articlecard__title-link:hover .articlecard__title {
+    opacity: 0.7;
+  }
+
+  .articlecard__image-wrapper {
+    width: 100%;
+    height: 210px;
+    border-radius: 20px;
+    overflow: hidden;
+    background: var(--color-dark);
+    flex-shrink: 0;
+  }
+
+  .articlecard__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .articlecard__content {
+    flex: 1 0 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 60px;
+  }
+
+  .articlecard__top {
+    display: flex;
+    flex-direction: column;
+    gap: 29px;
+  }
+
+  .articlecard__category {
+    display: flex;
+    align-items: center;
+    gap: 11.25px;
+    height: 15px;
+  }
+
+  .articlecard__dot {
+    width: 11.25px;
+    height: 11.25px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .articlecard__category-label {
+    font-size: 11.25px;
+    font-weight: 400;
+    line-height: 15px;
+    letter-spacing: 0.5625px;
+    text-transform: uppercase;
+  }
+
+  .articlecard__text-group {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .articlecard__title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .articlecard__excerpt {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.4;
+    height: 67px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+
+  .articlecard__footer {
+    width: 100%;
+    border-top: 0.938px solid rgba(25, 23, 24, 0.2);
+    padding-top: 15.938px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .articlecard__readtime {
+    font-size: 11.25px;
+    font-weight: 400;
+    line-height: 15px;
+    color: rgba(25, 23, 24, 0.9);
+  }
+
+  .articlecard__link {
+    font-size: 13.125px;
+    font-weight: 400;
+    line-height: 18.75px;
+    color: rgba(25, 23, 24, 0.9);
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .articlecard__link:hover {
+    opacity: 0.7;
+  }
+
+  @media (max-width: 768px) {
+    .articlecard {
+      gap: 0px;
+      padding: 0px;
+      overflow: hidden;
+    }
+
+    .articlecard__image-wrapper {
+      border-radius: 0px;
+    }
+
+    .articlecard__top {
+      gap: 20px;
+    }
+    .articlecard__content {
+      padding: 32px 16px 16px;
+      gap: 24px;
+    }
+
+    .articlecard__title {
+      font-size: 18px;
+    }
+    
+    .articlecard__excerpt {
+      font-size: 14px;
+      height: 56px;
+    }
+    
+  }
+</style>

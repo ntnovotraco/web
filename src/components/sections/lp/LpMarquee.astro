@@ -1,0 +1,49 @@
+---
+interface Props {
+  text: string;
+}
+const { text } = Astro.props;
+---
+
+<div class="bg-lp-yellow overflow-hidden py-[14px]">
+  <div class="marquee-track flex gap-[220px] whitespace-nowrap">
+    <span class="marquee-text">{text}</span>
+    <span class="marquee-text">{text}</span>
+    <span class="marquee-text">{text}</span>
+    <span class="marquee-text">{text}</span>
+    <span class="marquee-text">{text}</span>
+    <span class="marquee-text">{text}</span>
+    <span class="marquee-text">{text}</span>
+    <span class="marquee-text">{text}</span>
+  </div>
+</div>
+
+<style>
+  .marquee-text {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: 18px;
+    color: #020305;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+    line-height: 18px;
+  }
+
+  .marquee-track {
+    animation: marquee 30s linear infinite;
+    width: max-content;
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  @media (max-width: 768px) {
+    .marquee-text {
+      font-size: 14px;
+      line-height: 14px;
+    }
+  }
+</style>

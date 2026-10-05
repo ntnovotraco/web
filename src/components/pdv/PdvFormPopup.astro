@@ -1,0 +1,608 @@
+---
+// PdvFormPopup.astro — pré-checkout popup do /pdv
+// Isolado do LpFormPopup. Dispara via window event `pdv:open-checkout`.
+
+interface Props {
+  checkoutUrl?: string;
+}
+
+const { checkoutUrl = 'https://nt.novotraco.com/checkout' } = Astro.props;
+---
+
+<div id="pdv-popup-overlay" class="pdv-popup-overlay" data-checkout-url={checkoutUrl} aria-hidden="true">
+  <div class="pdv-popup-card" onclick="event.stopPropagation()">
+
+    <button class="pdv-popup-close" id="pdv-popup-close" aria-label="Fechar">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+
+    <p class="pdv-popup-intro">
+      Preencha seus dados para continuar com a assinatura
+    </p>
+
+    <form id="pdv-capture-form" class="pdv-popup-form" novalidate>
+
+      <div class="pdv-input-wrap" data-field="name">
+        <div class="pdv-input-container">
+          <img class="pdv-input-icon" src="/images/lp/icon-user-freehand.svg" alt="" width="24" height="24" />
+          <input type="text" id="pdv-name" name="name" placeholder="Seu nome*" autocomplete="name" />
+        </div>
+        <span class="pdv-input-error">Preencha esse campo</span>
+      </div>
+
+      <div class="pdv-input-wrap" data-field="email">
+        <div class="pdv-input-container">
+          <img class="pdv-input-icon" src="/images/lp/icon-email-freehand.svg" alt="" width="24" height="24" />
+          <input type="email" id="pdv-email" name="email" placeholder="Seu email*" autocomplete="email" />
+        </div>
+        <span class="pdv-input-error">Preencha esse campo</span>
+      </div>
+
+      <div class="pdv-input-wrap" data-field="whatsapp">
+        <div class="pdv-input-container">
+          <div class="pdv-country-dropdown">
+            <button type="button" id="pdv-country-select" class="pdv-country-btn">
+              <img id="pdv-selected-flag" src="https://flagcdn.com/w40/br.png" alt="Brasil" class="pdv-flag-img" />
+              <svg id="pdv-dropdown-arrow" class="pdv-dropdown-arrow" width="8" height="5" viewBox="0 0 8 5" fill="none">
+                <path d="M1 1L4 4L7 1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div id="pdv-country-dropdown-menu" class="pdv-country-menu">
+              <div class="pdv-country-search-wrap">
+                <input type="text" id="pdv-country-search" placeholder="Buscar país..." class="pdv-country-search" />
+              </div>
+              <div id="pdv-countries-list" class="pdv-countries-list"></div>
+            </div>
+          </div>
+          <input type="tel" id="pdv-whatsapp" name="whatsapp" placeholder="WhatsApp com DDD*" autocomplete="off" />
+        </div>
+        <span class="pdv-input-error">Preencha esse campo</span>
+      </div>
+
+      <p class="pdv-terms-text">
+        Ao continuar estou de acordo com a
+        <a href="#" id="pdv-popup-link-privacy">política de privacidade</a>
+        e os
+        <a href="#" id="pdv-popup-link-terms">termos de uso</a>.
+      </p>
+
+      <button type="submit" class="pdv-popup-btn" id="pdv-submit-btn">
+        <span class="pdv-popup-btn__text">Continuar para o checkout</span>
+        <span class="pdv-popup-btn__loading">
+          Redirecionando
+          <span class="pdv-spinner"></span>
+        </span>
+      </button>
+    </form>
+  </div>
+</div>
+
+<style is:global>
+  /* Prefixado com body.pdv pra vencer a especificidade do reset global `body.pdv *` */
+
+  body.pdv .pdv-popup-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.72);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+  }
+
+  body.pdv .pdv-popup-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  body.pdv .pdv-popup-card {
+    background-color: #87CDE7;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 420px;
+    max-height: 90vh;
+    overflow-y: inherit;
+    padding: 32px 24px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+
+  body.pdv .pdv-input-icon {
+    flex-shrink: 0;
+    color: #020305;
+    opacity: 0.85;
+  }
+
+  body.pdv .pdv-popup-close {
+    align-self: flex-end;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #020305;
+    padding: 0;
+    line-height: 0;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+  }
+
+  body.pdv .pdv-popup-close:hover { opacity: 0.6; }
+
+  body.pdv .pdv-popup-intro {
+    font-family: 'Margem', 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #020305;
+    text-align: center;
+    max-width: 311px;
+    padding-top: 9px;
+    margin: 0;
+  }
+
+  body.pdv .pdv-popup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+    align-items: center;
+  }
+
+  body.pdv .pdv-input-wrap {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    position: relative;
+  }
+
+  body.pdv .pdv-input-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 48px;
+    border: 1px solid #020305;
+    border-radius: 9999px;
+    padding: 0 20px;
+    background: transparent;
+    transition: border-color 0.2s;
+  }
+
+  body.pdv .pdv-input-wrap.error .pdv-input-container { border-color: #E10600; }
+
+  body.pdv .pdv-input-container input {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: 'Margem', 'Inter', sans-serif;
+    font-size: 14px;
+    color: #020305;
+  }
+
+  body.pdv .pdv-input-container input::placeholder { color: rgba(2, 3, 5, 0.65); }
+
+  body.pdv .pdv-input-error {
+    font-family: 'Margem', 'Inter', sans-serif;
+    font-size: 12px;
+    color: #E10600;
+    padding-left: 24px;
+    display: none;
+  }
+
+  body.pdv .pdv-input-wrap.error .pdv-input-error { display: block; }
+
+  body.pdv .pdv-country-dropdown { position: static; flex-shrink: 0; }
+
+  body.pdv .pdv-country-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    color: #020305;
+  }
+
+  body.pdv .pdv-flag-img { width: 24px; height: 24px; object-fit: cover; border-radius: 50%; }
+  body.pdv .pdv-dropdown-arrow { transition: transform 0.2s; }
+  body.pdv .pdv-dropdown-arrow.open { transform: rotate(180deg); }
+
+  body.pdv .pdv-country-menu {
+    position: absolute;
+    top: calc(48px + 4px);
+    left: 0;
+    right: 0;
+    z-index: 10;
+    background: #020305;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    max-height: 240px;
+    overflow: hidden;
+    display: none;
+  }
+
+  body.pdv .pdv-country-menu.open { display: block; }
+
+  body.pdv .pdv-country-search-wrap {
+    padding: 8px;
+    border-bottom: 1px solid rgba(239, 239, 239, 0.15);
+  }
+
+  body.pdv .pdv-country-search {
+    width: 100%;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    color: #EFEFEF;
+    font-family: 'Margem', 'Inter', sans-serif;
+    font-size: 13px;
+    outline: none;
+  }
+
+  body.pdv .pdv-country-search::placeholder { color: rgba(239, 239, 239, 0.5); }
+  body.pdv .pdv-country-search:focus { border-color: #87CDE7; }
+
+  body.pdv .pdv-countries-list {
+    overflow-y: auto;
+    max-height: 180px;
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  body.pdv .pdv-country-option {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    background: none;
+    border: none;
+    color: #EFEFEF;
+    cursor: pointer;
+    text-align: left;
+    border-radius: 8px;
+    font-family: 'Margem', 'Inter', sans-serif;
+    font-size: 13px;
+    transition: background 0.15s;
+  }
+
+  body.pdv .pdv-country-option:hover { background: rgba(135, 205, 231, 0.15); }
+  body.pdv .pdv-country-option img { width: 24px; height: 18px; border-radius: 3px; object-fit: cover; }
+  body.pdv .pdv-country-option .pdv-co-name { flex: 1; }
+  body.pdv .pdv-country-option .pdv-co-ddi { color: rgba(239, 239, 239, 0.5); }
+  body.pdv .pdv-country-option .pdv-co-check { color: #87CDE7; }
+
+  body.pdv .pdv-terms-text {
+    font-family: 'Margem', 'Inter', sans-serif;
+    font-size: 12px;
+    line-height: 1.4;
+    color: rgba(2, 3, 5, 0.85);
+    text-align: center;
+    width: 100%;
+    margin: 0;
+  }
+
+  body.pdv .pdv-terms-text a { color: rgba(2, 3, 5, 0.9); text-decoration: underline; cursor: pointer; }
+
+  body.pdv .pdv-popup-btn {
+    width: 100%;
+    height: 48px;
+    border: none;
+    border-radius: 9999px;
+    background: #020305;
+    color: #EFEFEF;
+    font-family: 'Margem', 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: opacity 0.2s;
+  }
+
+  body.pdv .pdv-popup-btn:hover { opacity: 0.85; }
+
+  body.pdv .pdv-popup-btn__loading { display: none; align-items: center; gap: 10px; }
+  body.pdv .pdv-popup-btn.loading .pdv-popup-btn__text { display: none; }
+  body.pdv .pdv-popup-btn.loading .pdv-popup-btn__loading { display: flex; }
+  body.pdv .pdv-popup-btn.loading { pointer-events: none; }
+
+  body.pdv .pdv-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(239, 239, 239, 0.3);
+    border-top-color: #EFEFEF;
+    border-radius: 50%;
+    animation: pdv-spin 0.8s linear infinite;
+  }
+
+  @keyframes pdv-spin { to { transform: rotate(360deg); } }
+
+  body.pdv .pdv-input-container input:-webkit-autofill,
+  body.pdv .pdv-input-container input:-webkit-autofill:hover,
+  body.pdv .pdv-input-container input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px #87CDE7 inset !important;
+    -webkit-text-fill-color: #020305 !important;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+
+  body.pdv .pdv-popup-card::-webkit-scrollbar { display: none; }
+  body.pdv .pdv-popup-card { -ms-overflow-style: none; scrollbar-width: none; }
+</style>
+
+<script is:inline>
+(function () {
+  // `area` = tamanho do código de área/DDD a ser separado pra Hotmart (phoneac).
+  // 0 = país sem área (mobile direto), tudo vai pro phonenumber.
+  const countries = [
+    { code: 'BR', ddi: '+55', area: 2, name: 'Brasil', flag: 'https://flagcdn.com/w40/br.png', mask: '(##) #####-####', placeholder: '(11) 99285-2666', min: 10, max: 11 },
+    { code: 'US', ddi: '+1', area: 3, name: 'Estados Unidos', flag: 'https://flagcdn.com/w40/us.png', mask: '(###) ###-####', placeholder: '(555) 123-4567', min: 10, max: 10 },
+    { code: 'GB', ddi: '+44', area: 4, name: 'Reino Unido', flag: 'https://flagcdn.com/w40/gb.png', mask: '#### ######', placeholder: '7400 123456', min: 10, max: 10 },
+    { code: 'PT', ddi: '+351', area: 0, name: 'Portugal', flag: 'https://flagcdn.com/w40/pt.png', mask: '### ### ###', placeholder: '912 345 678', min: 9, max: 9 },
+    { code: 'ES', ddi: '+34', area: 0, name: 'Espanha', flag: 'https://flagcdn.com/w40/es.png', mask: '### ## ## ##', placeholder: '612 34 56 78', min: 9, max: 9 },
+    { code: 'FR', ddi: '+33', area: 0, name: 'França', flag: 'https://flagcdn.com/w40/fr.png', mask: '# ## ## ## ##', placeholder: '6 12 34 56 78', min: 9, max: 9 },
+    { code: 'DE', ddi: '+49', area: 4, name: 'Alemanha', flag: 'https://flagcdn.com/w40/de.png', mask: '#### ########', placeholder: '1512 3456789', min: 10, max: 11 },
+    { code: 'IT', ddi: '+39', area: 3, name: 'Itália', flag: 'https://flagcdn.com/w40/it.png', mask: '### ### ####', placeholder: '312 345 6789', min: 9, max: 10 },
+    { code: 'AR', ddi: '+54', area: 2, name: 'Argentina', flag: 'https://flagcdn.com/w40/ar.png', mask: '## ####-####', placeholder: '11 1234-5678', min: 10, max: 10 },
+    { code: 'MX', ddi: '+52', area: 2, name: 'México', flag: 'https://flagcdn.com/w40/mx.png', mask: '## #### ####', placeholder: '55 1234 5678', min: 10, max: 10 },
+  ];
+
+  let selectedCountry = countries[0];
+  let dropdownOpen = false;
+
+  const overlay = document.getElementById('pdv-popup-overlay');
+  const closeBtn = document.getElementById('pdv-popup-close');
+  const form = document.getElementById('pdv-capture-form');
+  const submitBtn = document.getElementById('pdv-submit-btn');
+
+  const nameInput = document.getElementById('pdv-name');
+  const emailInput = document.getElementById('pdv-email');
+  const whatsappInput = document.getElementById('pdv-whatsapp');
+
+  const countryBtn = document.getElementById('pdv-country-select');
+  const countryMenu = document.getElementById('pdv-country-dropdown-menu');
+  const countrySearch = document.getElementById('pdv-country-search');
+  const countriesList = document.getElementById('pdv-countries-list');
+  const selectedFlag = document.getElementById('pdv-selected-flag');
+  const dropdownArrow = document.getElementById('pdv-dropdown-arrow');
+
+  const linkPrivacy = document.getElementById('pdv-popup-link-privacy');
+  const linkTerms = document.getElementById('pdv-popup-link-terms');
+
+  // ── Persist UTMs from URL to sessionStorage ──
+  (function persistUtms() {
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+      const stored = JSON.parse(sessionStorage.getItem('pdv_utms') || '{}');
+      let changed = false;
+      utmKeys.forEach(function (k) {
+        const v = urlParams.get(k);
+        if (v) { stored[k] = v; changed = true; }
+      });
+      if (changed) sessionStorage.setItem('pdv_utms', JSON.stringify(stored));
+    } catch {}
+  })();
+
+  function getUtms() {
+    try {
+      const stored = JSON.parse(sessionStorage.getItem('pdv_utms') || '{}');
+      const urlParams = new URLSearchParams(window.location.search);
+      ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach(function (k) {
+        const v = urlParams.get(k);
+        if (v) stored[k] = v;
+      });
+      return stored;
+    } catch { return {}; }
+  }
+
+  function openPopup() {
+    overlay.classList.add('active');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePopup() {
+    overlay.classList.remove('active');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  window.addEventListener('pdv:open-checkout', openPopup);
+
+  closeBtn.addEventListener('click', closePopup);
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) closePopup();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && overlay.classList.contains('active')) closePopup();
+  });
+
+  linkPrivacy && linkPrivacy.addEventListener('click', function (e) {
+    e.preventDefault();
+    window.dispatchEvent(new CustomEvent('pdv:open-privacy'));
+  });
+  linkTerms && linkTerms.addEventListener('click', function (e) {
+    e.preventDefault();
+    window.dispatchEvent(new CustomEvent('pdv:open-terms'));
+  });
+
+  // ── DDI selector ──
+  function renderCountries(list) {
+    list = list || countries;
+    countriesList.innerHTML = list.map(function (c) {
+      const isSelected = c.code === selectedCountry.code;
+      return '<button type="button" class="pdv-country-option" data-code="' + c.code + '">' +
+        '<img src="' + c.flag + '" alt="' + c.name + '">' +
+        '<span class="pdv-co-name">' + c.name + '</span>' +
+        '<span class="pdv-co-ddi">' + c.ddi + '</span>' +
+        (isSelected ? '<span class="pdv-co-check">✓</span>' : '') +
+        '</button>';
+    }).join('');
+
+    countriesList.querySelectorAll('.pdv-country-option').forEach(function (opt) {
+      opt.addEventListener('click', function () {
+        selectCountry(opt.getAttribute('data-code'));
+      });
+    });
+  }
+
+  function selectCountry(code) {
+    selectedCountry = countries.find(function (c) { return c.code === code; }) || countries[0];
+    selectedFlag.src = selectedCountry.flag;
+    selectedFlag.alt = selectedCountry.name;
+    whatsappInput.placeholder = selectedCountry.placeholder;
+    whatsappInput.value = '';
+    toggleDropdown(false);
+    renderCountries();
+  }
+
+  function toggleDropdown(open) {
+    dropdownOpen = typeof open === 'boolean' ? open : !dropdownOpen;
+    if (dropdownOpen) {
+      countryMenu.classList.add('open');
+      dropdownArrow.classList.add('open');
+      countrySearch.focus();
+    } else {
+      countryMenu.classList.remove('open');
+      dropdownArrow.classList.remove('open');
+      countrySearch.value = '';
+      renderCountries();
+    }
+  }
+
+  countryBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    toggleDropdown();
+  });
+
+  countrySearch.addEventListener('input', function () {
+    const q = countrySearch.value.toLowerCase();
+    renderCountries(countries.filter(function (c) {
+      return c.name.toLowerCase().indexOf(q) !== -1 || c.ddi.indexOf(q) !== -1;
+    }));
+  });
+
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.pdv-country-dropdown')) toggleDropdown(false);
+  });
+
+  // ── Phone mask ──
+  function applyMask(value, mask) {
+    const numbers = value.replace(/\D/g, '');
+    let masked = '';
+    let ni = 0;
+    for (let i = 0; i < mask.length && ni < numbers.length; i++) {
+      if (mask[i] === '#') { masked += numbers[ni]; ni++; }
+      else { masked += mask[i]; }
+    }
+    return masked;
+  }
+
+  whatsappInput.addEventListener('input', function () {
+    const numbers = whatsappInput.value.replace(/\D/g, '');
+    if (numbers.length <= selectedCountry.max) {
+      whatsappInput.value = applyMask(numbers, selectedCountry.mask);
+    } else {
+      whatsappInput.value = whatsappInput.value.slice(0, -1);
+    }
+  });
+
+  [nameInput, emailInput, whatsappInput].forEach(function (inp) {
+    inp.addEventListener('input', function () {
+      inp.closest('.pdv-input-wrap').classList.remove('error');
+    });
+  });
+
+  function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    document.querySelectorAll('.pdv-input-wrap').forEach(function (w) {
+      w.classList.remove('error');
+    });
+
+    let hasErrors = false;
+
+    if (!nameInput.value.trim()) {
+      nameInput.closest('.pdv-input-wrap').classList.add('error');
+      hasErrors = true;
+    }
+    if (!emailInput.value.trim() || !isValidEmail(emailInput.value)) {
+      emailInput.closest('.pdv-input-wrap').classList.add('error');
+      hasErrors = true;
+    }
+
+    const phoneDigits = whatsappInput.value.replace(/\D/g, '');
+    if (!phoneDigits || phoneDigits.length < selectedCountry.min) {
+      whatsappInput.closest('.pdv-input-wrap').classList.add('error');
+      hasErrors = true;
+    }
+
+    if (hasErrors) return;
+
+    const fullPhone = selectedCountry.ddi.replace('+', '') + phoneDigits;
+    const nameValue = nameInput.value.trim();
+    const emailValue = emailInput.value.trim();
+    const utms = getUtms();
+
+    // Hotmart precisa do DDD separado do número (sem DDI). Em países sem DDD definido, manda tudo no phonenumber.
+    const areaLen = selectedCountry.area || 0;
+    const phoneAreaCode = areaLen > 0 ? phoneDigits.slice(0, areaLen) : '';
+    const phoneSubscriber = areaLen > 0 ? phoneDigits.slice(areaLen) : phoneDigits;
+
+    const payload = Object.assign({
+      name: nameValue,
+      email: emailValue,
+      phonenumber: fullPhone,
+      page_url: window.location.href,
+    }, utms);
+
+    submitBtn.classList.add('loading');
+
+    const redirectBase = overlay.getAttribute('data-checkout-url') || 'https://nt.novotraco.com/collection';
+    const redirectParams = new URLSearchParams();
+    redirectParams.set('name', nameValue);
+    redirectParams.set('email', emailValue);
+    redirectParams.set('phoneac', phoneAreaCode);
+    redirectParams.set('phonenumber', phoneSubscriber);
+    Object.keys(utms).forEach(function (k) { redirectParams.set(k, utms[k]); });
+    const redirectUrl = redirectBase + '?' + redirectParams.toString();
+
+    try {
+      await fetch('https://ac.matheusiaromo.workers.dev/?form=pdv-capture', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    } catch (err) {
+      console.error('Erro ao enviar:', err);
+    }
+
+    window.location.href = redirectUrl;
+  });
+
+  renderCountries();
+})();
+</script>

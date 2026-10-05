@@ -1,0 +1,112 @@
+---
+---
+
+<section class="bio">
+  <div class="bio__inner">
+
+    <div class="bio__photo-wrapper">
+      <img
+        src="/images/rafaello-raimundo.webp"
+        alt="Rafaello Raimundo"
+        class="bio__photo"
+        width="252"
+        height="253"
+      />
+    </div>
+
+    <div class="bio__text">
+      <div class="bio__col">
+        <p>Rafaello Ramundo não queria montar palcos. Ele queria escrever histórias. Cresceu no Rio de Janeiro, ganhou concursos literários, aprendeu piano aos 9 anos e um dia percebeu que a cidade inteira podia ser seu livro.</p>
+        <p>Havia um problema que ninguém estava resolvendo: de um lado, marcas com orçamento e nenhuma alma. Do outro, um país inteiro com alma e nenhum acesso. No meio, um abismo chamado desigualdade cultural.</p>
+      </div>
+      <div class="bio__col">
+        <p>Em 2007, ele fundou a Novo Traço com uma premissa que o mercado chamou de loucura: dar de graça o que o mercado cobra caro. Levar Djavan, Gil, orquestras sinfônicas para quem mora na favela, no interior do Maranhão, na periferia de qualquer cidade.</p>
+        <p>Ninguém acreditou. Hoje, após 19 anos no mercado, impacta milhões de pessoas, gerando milhares de empregos e levando cultura para quem precisa.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .bio {
+    width: 100%;
+    background-color: var(--color-dark);
+    color: var(--color-light);
+  }
+
+  .bio__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 154px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 65px;
+  }
+
+  /* Foto circular */
+  .bio__photo-wrapper {
+    width: 252px;
+    height: 253px;
+    border-radius: 863px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .bio__photo {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  /* Dois parágrafos lado a lado */
+  .bio__text {
+    display: flex;
+    align-items: flex-start;
+    gap: 48px;
+    width: 100%;
+    max-width: 857px;
+  }
+
+  .bio__col {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    font-size: 18.9px;
+    font-weight: 400;
+    line-height: 1.3;
+  }
+
+  .bio__col p {
+    margin: 0;
+  }
+
+  /* Mobile: empilha colunas */
+  @media (max-width: 768px) {
+    .bio__inner {
+      padding: 80px 0px;
+      gap: 40px;
+      max-width: 276px;
+      gap: 32px;
+    }
+
+    .bio__photo-wrapper {
+      max-width: 180px;
+      max-height: 180px;
+    }
+
+    .bio__text {
+      flex-direction: column;
+      gap: 17px;
+    }
+
+    .bio__col {
+      font-size: 14px;
+    }
+  }
+</style>
